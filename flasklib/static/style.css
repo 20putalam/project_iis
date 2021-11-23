@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    /*background: red; */
+    background: transparent;
+    z-index: 5;
+    width: 100%;
+    position: absolute;
+    transition: margin 0.6s ease;
+
+}
+/*
+.nav_content {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+*/
+
+.nav_content {
+    display: inline-flex;
+    margin-top: 1vw;
+    margin-left: 10vw;
+    align-items: center;
+}
+
+.navbar .nav_content .left_links {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+.navbar .nav_content .right_links {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+.navbar .nav_list {
+    display: block;
+}
+
+.nav_list .right_links {
+    float: right;
+    margin-right: 8vw;
+}
+
+
+.navbar .logo {
+    width: 4vw;
+}
+
+.navbar .logo img{
+    width: 4vw;
+}
+
+.nav_list {
+    width: 80vw;
+}
+
+.nav_list li {
+    list-style: none;
+}
+
+.nav_list li a{
+    color: #fff;
+    margin-left: 1.5vw;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.left_links {
+    height: 65px;
+}
+
+.right_links {
+    height: 65px;
+}
+
+.right_links input[type=text] {
+    border: #fff solid 1px;
+    padding: 10px;
+    font-size: 17px;
+    width: 10vw;
+    border-radius: 2px;
+    background: transparent;
+}
+
+.right_links input::placeholder {
+    color: #fff;
+}
+
+.right_links input:focus {
+    color: #fff;
+}
+
+.right_links input:focus::placeholder {
+    color: transparent;
+  }
+/*
+#login2 {
+    border: black solid 1px;
+    background: darkslategray;
+    margin-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 65px;
+    border-radius: 5px;
+}
+*/
+.slideshow {
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.dot_class {
+    position: absolute;
+    margin-left: 10vw;
+    bottom: 3vw;
+}
+
+.dot {
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
+    margin: 0 3px;
+    background-color: white;
+    border: whitesmoke solid 0.1px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.dot.active, .dot:hover {
+    background-color: darkslategray;
+    border: black solid 0.5px;
+}
+
+.slides {
+    height: auto;
+    width: 100%;
+    display: flex;
+}
+
+.slide {
+    width: auto;
+    transition: 0.4s;
+}
+
+.slide img {
+    width: 100vw;
+}
+
+.slide_text {
+    margin-left: 10vw;
+    position: absolute;
+    bottom: 22.5%;
+    color: whitesmoke;
+    border-bottom: whitesmoke solid 0.5px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    display: none;
+}
+
+.slide_text h1 {
+    font-size: 7.5vw;
+}
+
+.slide_text p {
+    font-size: 2vw;
+    padding-bottom: 50px;
+}
+
+.slide.active > .slide_text {
+    display: block;
+    animation: an 1s ease-out 1 both;
+    animation-delay: 0.7s;
+    animation-duration: 0.5s;
+}
+
+@keyframes an{
+    0%  { 
+        opacity: 0;
+        transform: translateX(25%);
+    } 100% { 
+        transform: translateX(0%);
+        opacity: 1;  
+    }
+}
+
+/*ARTICLES*/
+.article1 {
+    font-size: 150%;
+    margin-left: 8vw;
+    margin-right: 8vw;
+    margin-top: 8vh;
+    overflow: auto;
+    /*border: green solid 1px;*/
+}
+
+.about {
+    float: left;
+    width: 20%;
+    height: 100%;
+    border-top: crimson solid 1px ;
+}
+
+.about p {
+    margin-top: 3vw;
+    font-weight: bold;
+}
+
+.about_content {
+    float: left;
+    width: 70%;
+    margin-left: 5vw;
+    border-top: gray solid 1px;
+}
+
+.about_content h1 {
+    margin-top: 3vw;
+    font-size: 1.8vw;
+    color: gray;
+}
+
+.about_content p {
+    margin-top: 1vw;
+    font-size: 1vw;
+    color: grey;
+}
+
+.article2 {
+    /*margin-left: 8vw;
+    margin-right: 8vw;*/
+    margin-top: 8vh;
+    background-color:lightgray;
+    height: 250px;
+    /*border: green solid 1px;*/
+}
+
+.article3 {
+    font-size: 150%;
+    margin-left: 8vw;
+    margin-right: 8vw;
+    margin-top: 4vh;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: darkgray;
+    margin-top: -1vw;
+}
+
+/*For mobile*/
+@media screen and (max-width: 955px) {
+    
+    /*Just so I can see the size*/
+    .slide_text {
+        background: pink;
+    }
+
+    .navbar .nav_list {
+        display: none;
+    }
+
+    .navbar .logo img {
+        width: 75px;
+    }
+
+
+}

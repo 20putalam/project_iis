@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="icon" href="/static/img/icon.ico">
+    <title>Knihovna</title>
+</head>
+<body>
+    <!--navbar-->
+    <nav class="navbar">
+        <div class="nav_content">
+            <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
+            <ul class="nav_list">
+                <div class="left_links">
+                    <li><a href="index">Domů</a></li>
+                    <li><a href="knihovny">Knihovny</a></li>
+                    <li><a href="knihy">Knihy</a></li>
+                    <li><a href="#">W</a></li>
+                    <li><a href="#">B</a></li>
+                    <li><a href="#">S</a></li>
+                    <li><a href="#">E</a></li>
+                </div>
+                <div class="right_links">
+                    <input type="text" placeholder="Search..">
+                    <li id="login1"><a href="login">Login</a></li>
+                    <li id="login2"><a href="#">Register</a></li>
+                </div>
+            </ul>
+        </div>
+    </nav>
+    <!--end of navbar-->
+
+    <!--slideshow-->    
+    <div class="slideshow">
+        <div class="slides">
+            
+            <div class="slide">
+                <img src="/static/img/slide_1.jpg" alt="slide one">
+                <div class="slide_text">
+                    <h1>TITLE ONE</h1>
+                    <p>Lorem ipsum dolor sit amet, <br> 
+                    adipiscing elit.</p>
+                </div>
+            </div>
+            
+            <div class="slide">
+                <img src="/static/img/slide_2.jpg" alt="slide two">
+                <div class="slide_text">
+                    <h1>TITLE TWO</h1>
+                    <p>Suspendisse sagittis ultrices, <br>
+                    nam quis nulla.</p>
+                </div>
+            </div>
+            
+            <div class="slide">
+                <img src="/static/img/slide_3.jpg" alt="slide three">
+                <div class="slide_text">
+                    <h1>TITLE THREE</h1>
+                    <p>Nulla non lectus sed nisl molestie malesuada, <br>
+                    fusce quis nulla.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dot_class">
+            <span class="dot" onclick="changeSlide(0)"></span>
+            <span class="dot" onclick="changeSlide(1)"></span>
+            <span class="dot" onclick="changeSlide(2)"></span>
+        </div>
+
+    </div>
+    <!--end of slideshow-->
+    
+    <!--Articles-->
+    <div class="article1">
+        <div class="about"><p>About</p></div>
+        <div class="about_content">
+            <h1>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero.</h1>
+            <p>Maecenas aliquet accumsan leo. Duis risus. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Quisque tincidunt scelerisque libero. Nulla quis diam. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Mauris tincidunt sem sed arcu.</p>
+        </div>
+    </div>
+
+    <div class="article2"></div>
+    
+    <div class="article3">
+        <p>Phasellus faucibus molestie nisl. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Etiam posuere lacus quis dolor. Duis risus. In convallis. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Nullam eget nisl. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis risus. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. In dapibus augue non sapien. Donec vitae arcu. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Praesent vitae arcu tempor neque lacinia pretium. Nullam faucibus mi quis velit.</p>
+        <p>Phasellus faucibus molestie nisl. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Etiam posuere lacus quis dolor. Duis risus. In convallis. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Nullam eget nisl. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis risus. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. In dapibus augue non sapien. Donec vitae arcu. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Praesent vitae arcu tempor neque lacinia pretium. Nullam faucibus mi quis velit.</p>
+        <p>Phasellus faucibus molestie nisl. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Etiam posuere lacus quis dolor. Duis risus. In convallis. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Nullam eget nisl. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis risus. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. In dapibus augue non sapien. Donec vitae arcu. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Praesent vitae arcu tempor neque lacinia pretium. Nullam faucibus mi quis velit.</p>
+    </div>
+    <!--end of Articles-->
+
+    <!--JS for slideshow-->
+    <script>
+        var slideIndex = 0;
+        var t;
+        
+        showSlides(slideIndex);
+        
+        function changeSlide(n) {    
+            slideIndex = n;
+            clearTimeout(t);
+            showSlides(slideIndex);
+            //console.log(slideIndex);
+        }
+        
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+            var i;
+            var width = window.innerWidth;
+            //console.log(width);
+            var slides = document.getElementsByClassName("slide");
+            var dots = document.getElementsByClassName("dot");
+            if (slideIndex == 3) {
+                slideIndex = 0;
+            }
+
+            if (slideIndex == 0) {
+                slides[0].style.marginLeft = "0%";
+                
+                slides[0].className += " active";
+                slides[1].className = slides[1].className.replace(" active", "");
+                slides[2].className = slides[2].className.replace(" active", "");
+            }
+        
+            if (slideIndex == 1) {
+                //slides[0].style.marginLeft = "-100%";
+                slides[0].style.marginLeft = -width + "px";
+
+                slides[1].className += " active";
+                slides[0].className = slides[0].className.replace(" active", "");
+                slides[2].className = slides[2].className.replace(" active", "");
+            }
+        
+            if (slideIndex == 2) {
+                //slides[0].style.marginLeft = "-200%";
+                slides[0].style.marginLeft = -2*width + "px";
+
+                slides[2].className += " active";
+                slides[0].className = slides[0].className.replace(" active", "");
+                slides[1].className = slides[1].className.replace(" active", "");
+            }
+
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            dots[slideIndex].className += " active";
+            
+            slideIndex++;
+            t = setTimeout(showSlides, 5000);
+        }
+
+
+
+        // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+
+    // Get the navbar
+    var navbar = document.getElementsByClassName("navbar")[0];
+
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+    console.log(sticky);
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    <!--end of JS for slideshow-->
+
+</body>
+</html>

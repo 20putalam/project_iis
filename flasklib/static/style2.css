@@ -1,0 +1,29 @@
+* {
+    background: grey;
+}
+
+.navbar {
+    position: relative;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: darkgray;
+    margin-top: -1vw;
+}
+
+.login {
+    align-items: center;
+    text-align: center;
+    border: white solid 1px;
+    margin-top: 2vw;
+    margin-left: 45vw;
+    margin-right: 45vw;
+    box-sizing: border-box;
+}
+
+.login input[type=text] {
+   
+}
