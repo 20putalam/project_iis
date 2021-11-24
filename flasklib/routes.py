@@ -50,4 +50,4 @@ def register():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('/index'))
+    return redirect(url_for('index'))
