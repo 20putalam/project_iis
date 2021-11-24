@@ -29,7 +29,7 @@
                     <input type="text" placeholder="Search..">
                     {% if current_user.is_authenticated %}
                         <li id="login1"><a href="#">Účet</a></li>
-                        <li id="login2"><a href="logout">Odhlášení</a></li>
+                        <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
                     {% else %}
                         <li id="login1"><a href="login">Příhlášení</a></li>
                         <li id="login2"><a href="register">Registrace</a></li>
