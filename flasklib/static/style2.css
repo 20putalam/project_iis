@@ -15,13 +15,11 @@
 }
 
 .login {
-    align-items: center;
-    text-align: center;
-    border: white solid 1px;
-    margin-top: 2vw;
-    margin-left: 45vw;
-    margin-right: 45vw;
-    box-sizing: border-box;
+  background: grey;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
 }
 
 .login input[type=text] {
