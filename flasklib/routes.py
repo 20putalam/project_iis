@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User
-from flasklib.forms import RegistrationForm, LoginForm
+from flasklibse.forms import RegistrationForm, LoginForm
 
 
 @app.route("/")
@@ -50,4 +50,4 @@ def register():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('/index'))
