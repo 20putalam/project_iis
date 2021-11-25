@@ -36,7 +36,7 @@ def myAdmin():
     if form.validate_on_submit():
         user = form.user.data
         if user.id in users.id:
-            User.query.filter_by(id=_id).delete()
+            User.query.filter_by(id=user.id).delete()
         else:
             message = "That user is not in our database."
             return render_template('myAdmin.html', users=users,form = form,message=message)
