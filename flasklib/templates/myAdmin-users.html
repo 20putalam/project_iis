@@ -1,4 +1,28 @@
-
+<nav class="navbar">
+  <div class="nav_content">
+      <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
+      <ul class="nav_list">
+          <div class="left_links">
+              <li><a href="index">Home</a></li>
+              <li><a href="index">Delete Users</a></li>
+              <li><a href="index">Add Users</a></li>
+              <li><a href="index">Manage Libraries</a></li>
+              <li><a href="index">Manage Books</a></li>
+              
+          </div>
+          <div class="right_links">
+              <input type="text" placeholder="Search..">
+              {% if current_user.is_authenticated %}
+                  <li id="login1"><a href="#">Účet</a></li>
+                  <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
+              {% else %}
+                  <li id="login1"><a href="login">Příhlášení</a></li>
+                  <li id="login2"><a href="register">Registrace</a></li>
+              {% endif %}
+          </div>
+      </ul>
+  </div>
+</nav>
 <div class="table-responsive rounded my-table">
   <table id="user_table" class="table table-striped" data-filter-data="" data-filter-control="true">
     <thead class="thead-dark">
