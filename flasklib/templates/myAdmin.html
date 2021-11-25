@@ -35,4 +35,9 @@
      {% endfor %}
      </tbody>
  </table>
+ <form action="" method="POST">
+  User ID: <input type=”text” name=”userID”><br>
+  {{wtf.quick_form(form)}}
+  <input type=”submit” value=”Delete”>
+  </form>
 </div>
