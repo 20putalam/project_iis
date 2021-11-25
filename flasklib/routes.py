@@ -27,8 +27,8 @@ def knihy():
     books = Book.query.order_by(Book.id)
     return render_template('knihy.html', books=books)
 
-@app.route("/ManageUsers",methods=['GET', 'POST'])
-def ManageUsers():
+@app.route("/manageusers",methods=['GET', 'POST'])
+def manageusers():
 
     '''if current_user.is_authenticated:
     if current_user.ro_user.name == "admin":'''
@@ -42,7 +42,7 @@ def ManageUsers():
             db.session.commit()
         except:
             flash("Given ID not found in database")
-        return render_template('ManageUsers.html', title='Admin Tools',users=users,form=form)
+        return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
 
     '''else:
         return False
