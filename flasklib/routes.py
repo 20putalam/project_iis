@@ -34,7 +34,7 @@ def myAdmin():
     form = AdminForm()
     if form.validate_on_submit():
         User.query.filter_by(id=form.id.data).delete()
-        users = User.query.order_by(User.id)
+        db.session.commit()
     return render_template('myAdmin.html', title='Admin Tools',users=users,form = form)
 
 @app.route("/login", methods=['GET', 'POST'])
