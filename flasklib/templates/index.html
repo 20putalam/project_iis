@@ -20,7 +20,7 @@
                     <li><a href="knihy">Knihy</a></li>
                     {% if current_user.is_authenticated %}
                         {% if current_user.ro_user.name == "admin" %}
-                            <li><a href="myAdminUsers">Admin</a></li>
+                            <li><a href="ManageUsers">Admin</a></li>
                         {% endif %}
                     {% endif %}
                 </div>

@@ -33,7 +33,7 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
-class AdminFormUsers(FlaskForm):
+class ManageUsersForm(FlaskForm):
 
     id = IntegerField('ID',validators=[DataRequired()])
     submit = SubmitField('Delete')
