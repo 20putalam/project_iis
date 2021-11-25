@@ -19,7 +19,7 @@
                     <li><a href="knihovny">Knihovny</a></li>
                     <li><a href="knihy">Knihy</a></li>
                     {% if current_user.is_authenticated %}
-                        {% if current_user.ro_user.name == "Admin" %}
+                        {% if current_user.ro_user.name == "admin" %}
                             <li><a href="admin">Admin</a></li>
                         {% endif %}
                     {% endif %}
