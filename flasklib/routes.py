@@ -1,6 +1,5 @@
 from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
-from flasklib import login_manager,db
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
 from flasklib.forms import AdminFormUsers, RegistrationForm, LoginForm
@@ -8,15 +7,11 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 
-#admin = Admin(app, index_view=MyAdminIndexView())
-#admin.add_view(MyModelView(User, db.session))
-#admin.add_view(MyModelView(Role, db.session))
-#admin.add_view(MyModelView(Library, db.session))
-#admin.add_view(MyModelView(Book, db.session))
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
+admin = Admin(app, index_view=MyAdminIndexView())
+admin.add_view(MyModelView(User, db.session))
+admin.add_view(MyModelView(Role, db.session))
+admin.add_view(MyModelView(Library, db.session))
+admin.add_view(MyModelView(Book, db.session))
 
 @app.route("/")
 @app.route("/index")
@@ -35,24 +30,24 @@ def knihy():
 @app.route("/myAdminUsers",methods=['GET', 'POST'])
 def myAdminUsers():
 
-    if current_user.is_authenticated:
-        if current_user.ro_user.name == "admin":
+    '''if current_user.is_authenticated:
+    if current_user.ro_user.name == "admin":'''
 
-            users = User.query.order_by(User.id)
-            form = AdminFormUsers()
+    users = User.query.order_by(User.id)
+    form = AdminFormUsers()
 
-            if form.validate_on_submit():
-                try:
-                    User.query.filter_by(id=form.id.data).delete()
-                    db.session.commit()
-                except:
-                    flash("Given ID not found in database")
-            return render_template('myAdminUsers.html', title='Admin Tools',users=users,form = form)
+    if form.validate_on_submit():
+        try:
+            User.query.filter_by(id=form.id.data).delete()
+            db.session.commit()
+        except:
+            flash("Given ID not found in database")
+        return render_template('myAdminUsers.html', title='Admin Tools',users=users,form = form)
 
-        else:
-            return False
-    else:
+    '''else:
         return False
+else:
+    return False'''
 
 
 @app.route("/login", methods=['GET', 'POST'])
