@@ -30,7 +30,7 @@ class Role(db.Model):
 class MyModelView(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated:
-            if current_user.ro_user.name == "Admin":
+            if current_user.ro_user.name == "admin":
                 return True
             else:
                 return False
@@ -43,7 +43,7 @@ class MyModelView(ModelView):
 class MyAdminIndexView(AdminIndexView):
     def is_accessible(self):
         if current_user.is_authenticated:
-            if current_user.ro_user.name == "Admin":
+            if current_user.ro_user.name == "admin":
                 return True
             else:
                 return False
