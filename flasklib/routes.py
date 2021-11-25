@@ -40,6 +40,7 @@ def myAdmin():
         else:
             message = "That user is not in our database."
             return render_template('myAdmin.html', users=users,form = form,message=message)
+    return render_template('myAdmin.html', users=users,form = form,message=message)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
