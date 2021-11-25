@@ -33,7 +33,7 @@ def myAdmin():
     users = User.query.order_by(User.id)
     form = AdminForm()
     if form.validate_on_submit():
-        userID = form.id
+        userID = form.id.data
         if userID in users.id:
             User.query.filter_by(id=userID).delete()
         else:
