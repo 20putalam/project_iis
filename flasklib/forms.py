@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flasklib.models import User
 
@@ -34,7 +35,7 @@ class LoginForm(FlaskForm):
 
 class AdminForm(FlaskForm):
 
-    id = StringField('ID')
+    id = IntegerField('ID',validators=[DataRequired()])
     submit = SubmitField('Delete')
 
         

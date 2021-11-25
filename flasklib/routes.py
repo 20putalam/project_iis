@@ -33,8 +33,11 @@ def myAdmin():
     users = User.query.order_by(User.id)
     form = AdminForm()
     if form.validate_on_submit():
-        User.query.filter_by(id=form.id.data).delete()
-        db.session.commit()
+        try:
+            User.query.filter_by(id=form.id.data).delete()
+            db.session.commit()
+        except:
+            flash("Given ID not found in database")
     return render_template('myAdmin.html', title='Admin Tools',users=users,form = form)
 
 @app.route("/login", methods=['GET', 'POST'])
