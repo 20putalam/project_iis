@@ -46,9 +46,6 @@ class Book(db.Model):
     
 
 
-
-
-
 class MyModelView(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated:

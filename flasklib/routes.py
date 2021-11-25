@@ -27,9 +27,10 @@ def knihovny():
 def knihy():
     return render_template('knihy.html')
 
-@app.route("/myAdmin")
+@app.route("/myAdmin", methods=['GET', 'POST'])
 def adminpage():
-    return render_template('myAdmin.html')
+    users = session.query(User).all()
+    return render_template('myAdmin.html',users = users)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
