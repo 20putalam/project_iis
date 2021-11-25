@@ -25,12 +25,13 @@ def knihovny():
 
 @app.route("/knihy")
 def knihy():
-    return render_template('knihy.html')
+    books = Book.query.order_by(Book.id)
+    return render_template('knihy.html', books=books)
 
-@app.route("/myAdmin", methods=['GET', 'POST'])
-def adminpage():
-    users = session.query(User).all()
-    return render_template('myAdmin.html',users = users)
+@app.route("/myAdmin")
+def myAdmin():
+    users = User.query.order_by(User.id)
+    return render_template('myAdmin.html', users=users)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
