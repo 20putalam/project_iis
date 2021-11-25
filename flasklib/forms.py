@@ -33,7 +33,10 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class AdminForm(FlaskForm):
-    id = StringField('Email',validators=[DataRequired()])
+
+    id = StringField('ID')
     submit = SubmitField('Delete')
+
+        
             
 

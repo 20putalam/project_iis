@@ -28,19 +28,17 @@ def knihy():
     books = Book.query.order_by(Book.id)
     return render_template('knihy.html', books=books)
 
-@app.route("/myAdmin")
+@app.route("/myAdmin",methods=['GET', 'POST'])
 def myAdmin():
     users = User.query.order_by(User.id)
     form = AdminForm()
-    message = ""
     if form.validate_on_submit():
-        user = form.user.data
-        if user.id in users.id:
-            User.query.filter_by(id=user.id).delete()
+        userID = form.id
+        if userID in users.id:
+            User.query.filter_by(id=userID).delete()
         else:
-            message = "That user is not in our database."
-            return render_template('myAdmin.html', users=users,form = form,message=message)
-    return render_template('myAdmin.html', users=users,form = form,message=message)
+            flash("That user is not in our database.")
+    return render_template('myAdmin.html', users=users,form = form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
