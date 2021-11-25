@@ -13,6 +13,9 @@ admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(Library, db.session))
 admin.add_view(MyModelView(Book, db.session))
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 @app.route("/")
 @app.route("/index")
@@ -33,7 +36,7 @@ def myAdminUsers():
 
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
-            
+
             users = User.query.order_by(User.id)
             form = AdminFormUsers()
 
