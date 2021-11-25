@@ -5,13 +5,11 @@ from flasklib.models import User, Role
 from flasklib.forms import RegistrationForm, LoginForm
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from flask_security import Security, SQLAlchemyUserDatastore
+
 
 admin = Admin(app)
 admin.add_view(ModelView(User, db.session))
 
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
 
 @app.route("/")
 @app.route("/index")
