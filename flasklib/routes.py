@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
-from flasklib.models import User, Role, MyModelView, MyAdminIndexView
+from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
 from flasklib.forms import RegistrationForm, LoginForm
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -10,6 +10,8 @@ from flask_admin.contrib.sqla import ModelView
 admin = Admin(app, index_view=MyAdminIndexView())
 admin.add_view(MyModelView(User, db.session))
 admin.add_view(MyModelView(Role, db.session))
+admin.add_view(MyModelView(Library, db.session))
+admin.add_view(MyModelView(Book, db.session))
 
 
 @app.route("/")
@@ -24,6 +26,10 @@ def knihovny():
 @app.route("/knihy")
 def knihy():
     return render_template('knihy.html')
+
+@app.route("/myAdmin")
+def knihy():
+    return render_template('myAdmin.html')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
