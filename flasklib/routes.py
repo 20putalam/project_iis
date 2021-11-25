@@ -30,8 +30,6 @@ def knihy():
 
 @app.route("/myAdmin",methods=['GET', 'POST'])
 def myAdmin():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     users = User.query.order_by(User.id)
     form = AdminForm()
     if form.validate_on_submit():
