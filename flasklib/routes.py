@@ -30,15 +30,26 @@ def knihy():
 
 @app.route("/myAdminUsers",methods=['GET', 'POST'])
 def myAdminUsers():
-    users = User.query.order_by(User.id)
-    form = AdminFormUsers()
-    if form.validate_on_submit():
-        try:
-            User.query.filter_by(id=form.id.data).delete()
-            db.session.commit()
-        except:
-            flash("Given ID not found in database")
-    return render_template('myAdminUsers.html', title='Admin Tools',users=users,form = form)
+
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
+            
+            users = User.query.order_by(User.id)
+            form = AdminFormUsers()
+
+            if form.validate_on_submit():
+                try:
+                    User.query.filter_by(id=form.id.data).delete()
+                    db.session.commit()
+                except:
+                    flash("Given ID not found in database")
+            return render_template('myAdminUsers.html', title='Admin Tools',users=users,form = form)
+
+        else:
+            return False
+    else:
+        return False
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
