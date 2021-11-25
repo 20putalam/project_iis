@@ -28,7 +28,7 @@ def knihy():
     return render_template('knihy.html')
 
 @app.route("/myAdmin")
-def knihy():
+def adminpage():
     return render_template('myAdmin.html')
 
 @app.route("/login", methods=['GET', 'POST'])
