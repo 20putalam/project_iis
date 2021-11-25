@@ -1,5 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
+from flasklib import login_manager,db
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
 from flasklib.forms import AdminFormUsers, RegistrationForm, LoginForm
@@ -7,11 +8,11 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 
-admin = Admin(app, index_view=MyAdminIndexView())
-admin.add_view(MyModelView(User, db.session))
-admin.add_view(MyModelView(Role, db.session))
-admin.add_view(MyModelView(Library, db.session))
-admin.add_view(MyModelView(Book, db.session))
+#admin = Admin(app, index_view=MyAdminIndexView())
+#admin.add_view(MyModelView(User, db.session))
+#admin.add_view(MyModelView(Role, db.session))
+#admin.add_view(MyModelView(Library, db.session))
+#admin.add_view(MyModelView(Book, db.session))
 
 @login_manager.user_loader
 def load_user(user_id):
