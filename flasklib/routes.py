@@ -25,11 +25,8 @@ def knihovny():
 
 @app.route("/knihy")
 def knihy():
-    return render_template('knihy.html')
-
-@app.route("/myAdmin")
-def adminpage():
-    return render_template('myAdmin.html')
+    books = Book.query.order_by(Book.id)
+    return render_template('knihy.html', books=books)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
