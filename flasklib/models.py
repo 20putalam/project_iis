@@ -27,6 +27,28 @@ class Role(db.Model):
 
     users = db.relationship('User', backref='ro_user')
 
+class Library(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    city = db.Column(db.String(40), nullable=False)
+    street = db.Column(db.String(40), nullable=False)
+    housenumber = db.Column(db.Integer, nullable=False)
+
+    books = db.relationship('Book', backref='all_books')
+
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40), nullable=False)
+    autor = db.Column(db.String(40), nullable=False)
+    publisher = db.Column(db.String(40), nullable=False)
+    tag = db.Column(db.String(40), nullable=False)
+
+    library = db.Column(db.Integer, db.ForeignKey('library.id'))
+    
+
+
+
+
+
 class MyModelView(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated:
