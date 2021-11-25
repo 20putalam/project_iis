@@ -18,10 +18,11 @@
                     <li><a href="index">Domů</a></li>
                     <li><a href="knihovny">Knihovny</a></li>
                     <li><a href="knihy">Knihy</a></li>
-                    <li><a href="#">W</a></li>
-                    <li><a href="#">B</a></li>
-                    <li><a href="#">S</a></li>
-                    <li><a href="#">E</a></li>
+                    {% if current_user.is_authenticated %}
+                        {% if current_user.ro_user.name == "Admin" %}
+                            <li><a href="admin">Admin</a></li>
+                        {% endif %}
+                    {% endif %}
                 </div>
                 <div class="right_links">
                     <input type="text" placeholder="Search..">

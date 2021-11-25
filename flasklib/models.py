@@ -3,6 +3,7 @@ from flasklib import db, login_manager
 from flask_login import UserMixin
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import AdminIndexView
+from flask_login import current_user
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -28,9 +29,25 @@ class Role(db.Model):
 
 class MyModelView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        if current_user.is_authenticated:
+            if current_user.ro_user.name == "Admin":
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def inaccessible_callback(self,name, **kwargs):
         return redirect(url_for('login'))
+
+class MyAdminIndexView(AdminIndexView):
+    def is_accessible(self):
+        if current_user.is_authenticated:
+            if current_user.ro_user.name == "Admin":
+                return True
+            else:
+                return False
+        else:
+            return False
 
 

@@ -1,14 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
 
-{% if current_user.is_authenticated %}
-    {% if current_user.username == "Marek" %}
-        ano
-    {% else %}
-        Auto ale nic {{ current_user.username }}
-    {% endif %}
-{% else %}
-    NIC
-{% endif %}
 
 {% endblock content %}

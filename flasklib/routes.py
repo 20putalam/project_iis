@@ -1,15 +1,15 @@
 from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
-from flasklib.models import User, Role
+from flasklib.models import User, Role, MyModelView, MyAdminIndexView
 from flasklib.forms import RegistrationForm, LoginForm
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 
-admin = Admin(app)
-admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(Role, db.session))
+admin = Admin(app, index_view=MyAdminIndexView())
+admin.add_view(MyModelView(User, db.session))
+admin.add_view(MyModelView(Role, db.session))
 
 
 @app.route("/")
@@ -47,7 +47,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='Host').first())
         db.session.add(user)
         db.session.commit()
         flash('Váš učet byl vytvořen! Nyní se můžete  přihlásit', 'Úspěch')
