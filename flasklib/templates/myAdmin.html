@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if Objects %}
+
+<div class="table-responsive rounded my-table">
+  <table id="user_table" class="table table-striped" data-filter-data="" data-filter-control="true">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" data-field="pk" data-filter-control="input">#</th>
+        <th scope="col" data-field="fields.first_name">Name</th>
+        <th scope="col" data-field="fields.email">E-mail</th>
+        <th scope="col" data-field="fields.role" data-filter-control="input">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in user_table %}
+        
+          <tr>
+
+            <th scope="row">
+              <a href="{{ object_page }}">
+                {{ o.id }}
+              </a> 
+            </th>
+            
+            <td>
+              <a href="{{ object_page }}">
+                {{ o.username }}
+              </a>  
+            </td>
+
+            <td>
+              <a href="{{ object_page }}">
+                {{ o.email }}
+              </a>  
+            </td>
+            
+            <td>
+              <a href="{{ object_page }}">
+                {{ o.role_id }}
+              </a>  
+            </td>
+
+          </tr>
+        
+
+     {% endfor %}
+     </tbody>
+ </table>
+</div>
+
+{% endif %}
+{% endblock content %}

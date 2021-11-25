@@ -27,6 +27,10 @@ def knihovny():
 def knihy():
     return render_template('knihy.html')
 
+@app.route("/myAdmin")
+def knihy():
+    return render_template('myAdmin.html')
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
