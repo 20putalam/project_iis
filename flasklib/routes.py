@@ -33,12 +33,8 @@ def myAdmin():
     users = User.query.order_by(User.id)
     form = AdminForm()
     if form.validate_on_submit():
-        userID = form.id.data
-        if userID in users.id:
-            User.query.filter_by(id=userID).delete()
-        else:
-            flash("That user is not in our database.")
-    return render_template('myAdmin.html', users=users,form = form)
+        User.query.filter_by(id=form.id.data).delete()
+    return render_template('myAdmin.html', title='Admin Tools',users=users,form = form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
