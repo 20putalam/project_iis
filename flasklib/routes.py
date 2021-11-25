@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import AdminForm, AdminFormUsers, RegistrationForm, LoginForm
+from flasklib.forms import AdminFormUsers, RegistrationForm, LoginForm
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -28,8 +28,8 @@ def knihy():
     books = Book.query.order_by(Book.id)
     return render_template('knihy.html', books=books)
 
-@app.route("/myAdmin-users",methods=['GET', 'POST'])
-def myAdmin_users():
+@app.route("/myAdminUsers",methods=['GET', 'POST'])
+def myAdminUsers():
     users = User.query.order_by(User.id)
     form = AdminFormUsers()
     if form.validate_on_submit():
@@ -38,7 +38,7 @@ def myAdmin_users():
             db.session.commit()
         except:
             flash("Given ID not found in database")
-    return render_template('myAdmin-users.html', title='Admin Tools',users=users,form = form)
+    return render_template('myAdminUsers.html', title='Admin Tools',users=users,form = form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
