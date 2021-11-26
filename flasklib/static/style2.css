@@ -4,6 +4,7 @@
 
 .navbar {
     position: relative;
+    background: transparent;
 }
 
 .sticky {
