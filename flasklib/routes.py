@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import RegistrationForm, LoginForm, AddUsersForm, AddBook
+from flasklib.forms import AddLibrariesForm, RegistrationForm, LoginForm, AddUsersForm, AddBook
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -50,6 +50,7 @@ def knihy_delete(id):
         flash("Při mazání nastala chyba !!")
         return redirect(url_for('knihy'))
 
+############################################################################################################################################
 
 @app.route("/manageusers")
 def manageusers():
@@ -112,13 +113,22 @@ def addusers():
     else:
         return redirect(url_for('home'))
 
+############################################################################################################################################
+
 @app.route("/managelibraries")
 def managelibraries():
 
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
-            libraries = Library.query.order_by(Library.id) 
-            return render_template('manageusers.html', title='Admin Tools',libraries = libraries)
+            libraries = Library.query.order_by(Library.id)
+            form = AddLibrariesForm()
+            if form.validate_on_submit():
+                
+                library = Library(city=form.city.data, street=form.street.data, housenumber=form.housenumber.data)
+                db.session.add(library)
+                db.session.commit()
+                flash('Učet byl vytvořen!', 'Úspěch') 
+            return render_template('manageusers.html', title='Admin Tools',libraries = libraries,form=form)
 
         else:
             return redirect(url_for('home'))
@@ -136,6 +146,9 @@ def library_delete(id):
     except:
         flash("Při mazání nastala chyba !!")
         return redirect(url_for('managelibraries'))
+
+############################################################################################################################################
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
