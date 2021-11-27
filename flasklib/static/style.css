@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.navbar {
+.navbar2 {
     /*background: red; */
     background: transparent;
     z-index: 5;
@@ -30,7 +30,7 @@
     align-items: center;
 }
 
-.navbar .nav_content .left_links {
+.navbar2 .nav_content .left_links {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -38,7 +38,7 @@
     margin-bottom: 0.5vw;
 }
 
-.navbar .nav_content .right_links {
+.navbar2 .nav_content .right_links {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -46,7 +46,7 @@
     margin-bottom: 0.5vw;
 }
 
-.navbar .nav_list {
+.navbar2 .nav_list {
     display: block;
 }
 
@@ -56,11 +56,11 @@
 }
 
 
-.navbar .logo {
+.navbar2 .logo {
     width: 4vw;
 }
 
-.navbar .logo img{
+.navbar2 .logo img{
     width: 4vw;
 }
 
