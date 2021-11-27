@@ -43,10 +43,6 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login') 
 
-class RoleUserForm(FlaskForm):
-
-    role = SelectField('Role',validators=[DataRequired()],choices=["admin","reader","librarian","kkt"])
-
 class AddUsersForm(FlaskForm):
 
     username = StringField('Username',

@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm, AddBook, RoleUserForm
+from flasklib.forms import RegistrationForm, LoginForm, AddUsersForm, AddBook
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 

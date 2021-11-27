@@ -62,14 +62,15 @@
             </td>
             <td>
                 {{ o.role_id }}
-                <form method="POST" action="">
-                  {{ form.hidden_tag() }}
-                  <fieldset class="form-group">
-                    {{ form.role.label(class="form-control-label") }}
-                    {{ form.role(class="form-control form-control-lg is-invalid") }}
-                  </fieldset>
-                </form>
-                <a href="{{ url_for('user_update', id=o.id,role=form.role.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Set</button> </a>
+                <div class="dropdown">
+                  <button class="dropbtn">Dropdown</button>
+                  <div class="dropdown-content">
+                    <a href="{{ url_for('user_update', id=o.id,role=1)}}">Admin</a>
+                    <a href="{{ url_for('user_update', id=o.id,role=2)}}">Reader</a>
+                    <a href="{{ url_for('user_update', id=o.id,role=3)}}">Librarian</a>
+                    <a href="{{ url_for('user_update', id=o.id,role=4)}}">Teacher</a>
+                  </div>
+                </div> 
             </td>
             <td>
               <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
