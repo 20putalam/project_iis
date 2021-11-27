@@ -45,7 +45,7 @@ def manageusers():
         return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
 
     else:
-        return render_template('index.html')
+        return redirect(url_for('index'))
 
 @app.route("/addusers",methods=['GET', 'POST'])
 def addusers():
