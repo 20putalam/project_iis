@@ -42,7 +42,7 @@ def manageusers():
             db.session.commit()
         except:
             flash("Given ID not found in database")
-        return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
+    return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
 
     '''else:
         return False
