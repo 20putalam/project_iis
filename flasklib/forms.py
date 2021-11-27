@@ -45,7 +45,7 @@ class LoginForm(FlaskForm):
 class ManageUsersForm(FlaskForm):
 
     id = IntegerField('ID',validators=[DataRequired()])
-    role = SelectField('Role',validators=[DataRequired()],choices=[1,2,3,4])
+    role = SelectField('Role',validators=[DataRequired()],choices=["admin","reader","librarian","kkt"])
     submit = SubmitField('Delete')
     submitS = SubmitField('Set')
 

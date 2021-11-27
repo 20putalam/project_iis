@@ -68,7 +68,7 @@ def manageusers():
                 except:
                     flash("Given ID not found in database")
 
-                User.query.filter_by(id=form.id.data).update(dict(ro_user=Role.query.filter_by(id=form.role).first()))
+                User.query.filter_by(id=form.id.data).update(dict(ro_user=form.role))
                 db.session.commit()
                 
             return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
