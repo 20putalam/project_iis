@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm, AddBook
+from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm, AddBook, RoleUserForm
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -52,26 +52,19 @@ def knihy_delete(id):
 
 
 @app.route("/manageusers",methods=['GET', 'POST'])
-def manageusers():
+def manageusers(id):
 
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
 
             users = User.query.order_by(User.id)
-            form = ManageUsersForm()
-
-            if form.validate_on_submit():
-
-                try:
-                    User.query.filter_by(id=form.id.data).delete()
-                    db.session.commit()
-                except:
-                    flash("Given ID not found in database")
-
-                User.query.filter_by(id=form.id.data).update(dict(ro_user=form.role))
+            try:
+                User.query.filter_by(id=id).delete()
                 db.session.commit()
+            except:
+                flash("Given ID not found in database")
                 
-            return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
+            return render_template('manageusers.html', title='Admin Tools',users=users)
 
         else:
             return redirect(url_for('home'))
