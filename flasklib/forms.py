@@ -67,7 +67,7 @@ class AddLibrariesForm(FlaskForm):
     city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
     street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
     housenumber = IntegerField('housenumber', validators=[DataRequired()])
-    submit = SubmitField('Add')
+    submit_add = SubmitField('Add')
    
 
 class ChangeLibrariesForm(FlaskForm):
@@ -75,7 +75,7 @@ class ChangeLibrariesForm(FlaskForm):
     city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
     street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
     housenumber = IntegerField('housenumber', validators=[DataRequired()])
-    submit = SubmitField('Change')
+    submit_change = SubmitField('Change')
     
 
 

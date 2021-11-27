@@ -124,21 +124,23 @@ def managelibraries():
             form1 = AddLibrariesForm()
             form2 = ChangeLibrariesForm()
             if form1.validate_on_submit():
-
-                library = Library(city=form1.city.data, street=form1.street.data, housenumber=form1.housenumber.data)
-                db.session.add(library)
-                db.session.commit()
-                flash('Učet byl vytvořen!', 'Úspěch')
+                
+                if form1.submit_add.data:
+                    library = Library(city=form1.city.data, street=form1.street.data, housenumber=form1.housenumber.data)
+                    db.session.add(library)
+                    db.session.commit()
+                    flash('Učet byl vytvořen!', 'Úspěch')
 
             if form2.validate_on_submit():
-
-                try:
-                    Library.query.filter_by(id=form2.id.data).update(dict(city=form2.city.data))
-                    Library.query.filter_by(id=form2.id.data).update(dict(street=form2.street.data))
-                    Library.query.filter_by(id=form2.id.data).update(dict(housenumber=form2.housenumber.data))
-                    db.session.commit()
-                except:
-                    flash("Library ID to update not found")
+                
+                if form2.submit_change.data:
+                    try:
+                        Library.query.filter_by(id=form2.id.data).update(dict(city=form2.city.data))
+                        Library.query.filter_by(id=form2.id.data).update(dict(street=form2.street.data))
+                        Library.query.filter_by(id=form2.id.data).update(dict(housenumber=form2.housenumber.data))
+                        db.session.commit()
+                    except:
+                        flash("Library ID to update not found")
             return render_template('managelibraries.html', title='Admin Tools',libraries = libraries,form1=form1,form2=form2)
 
         else:
