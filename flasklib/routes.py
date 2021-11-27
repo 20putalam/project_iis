@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm, AddBook, UserRolesForm
+from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm, AddBook
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -41,23 +41,21 @@ def manageusers():
         if current_user.ro_user.name == "admin":
 
             users = User.query.order_by(User.id)
-            form_1 = ManageUsersForm()
-            form_2 = UserRolesForm()
-            if form_1.validate_on_submit():
+            form = ManageUsersForm()
+
+            if form.validate_on_submit():
 
                 try:
-                    User.query.filter_by(id=form_1.id.data).delete()
+                    User.query.filter_by(id=form.id.data).delete()
                     db.session.commit()
                 except:
                     flash("Given ID not found in database")
 
-            if form_2.validate_on_submit():
-
-                user = User.query.filter_by(id=form_2.id.data)
-                user.role_id = form_2.role.data
+                user = User.query.filter_by(id=form.id.data)
+                user.role = form.role.data
                 db.session.commit()
                 
-            return render_template('manageusers.html', title='Admin Tools',users=users,f1=form_1,f2=form_1)
+            return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
 
         else:
             return redirect(url_for('home'))
