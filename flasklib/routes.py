@@ -100,7 +100,7 @@ def addusers():
             if form.validate_on_submit():
                 
                 hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-                user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first())
+                user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first(),role_name=Role.query.filter_by(name='reader').first())
                 db.session.add(user)
                 db.session.commit()
                 flash('Učet byl vytvořen!', 'Úspěch')
@@ -159,7 +159,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first())
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first(),role_name=Role.query.filter_by(name='reader').first())
         db.session.add(user)
         db.session.commit()
         flash('Váš učet byl vytvořen! Nyní se můžete  přihlásit', 'Úspěch')
