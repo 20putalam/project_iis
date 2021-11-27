@@ -2,7 +2,11 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
+<<<<<<< HEAD
 from flasklib.forms import RegistrationForm, LoginForm, AddBook
+=======
+from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm
+>>>>>>> 3b50a10f0ff288a42a44ccdf0de9f18c1736efb2
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -12,7 +16,6 @@ admin.add_view(MyModelView(User, db.session))
 admin.add_view(MyModelView(Role, db.session))
 admin.add_view(MyModelView(Library, db.session))
 admin.add_view(MyModelView(Book, db.session))
-
 
 @app.route("/")
 @app.route("/index")
@@ -25,6 +28,7 @@ def knihovny():
 
 @app.route("/knihy", methods=['GET', 'POST'])
 def knihy():
+<<<<<<< HEAD
     Books = Book.query
     form = AddBook()
     city_lib = Library.query.filter_by(city=form.library.data).first()
@@ -35,6 +39,53 @@ def knihy():
         flash('Kniha byla přidána!', 'Úspěch')
     return render_template('knihy.html', title='Basic Table',
                            Books=Books, form=form)
+=======
+    books = Book.query.order_by(Book.id)
+    return render_template('knihy.html', books=books)
+
+@app.route("/manageusers",methods=['GET', 'POST'])
+def manageusers():
+
+    
+    if current_user.ro_user.name == "admin":
+
+        users = User.query.order_by(User.id)
+        form = ManageUsersForm()
+
+        if form.validate_on_submit():
+            try:
+                User.query.filter_by(id=form.id.data).delete()
+                db.session.commit()
+            except:
+                flash("Given ID not found in database")
+        return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
+
+    else:
+        return render_template('index.html')
+
+@app.route("/addusers",methods=['GET', 'POST'])
+def addusers():
+
+    if current_user.ro_user.name == "admin":
+
+        form = AddUsersForm()
+
+        if form.validate_on_submit():
+            
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first())
+            db.session.add(user)
+            db.session.commit()
+            flash('Učet byl vytvořen!', 'Úspěch')
+            
+        return render_template('addusers.html', title='Admin Tools',form=form)
+
+    else:
+        return render_template('index.html')
+
+
+
+>>>>>>> 3b50a10f0ff288a42a44ccdf0de9f18c1736efb2
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

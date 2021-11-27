@@ -45,6 +45,7 @@ class Book(db.Model):
     #reservations = db.relationship('Reservation', backref='reservations')
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
     
+<<<<<<< HEAD
 #class Reservation(db.Model):
 #    id = db.Column(db.Integer, primary_key)
 #    isbn = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key)
@@ -53,6 +54,8 @@ class Book(db.Model):
 
 
 
+=======
+>>>>>>> 3b50a10f0ff288a42a44ccdf0de9f18c1736efb2
 class MyModelView(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated:
@@ -75,5 +78,3 @@ class MyAdminIndexView(AdminIndexView):
                 return False
         else:
             return False
-
-

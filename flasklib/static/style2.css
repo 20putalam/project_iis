@@ -1,9 +1,11 @@
+/*
 * {
     background: grey;
 }
-
+*/
 .navbar {
     position: relative;
+    background: grey;
 }
 
 .sticky {
