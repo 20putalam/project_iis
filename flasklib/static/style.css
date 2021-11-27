@@ -323,6 +323,15 @@
     margin-top: 2vw;
 }
 
+.table_user_manage th > *{
+    padding: 15px;
+}
+
+.table_user_manage td > *{
+    padding: 15px;
+}
+
+
 /*For mobile*/
 @media screen and (max-width: 955px) {
     
