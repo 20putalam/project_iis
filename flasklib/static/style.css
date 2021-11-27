@@ -331,6 +331,16 @@
     padding: 15px;
 }
 
+.table_user_manage td{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.table_user_manage th{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 
 /*For mobile*/
 @media screen and (max-width: 955px) {
