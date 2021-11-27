@@ -52,7 +52,7 @@ def manageusers():
                     flash("Given ID not found in database")
 
                 user = User.query.filter_by(id=form.id.data)
-                user.role = form.role.data
+                user.role = form.role
                 db.session.commit()
                 
             return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
