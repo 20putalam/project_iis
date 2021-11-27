@@ -2,11 +2,8 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-<<<<<<< HEAD
 from flasklib.forms import RegistrationForm, LoginForm, AddBook
-=======
 from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm
->>>>>>> 3b50a10f0ff288a42a44ccdf0de9f18c1736efb2
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -28,7 +25,6 @@ def knihovny():
 
 @app.route("/knihy", methods=['GET', 'POST'])
 def knihy():
-<<<<<<< HEAD
     Books = Book.query
     form = AddBook()
     city_lib = Library.query.filter_by(city=form.library.data).first()
@@ -39,9 +35,6 @@ def knihy():
         flash('Kniha byla přidána!', 'Úspěch')
     return render_template('knihy.html', title='Basic Table',
                            Books=Books, form=form)
-=======
-    books = Book.query.order_by(Book.id)
-    return render_template('knihy.html', books=books)
 
 @app.route("/manageusers",methods=['GET', 'POST'])
 def manageusers():
@@ -90,7 +83,6 @@ def addusers():
 
 
 
->>>>>>> 3b50a10f0ff288a42a44ccdf0de9f18c1736efb2
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
