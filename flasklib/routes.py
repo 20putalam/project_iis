@@ -124,10 +124,19 @@ def managelibraries():
             form = AddLibrariesForm()
             if form.validate_on_submit():
                 
-                library = Library(city=form.city.data, street=form.street.data, housenumber=form.housenumber.data)
-                db.session.add(library)
-                db.session.commit()
-                flash('Učet byl vytvořen!', 'Úspěch') 
+                if form.submit_add.data:
+                    library = Library(city=form.city.data, street=form.street.data, housenumber=form.housenumber.data)
+                    db.session.add(library)
+                    db.session.commit()
+                    flash('Učet byl vytvořen!', 'Úspěch')
+                else:
+                    try:
+                        Library.query.filter_by(id=form.id.data).update(dict(city=form.city.data))
+                        Library.query.filter_by(id=form.id.data).update(dict(street=form.street.data))
+                        Library.query.filter_by(id=form.id.data).update(dict(housenumber=form.housenumber.data))
+                        db.session.commit()
+                    except:
+                        flash("Library ID to update not found")
             return render_template('manageusers.html', title='Admin Tools',libraries = libraries,form=form)
 
         else:

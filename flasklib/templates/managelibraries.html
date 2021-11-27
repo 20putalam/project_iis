@@ -71,7 +71,7 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Add Library</legend>
+            <legend class="border-bottom mb-4">Add Library/Change Library</legend>
             <div class="form-group">
                 {{ form.city.label(class="form-control-label") }}
 
@@ -114,7 +114,9 @@
             </div>
         </fieldset>
         <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
+            {{ form.submit_add(class="btn btn-outline-info") }}
+            {{ form.submit_change(class="btn btn-outline-info") }}
+            {{ form.id() }}
         </div>
     </form>
     </div>
