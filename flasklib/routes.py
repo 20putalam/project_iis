@@ -112,7 +112,30 @@ def addusers():
     else:
         return redirect(url_for('home'))
 
+@app.route("/managelibraries")
+def managelibraries():
 
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
+            libraries = Library.query.order_by(Library.id) 
+            return render_template('manageusers.html', title='Admin Tools',libraries = libraries)
+
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/library_delete/<int:id>')
+def library_delete(id):
+
+    try:
+        Library.query.filter_by(id=id).delete()
+        db.session.commit()
+        flash("Library byla úspěšné smazána !")
+        return redirect(url_for('managelibraries'))
+    except:
+        flash("Při mazání nastala chyba !!")
+        return redirect(url_for('managelibraries'))
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
