@@ -2,8 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import RegistrationForm, LoginForm, AddBook
-from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm
+from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm, AddBook
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -33,8 +32,7 @@ def knihy():
         db.session.add(new_book)
         db.session.commit()   
         flash('Kniha byla přidána!', 'Úspěch')
-    return render_template('knihy.html', title='Basic Table',
-                           Books=Books, form=form)
+    return render_template('knihy.html', title='Basic Table', Books=Books, form=form)
 
 @app.route("/manageusers",methods=['GET', 'POST'])
 def manageusers():
