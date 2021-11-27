@@ -51,7 +51,7 @@ def knihy_delete(id):
         return redirect(url_for('knihy'))
 
 
-@app.route("/manageusers",methods=['GET', 'POST'])
+@app.route("/manageusers/<int:id>")
 def manageusers(id):
 
     if current_user.is_authenticated:
