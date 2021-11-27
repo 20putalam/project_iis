@@ -62,5 +62,14 @@ class AddUsersForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email is taken. Please choose a different one.')
+
+class AddLibrariesForm(FlaskForm):
+
+    city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
+    street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
+    housenumber = IntegerField('housenumber', validators=[DataRequired()])
+    submit = SubmitField('Add')
+
+
             
 
