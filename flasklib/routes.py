@@ -34,6 +34,23 @@ def knihy():
         flash('Kniha byla přidána!', 'Úspěch')
     return render_template('knihy.html', title='Basic Table', Books=Books, form=form)
 
+@app.route('/knihy_delete/<int:id>')
+def knihy_delete(id):
+    book_delete = Book.query.get_or_404(id)
+    name = None
+    form = AddBook()
+
+    try:
+        db.session.delete(book_delete)
+        db.session.commit()
+        flash("Kniha byla úspěšné smazána !")
+        Books = Book.query
+        return redirect(url_for('knihy'))
+    except:
+        flash("Při mazání nastala chyba !!")
+        return redirect(url_for('knihy'))
+
+
 @app.route("/manageusers",methods=['GET', 'POST'])
 def manageusers():
 
