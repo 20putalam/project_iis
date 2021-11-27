@@ -25,3 +25,16 @@
 .login input[type=text] {
    
 }
+
+.click:link, .click:visited {
+  background-color: #7E0B09;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.click:hover, .click:active {
+  background-color: #7E0B09;
+}

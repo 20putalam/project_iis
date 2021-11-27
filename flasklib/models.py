@@ -41,9 +41,13 @@ class Book(db.Model):
     autor = db.Column(db.String(40), nullable=False)
     publisher = db.Column(db.String(40), nullable=False)
     tag = db.Column(db.String(40), nullable=False)
-
+    
+    #reservations = db.relationship('Reservation', backref='reservations')
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
     
+#class Reservation(db.Model):
+#    id = db.Column(db.Integer, primary_key)
+#    isbn = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key)
 
 
 

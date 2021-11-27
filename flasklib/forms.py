@@ -24,6 +24,14 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('That email is taken. Please choose a different one.')
 
+class AddBook(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(min=2, max=40)])
+    autor = StringField('Autor', validators=[DataRequired(), Length(min=2, max=40)])
+    publisher = StringField('Publisher', validators=[DataRequired(), Length(min=2, max=40)])
+    tag = StringField('Tag', validators=[DataRequired(), Length(min=2, max=40)])
+    library = StringField('Library', validators=[DataRequired(), Length(min=2, max=40)])
+    submit = SubmitField('Přidat')
+
 
 class LoginForm(FlaskForm):
     email = StringField('Email',

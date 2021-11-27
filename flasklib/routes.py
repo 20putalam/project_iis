@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import RegistrationForm, LoginForm
+from flasklib.forms import RegistrationForm, LoginForm, AddBook
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -23,11 +23,18 @@ def home():
 def knihovny():
     return render_template('knihovny.html')
 
-@app.route("/knihy")
+@app.route("/knihy", methods=['GET', 'POST'])
 def knihy():
-    books = Book.query.order_by(Book.id)
-    return render_template('knihy.html', books=books)
-
+    Books = Book.query
+    form = AddBook()
+    city_lib = Library.query.filter_by(city=form.library.data).first()
+    if form.validate_on_submit():
+        new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data ,all_books=city_lib)
+        db.session.add(new_book)
+        db.session.commit()   
+        flash('Kniha byla přidána!', 'Úspěch')
+    return render_template('knihy.html', title='Basic Table',
+                           Books=Books, form=form)
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
