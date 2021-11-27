@@ -45,8 +45,7 @@ class AddUsersForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
-                                     validators=[DataRequired(), EqualTo('password')])
+
     submit = SubmitField('Add User')
     
     def validate_username(self, username):
