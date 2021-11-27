@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .navbar2 {
@@ -49,6 +50,7 @@
 .navbar2 .nav_list {
     display: block;
     padding: 0;
+    margin-bottom: 0;
 }
 
 .nav_list .right_links {
@@ -63,7 +65,7 @@
 
 .navbar2 .logo img{
     width: 4vw;
-    vertical-align: 0;
+    vertical-align: middle;
 }
 
 .nav_list {
