@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import AddLibrariesForm, RegistrationForm, LoginForm, AddUsersForm, AddBook
+from flasklib.forms import AddLibrariesForm, ChangeLibrariesForm, RegistrationForm, LoginForm, AddUsersForm, AddBook
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -121,23 +121,25 @@ def managelibraries():
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
             libraries = Library.query.order_by(Library.id)
-            form = AddLibrariesForm()
-            if form.validate_on_submit():
+            form1 = AddLibrariesForm()
+            form2 = ChangeLibrariesForm()
+            if form1.validate_on_submit():
 
-                if form.submit_add.data:
-                    library = Library(city=form.city.data, street=form.street.data, housenumber=form.housenumber.data)
-                    db.session.add(library)
+                library = Library(city=form1.city.data, street=form1.street.data, housenumber=form1.housenumber.data)
+                db.session.add(library)
+                db.session.commit()
+                flash('Učet byl vytvořen!', 'Úspěch')
+
+            if form2.validate_on_submit():
+
+                try:
+                    Library.query.filter_by(id=form2.id.data).update(dict(city=form2.city.data))
+                    Library.query.filter_by(id=form2.id.data).update(dict(street=form2.street.data))
+                    Library.query.filter_by(id=form2.id.data).update(dict(housenumber=form2.housenumber.data))
                     db.session.commit()
-                    flash('Učet byl vytvořen!', 'Úspěch')
-                else:
-                    try:
-                        Library.query.filter_by(id=form.id.data).update(dict(city=form.city.data))
-                        Library.query.filter_by(id=form.id.data).update(dict(street=form.street.data))
-                        Library.query.filter_by(id=form.id.data).update(dict(housenumber=form.housenumber.data))
-                        db.session.commit()
-                    except:
-                        flash("Library ID to update not found")
-            return render_template('managelibraries.html', title='Admin Tools',libraries = libraries,form=form)
+                except:
+                    flash("Library ID to update not found")
+            return render_template('managelibraries.html', title='Admin Tools',libraries = libraries,form1=form1,form2=form2)
 
         else:
             return redirect(url_for('home'))

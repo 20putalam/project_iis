@@ -64,12 +64,19 @@ class AddUsersForm(FlaskForm):
             raise ValidationError('That email is taken. Please choose a different one.')
 
 class AddLibrariesForm(FlaskForm):
+    city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
+    street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
+    housenumber = IntegerField('housenumber', validators=[DataRequired()])
+    submit = SubmitField('Add')
+   
+
+class ChangeLibrariesForm(FlaskForm):
     id = IntegerField('ID of Library to change',validators=[DataRequired()])
     city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
     street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
     housenumber = IntegerField('housenumber', validators=[DataRequired()])
-    submit_add = SubmitField('Add')
-    submit_change = SubmitField('Change')
+    submit = SubmitField('Change')
+    
 
 
             
