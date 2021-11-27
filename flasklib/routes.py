@@ -123,7 +123,7 @@ def managelibraries():
             libraries = Library.query.order_by(Library.id)
             form = AddLibrariesForm()
             if form.validate_on_submit():
-                
+
                 if form.submit_add.data:
                     library = Library(city=form.city.data, street=form.street.data, housenumber=form.housenumber.data)
                     db.session.add(library)
@@ -137,7 +137,7 @@ def managelibraries():
                         db.session.commit()
                     except:
                         flash("Library ID to update not found")
-            return render_template('manageusers.html', title='Admin Tools',libraries = libraries,form=form)
+            return render_template('managelibraries.html', title='Admin Tools',libraries = libraries,form=form)
 
         else:
             return redirect(url_for('home'))
