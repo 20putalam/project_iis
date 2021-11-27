@@ -334,6 +334,9 @@
 .table_user_manage td{
     padding-left: 10px;
     padding-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    min-width: fit-content;
 }
 
 .table_user_manage th{
