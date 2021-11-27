@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
 from flasklib.models import User, Role, MyModelView, MyAdminIndexView, Library, Book
-from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm
+from flasklib.forms import ManageUsersForm, RegistrationForm, LoginForm, AddUsersForm
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
@@ -43,6 +43,26 @@ def manageusers():
             except:
                 flash("Given ID not found in database")
         return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
+
+    else:
+        return render_template('index.html')
+
+@app.route("/addusers",methods=['GET', 'POST'])
+def addusers():
+
+    if current_user.ro_user.name == "admin":
+
+        form = AddUsersForm()
+
+        if form.validate_on_submit():
+            
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first())
+            db.session.add(user)
+            db.session.commit()
+            flash('Učet byl vytvořen!', 'Úspěch')
+            
+        return render_template('addusers.html', title='Admin Tools',form=form)
 
     else:
         return render_template('index.html')
