@@ -48,6 +48,7 @@
 
 .navbar2 .nav_list {
     display: block;
+    padding: 0;
 }
 
 .nav_list .right_links {
