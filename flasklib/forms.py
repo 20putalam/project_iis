@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.fields.choices import SelectField
 from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flasklib.models import User
@@ -44,7 +45,9 @@ class LoginForm(FlaskForm):
 class ManageUsersForm(FlaskForm):
 
     id = IntegerField('ID',validators=[DataRequired()])
+    role = SelectField('Role',validators=[DataRequired()],choices=[1,2,3,4])
     submit = SubmitField('Delete')
+    submitS = SubmitField('Set')
 
 class AddUsersForm(FlaskForm):
 

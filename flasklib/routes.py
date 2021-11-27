@@ -44,11 +44,17 @@ def manageusers():
             form = ManageUsersForm()
 
             if form.validate_on_submit():
+
                 try:
                     User.query.filter_by(id=form.id.data).delete()
                     db.session.commit()
                 except:
                     flash("Given ID not found in database")
+
+                user = User.query.filter_by(id=form.id.data)
+                user.id = form.role.data
+                db.session.commit()
+                
             return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
 
         else:
