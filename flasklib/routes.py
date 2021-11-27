@@ -115,7 +115,7 @@ def addusers():
 
 ############################################################################################################################################
 
-@app.route("/managelibraries")
+@app.route("/managelibraries",methods=['GET', 'POST'])
 def managelibraries():
 
     if current_user.is_authenticated:
