@@ -45,9 +45,9 @@ def manageusers():
             return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
 
         else:
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
 
 @app.route("/addusers",methods=['GET', 'POST'])
 def addusers():
@@ -68,9 +68,9 @@ def addusers():
             return render_template('addusers.html', title='Admin Tools',form=form)
 
         else:
-            return render_template('index.html')
+            return redirect(url_for('home'))
     else:
-        return render_template('index.html')
+        return redirect(url_for('home'))
 
 
 
