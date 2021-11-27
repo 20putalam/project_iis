@@ -16,7 +16,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
-    role_name = db.Column(db.String(40),db.ForeignKey('role.name'))
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
