@@ -63,16 +63,16 @@
             <td>
                 {{ o.role_id }}
                 <form method="POST" action="">
-                  {{ form.hidden_tag() }}
+                  {{ f2.hidden_tag() }}
                   <fieldset class="form-group">
                       <legend class="border-bottom mb-4">Set user role</legend>
                       <div class="form-group">
-                        {{ form.role.label(class="mr-sm-2") }}
-                        {{ form.role(class="custom-select mr-sm-2")}}
+                        {{ f2.role.label(class="mr-sm-2") }}
+                        {{ f2.role(class="custom-select mr-sm-2")}}
                       </div>
                   </fieldset>
                     <div class="col-auto my-1">
-                      {{ form.submitS(class="btn btn-outline-info", text="Set") }}
+                      {{ f2.submit(class="btn btn-outline-info", text="Set") }}
                     </div>
                   </div>
                 </form>
@@ -84,16 +84,16 @@
  </table>
 
  <form method="POST" action="">
-  {{ form.hidden_tag() }}
+  {{ f1.hidden_tag() }}
   <fieldset class="form-group">
       <legend class="border-bottom mb-4">Delete User by ID</legend>
       <div class="form-group">
-          {{ form.id.label(class="form-control-label") }}
-          {{ form.id(class="form-control form-control-lg") }}
+          {{ f1.id.label(class="form-control-label") }}
+          {{ f1.id(class="form-control form-control-lg") }}
       </div>
   </fieldset>
   <div class="form-group">
-      {{ form.submit(class="btn btn-outline-info", text="Delete") }}
+      {{ f1.submit(class="btn btn-outline-info", text="Delete") }}
   </div>
 </form>
 
