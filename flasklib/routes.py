@@ -30,40 +30,45 @@ def knihy():
 @app.route("/manageusers",methods=['GET', 'POST'])
 def manageusers():
 
-    
-    if current_user.ro_user.name == "admin":
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
 
-        users = User.query.order_by(User.id)
-        form = ManageUsersForm()
+            users = User.query.order_by(User.id)
+            form = ManageUsersForm()
 
-        if form.validate_on_submit():
-            try:
-                User.query.filter_by(id=form.id.data).delete()
-                db.session.commit()
-            except:
-                flash("Given ID not found in database")
-        return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
+            if form.validate_on_submit():
+                try:
+                    User.query.filter_by(id=form.id.data).delete()
+                    db.session.commit()
+                except:
+                    flash("Given ID not found in database")
+            return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
 
+        else:
+            return redirect(url_for('index'))
     else:
         return redirect(url_for('index'))
 
 @app.route("/addusers",methods=['GET', 'POST'])
 def addusers():
 
-    if current_user.ro_user.name == "admin":
+    if  current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
 
-        form = AddUsersForm()
+            form = AddUsersForm()
 
-        if form.validate_on_submit():
-            
-            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-            user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first())
-            db.session.add(user)
-            db.session.commit()
-            flash('Učet byl vytvořen!', 'Úspěch')
-            
-        return render_template('addusers.html', title='Admin Tools',form=form)
+            if form.validate_on_submit():
+                
+                hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+                user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first())
+                db.session.add(user)
+                db.session.commit()
+                flash('Učet byl vytvořen!', 'Úspěch')
+                
+            return render_template('addusers.html', title='Admin Tools',form=form)
 
+        else:
+            return render_template('index.html')
     else:
         return render_template('index.html')
 
