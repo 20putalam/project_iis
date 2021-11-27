@@ -54,11 +54,12 @@ def knihy_delete(id):
 @app.route("/manageusers")
 def manageusers():
 
+    form = RoleUserForm()
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
 
             users = User.query.order_by(User.id) 
-            return render_template('manageusers.html', title='Admin Tools',users=users)
+            return render_template('manageusers.html', title='Admin Tools',users=users,form = form)
 
         else:
             return redirect(url_for('home'))
@@ -71,7 +72,19 @@ def user_delete(id):
     try:
         User.query.filter_by(id=id).delete()
         db.session.commit()
-        flash("Kniha byla úspěšné smazána !")
+        flash("User byl úspěšné smazán !")
+        return redirect(url_for('manageusers'))
+    except:
+        flash("Při mazání nastala chyba !!")
+        return redirect(url_for('manageusers'))
+
+@app.route('/user_update/<int:id><int:role>')
+def user_update(id):
+
+    try:
+        User.query.filter_by(id=id).update(dict(role_id=role))
+        db.session.commit()
+        flash("User successfully updated !")
         return redirect(url_for('manageusers'))
     except:
         flash("Při mazání nastala chyba !!")

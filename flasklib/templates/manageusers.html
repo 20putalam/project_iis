@@ -62,7 +62,17 @@
             </td>
             <td>
                 {{ o.role_id }}
-                <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+                <form method="POST" action="">
+                  {{ form.hidden_tag() }}
+                  <fieldset class="form-group">
+                    {{ form.role.label(class="form-control-label") }}
+                    {{ form.role(class="form-control form-control-lg is-invalid") }}
+                  </fieldset>
+                </form>
+                <a href="{{ url_for('user_update', id=o.id,role=form.role.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Set</button> </a>
+            </td>
+            <td>
+              <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
             </td>
 
           </tr>
