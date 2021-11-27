@@ -78,7 +78,7 @@ def user_delete(id):
         flash("Při mazání nastala chyba !!")
         return redirect(url_for('manageusers'))
 
-@app.route('/user_update/<int:id,int:role>')
+@app.route('/user_update/<int:id>')
 def user_update(id,role):
 
     try:
