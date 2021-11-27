@@ -54,12 +54,11 @@ def knihy_delete(id):
 @app.route("/manageusers")
 def manageusers():
 
-    form = RoleUserForm()
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
 
             users = User.query.order_by(User.id) 
-            return render_template('manageusers.html', title='Admin Tools',users=users,form = form)
+            return render_template('manageusers.html', title='Admin Tools',users=users)
 
         else:
             return redirect(url_for('home'))
@@ -78,7 +77,7 @@ def user_delete(id):
         flash("Při mazání nastala chyba !!")
         return redirect(url_for('manageusers'))
 
-@app.route('/user_update/<int:id>')
+@app.route('/user_update/<int:id>/<int:role>')
 def user_update(id,role):
 
     try:
