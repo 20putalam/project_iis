@@ -78,8 +78,8 @@ def user_delete(id):
         flash("Při mazání nastala chyba !!")
         return redirect(url_for('manageusers'))
 
-@app.route('/user_update/<int:id><int:role>')
-def user_update(id):
+@app.route('/user_update/<int:id>,<int:role>')
+def user_update(id,role):
 
     try:
         User.query.filter_by(id=id).update(dict(role_id=role))
