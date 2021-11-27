@@ -63,6 +63,7 @@
 
 .navbar2 .logo img{
     width: 4vw;
+    vertical-align: 0;
 }
 
 .nav_list {
