@@ -62,7 +62,7 @@
             </td>
             <td>
                 {{ o.role_id }}
-                <a href="{{ url_for('manageusers', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+                <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
             </td>
 
           </tr>

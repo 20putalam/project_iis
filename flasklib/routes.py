@@ -51,25 +51,31 @@ def knihy_delete(id):
         return redirect(url_for('knihy'))
 
 
-@app.route("/manageusers/<int:id>")
-def manageusers(id):
+@app.route("/manageusers")
+def manageusers():
 
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
 
-            users = User.query.order_by(User.id)
-            try:
-                User.query.filter_by(id=id).delete()
-                db.session.commit()
-            except:
-                flash("Given ID not found in database")
-                
+            users = User.query.order_by(User.id) 
             return render_template('manageusers.html', title='Admin Tools',users=users)
 
         else:
             return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
+
+@app.route('/user_delete/<int:id>')
+def user_delete(id):
+
+    try:
+        User.query.filter_by(id=id).delete()
+        db.session.commit()
+        flash("Kniha byla úspěšné smazána !")
+        return redirect(url_for('manageusers'))
+    except:
+        flash("Při mazání nastala chyba !!")
+        return redirect(url_for('manageusers'))
 
 @app.route("/addusers",methods=['GET', 'POST'])
 def addusers():
