@@ -23,17 +23,15 @@
     <legend>Your reservations and borrowings:</legend>
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Book ID</th>
-            <th>Valid Until</th>
+            <th>Reservation ID</th>
+            <th>Book Title</th>
         </tr>
     </thead>
     <tbody>
         {% for reservation in reservations %}
         <tr>
             <td>{{ reservation.id }}</td>
-            <td>{{ reservation.book_id }}</td>
-            <td>{{ reservation.valid_until }}</td>
+            <td>{{ reservation.book_id.name }}</td>
         </tr>
         {% endfor %}
     </tbody>
