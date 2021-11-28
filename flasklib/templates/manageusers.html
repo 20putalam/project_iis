@@ -78,13 +78,13 @@
                   <a href="{{ url_for('user_update', id=o.id,role=1)}}">Admin</a>
                   <a href="{{ url_for('user_update', id=o.id,role=2)}}">Reader</a>
                   <a href="{{ url_for('user_update', id=o.id,role=3)}}">Librarian</a>
-                  <a href="{{ url_for('user_update', id=o.id,role=4)}}">Teacher</a>
+                  <a href="{{ url_for('user_update', id=o.id,role=4)}}">Distributor</a>
                 </div>
               </div> 
             </td>
             </td>
             <td>
-              <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+              <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Delete</button> </a>
             </td>
 
           </tr>
