@@ -1,35 +1,54 @@
 {% extends "layout.html" %}
 {% block content %}
-<table id="book_table" class="table table-striped">
-    <thead class="thead-dark">
+<table id="data" class="table table-striped">
+  <thead>
       <tr>
-        <th scope="col" >Name</th>
-        <th scope="col" >Author</th>
-        <th scope="col" >Publisher</th>
-        <th scope="col" >Tag</th>
-        <th scope="col" >Library</th>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Publisher</th>
+          <th>Tag</th>
+          <th>Library</th>
+          <th>Button</th>
       </tr>
-    </thead>
-    <tbody>
-      {% for o in books %}
-          <tr>
-            <th scope="row">          
-                {{ o.name }}
-            </th>
-            <td>             
-                {{ o.autor }}
-            </td>
-            <td>             
-                {{ o.publisher }}
-            </td>
-            <td>             
-                {{ o.tag }}
-            </td>
-            <td>             
-                {{ o.library }}
-            </td>
-          </tr>
-     {% endfor %}
-     </tbody>
- </table>
+  </thead>
+  <tbody>
+      {% for Book in books %}
+      <tr>
+          <td>{{ Book.name }}</td>
+          <td>{{ Book.autor }}</td>
+          <td>{{ Book.publisher }}</td>
+          <td>{{ Book.tag }}</td>
+          <td>{{ Book.library }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+
+<script>
+  $(document).ready(function () {
+      $('#data').DataTable({
+          columns: [
+              null,
+              null,
+              null,
+              null,
+              null,
+              { searchable: false, orderable: false }],
+      });
+  });
+
+  var closebtns = document.getElementsByClassName("close");
+  var i;
+
+  /* Loop through the elements, and hide the parent, when clicked on */
+  for (i = 0; i < closebtns.length; i++) {
+      closebtns[i].addEventListener("click", function () {
+          this.parentElement.style.display = 'none';
+      });
+  }
+</script>
 {% endblock %}
