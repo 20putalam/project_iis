@@ -32,6 +32,20 @@ def books():
     books = Book.query.order_by(Book.id)
     return render_template('books.html',books=books)
 
+@app.route("/librarian")
+def librarian():
+    reservations = Reservation.query.all()
+    return render_template('librarian.html',reservations=reservations)
+
+@app.route("/confirm_borrowing/<int:id>")
+def confirm_borrowing(id):
+    reservation = Reservation.query.filter_by(id=id)
+    borrowing = Borrowing(user_id=current_user.id, book_id=id)
+    db.session.delete(reservation)
+    db.session.add(borrowing)
+    db.session.commit()
+    return render_template('librarian.html')
+
 @app.route("/books_reserve/<int:id>")
 def book_reserve(id):
     if current_user.is_authenticated:

@@ -23,6 +23,11 @@
                             <li><a href="manageusers">Admin</a></li>
                         {% endif %}
                     {% endif %}
+                    {% if current_user.is_authenticated %}
+                        {% if current_user.ro_user.name == "librarian" or "admin" %}
+                            <li><a href="librarian">Librarian</a></li>
+                        {% endif %}
+                    {% endif %}
                 </div>
                 <div class="right_links">
                     <input type="text" placeholder="Search..">
