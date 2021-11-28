@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
@@ -35,7 +36,7 @@ def books():
 def book_reserve(id):
     if current_user.is_authenticated:
         try:
-            reservation = Reservation(user_id=current_user.id, book_id=id)
+            reservation = Reservation(user_id=current_user.id, book_id=id,valid_until=datetime.now().date() + 3)
             db.session.commit(reservation)
             flash("Book reserved successfully!")
             return redirect(url_for('books'))
