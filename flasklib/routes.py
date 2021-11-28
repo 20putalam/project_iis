@@ -128,7 +128,7 @@ def managelibraries():
                     library = Library(city=form1.city.data, street=form1.street.data, housenumber=form1.housenumber.data)
                     db.session.add(library)
                     db.session.commit()
-                    flash('Učet byl vytvořen!', 'Úspěch')
+                    flash('Knihovna byla vytvořena!', 'Úspěch')
 
             if form2.validate_on_submit():
                 if form2.submit_change.data:

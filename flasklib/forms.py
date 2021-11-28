@@ -86,7 +86,7 @@ class ChangeLibrariesForm(FlaskForm):
     housenumber = IntegerField('Housenumber', validators=[DataRequired()])
     submit_change = SubmitField('Change')
 
-    def validate_library(self, city, street, housenumber):
+    def validate_library_2(self, city, street, housenumber):
         par1 = Library.query.filter_by(city==city.data).first()
         par2 = Library.query.filter_by(street==street.data).first()
         par3 = Library.query.filter_by(housenumber==housenumber.data).first()
