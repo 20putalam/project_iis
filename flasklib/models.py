@@ -63,7 +63,7 @@ class Borrowing(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     valid_until = db.Column(db.DateTime,  default=db.func.current_timestamp()+ '30 days')
 
-   '''
+
 class MyModelView(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated:
@@ -86,4 +86,3 @@ class MyAdminIndexView(AdminIndexView):
                 return False
         else:
             return False
-     '''
