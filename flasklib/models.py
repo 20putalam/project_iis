@@ -45,7 +45,7 @@ class Book(db.Model):
     
     #reservations = db.relationship('Reservation', backref='reservations')
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
-
+'''
 class Reservation(db.Model):
     
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -56,7 +56,7 @@ class Reservation(db.Model):
 class Borrowing(db.Model):
     id = db.Column(db.Integer, db.ForeignKey('reservation.id'))
     valid_until = db.Column(db.DateTime,  default=db.func.current_timestamp()+ '30 days')
-
+'''
 class MyModelView(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated:
