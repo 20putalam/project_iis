@@ -65,27 +65,27 @@ class AddUsersForm(FlaskForm):
 
 class AddLibrariesForm(FlaskForm):
 
-    city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
-    street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
-    housenumber = IntegerField('housenumber', validators=[DataRequired()])
+    city = StringField('City',validators=[DataRequired(), Length(min=1, max=40)])
+    street = StringField('Street',validators=[DataRequired(), Length(min=1, max=40)])
+    housenumber = IntegerField('Housenumber', validators=[DataRequired()])
     submit_add = SubmitField('Add')
 
     def validate_library(self, city, street, housenumber):
-        library = Library.query.filter_by(city=city.data,street=street.data,housenumber=housenumber.data).first()
+        library = Library.query.filter_by(city=city.data,street=street.data,housenumber=housenumber.data)
         if library:
             raise ValidationError('That library already exists, please set valid information')
    
 
 class ChangeLibrariesForm(FlaskForm):
-    
+
     id = IntegerField('ID of Library to change',validators=[DataRequired()])
-    city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
-    street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
-    housenumber = IntegerField('housenumber', validators=[DataRequired()])
+    city = StringField('City',validators=[DataRequired(), Length(min=1, max=40)])
+    street = StringField('Street',validators=[DataRequired(), Length(min=1, max=40)])
+    housenumber = IntegerField('Housenumber', validators=[DataRequired()])
     submit_change = SubmitField('Change')
 
     def validate_library(self, city, street, housenumber):
-        library = Library.query.filter_by(city=city.data,street=street.data,housenumber=housenumber.data).first()
+        library = Library.query.filter_by(city=city.data,street=street.data,housenumber=housenumber.data)
         if library:
             raise ValidationError('That library already exists, please set valid information')
     
