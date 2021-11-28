@@ -56,13 +56,13 @@ class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    valid_until = db.Column(db.DateTime,  default=db.func.current_timestamp()+ '3 days')
+    
 
 class Borrowing(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    valid_until = db.Column(db.DateTime,  default=db.func.current_timestamp()+ '30 days')
+    
 
 
 class MyModelView(ModelView):
