@@ -41,7 +41,6 @@
             </ul>
         </div>
     </nav>
-    {% block content %}
     <div class="our_button">
         {% for message in get_flashed_messages() %}
         <div class="our_alert">
@@ -49,7 +48,6 @@
         </div>
         {% endfor %}
     </div>
-    {% endblock %}
     <!--end of navbar-->
     <div>    
         {% block content %}{% endblock %}
