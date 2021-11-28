@@ -5,10 +5,6 @@ from flask_admin.contrib.sqla import ModelView
 from flask_admin import AdminIndexView
 from flask_login import current_user
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
