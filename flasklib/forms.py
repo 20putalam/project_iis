@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.fields.choices import SelectField
 from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from flasklib.models import User
+from flasklib.models import Library, User
 
 
 class RegistrationForm(FlaskForm):
@@ -64,18 +64,30 @@ class AddUsersForm(FlaskForm):
             raise ValidationError('That email is taken. Please choose a different one.')
 
 class AddLibrariesForm(FlaskForm):
+
     city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
     street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
     housenumber = IntegerField('housenumber', validators=[DataRequired()])
     submit_add = SubmitField('Add')
+
+    def validate_library(self, city, street, housenumber):
+        library = Library.query.filter_by(city=city.data,street=street.data,housenumber=housenumber.data).first()
+        if library:
+            raise ValidationError('That library already exists, please set valid information')
    
 
 class ChangeLibrariesForm(FlaskForm):
+    
     id = IntegerField('ID of Library to change',validators=[DataRequired()])
     city = StringField('city',validators=[DataRequired(), Length(min=1, max=40)])
     street = StringField('street',validators=[DataRequired(), Length(min=1, max=40)])
     housenumber = IntegerField('housenumber', validators=[DataRequired()])
     submit_change = SubmitField('Change')
+
+    def validate_library(self, city, street, housenumber):
+        library = Library.query.filter_by(city=city.data,street=street.data,housenumber=housenumber.data).first()
+        if library:
+            raise ValidationError('That library already exists, please set valid information')
     
 
 
