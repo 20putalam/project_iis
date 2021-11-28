@@ -37,7 +37,7 @@ class AddBook(FlaskForm):
         choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
     
     library = SelectField('Library', validators=[DataRequired()], choices=choices)
-    submit = SubmitField('Přidat')
+    submit = SubmitField('Add')
 
 
 class LoginForm(FlaskForm):
@@ -45,7 +45,7 @@ class LoginForm(FlaskForm):
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+    submit = SubmitField('Log in')
 
 class AddUsersForm(FlaskForm):
 
