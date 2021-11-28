@@ -18,6 +18,13 @@ admin.add_view(MyModelView(Book, db.session))
 def home():
     return render_template('index.html')
 
+@app.route("/account")
+def account():
+    if current_user.is_authenticated:
+        return render_template('account.html',user=current_user)   
+    else:
+        return redirect(url_for('login'))
+
 @app.route("/books")
 def books():
     books = Book.query.order_by(Book.id)
