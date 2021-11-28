@@ -17,7 +17,7 @@ admin.add_view(MyModelView(Book, db.session))
 @app.route("/index")
 def home():
     return render_template('index.html')
-
+#<!--<a href="{{ url_for('user_self_update', id=user.id)}}"> <button type="button" class="btn btn-secondary">Update</button> </a>-->
 @app.route("/account")
 def account():
     if current_user.is_authenticated:
