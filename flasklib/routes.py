@@ -21,7 +21,8 @@ def home():
 @app.route("/account")
 def account():
     if current_user.is_authenticated:
-        return render_template('account.html',user=current_user)   
+        user = current_user
+        return render_template('account.html',user=user)   
     else:
         return redirect(url_for('login'))
 
