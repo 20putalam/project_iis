@@ -59,6 +59,7 @@ def managebooks():
             Books = Book.query
             form = AddBook()
             if form.validate_on_submit():
+                form.fill_choices()
                 lib_city=form.library.data
                 lib_city = Library.query.get_or_404(lib_city)
 
