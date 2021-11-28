@@ -21,7 +21,7 @@ def home():
 @app.route("/books")
 def books():
     books = Book.query.order_by(Book.id)
-    return render_template('libraries.html',books=books)
+    return render_template('books.html',books=books)
 
 @app.route("/libraries")
 def libraries():
