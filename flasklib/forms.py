@@ -26,9 +26,9 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('That email is taken. Please choose a different one.')
 
 class AddBook(FlaskForm):
-    def fill_choices():
+    def fill_choices(Library):
         choices = list()
-        for lib in db.session.query(Library).query.all():
+        for lib in Library.query.all():
             choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
         return choices
     
@@ -36,7 +36,7 @@ class AddBook(FlaskForm):
     autor = StringField('Autor', validators=[DataRequired(), Length(min=2, max=40)])
     publisher = StringField('Publisher', validators=[DataRequired(), Length(min=2, max=40)])
     tag = StringField('Tag', validators=[DataRequired(), Length(min=2, max=40)])
-    library = SelectField('Library', validators=[DataRequired()], choices=fill_choices())
+    library = SelectField('Library', validators=[DataRequired()], choices=fill_choices(Library))
     number_of = IntegerField('Number', validators=[DataRequired()])
     img = StringField('Image', validators=[DataRequired(), Length(min=2, max=40)])
 
