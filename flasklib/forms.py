@@ -71,7 +71,7 @@ class AddLibrariesForm(FlaskForm):
     submit_add = SubmitField('Add')
 
     def validate_library(self, city):
-        par1 = Library.query.filter_by(city==city.data).first()
+        par1 = Library.query.filter_by(city=city.data).first()
         #par2 = Library.query.filter_by(street==street.data).first()
         #par3 = Library.query.filter_by(housenumber==housenumber.data).first()
         if par1:
