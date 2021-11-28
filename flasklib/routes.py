@@ -275,6 +275,15 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         if form.username.data == "admin":
             role = 'admin'
+            role1 = Role(name='admin', description='all perms')
+            role2 = Role(name='reader', description='reader')
+            role3 = Role(name='librarian', description='librarian')
+            role4 = Role(name='distributor', description='distributor')
+            db.session.add(role1)
+            db.session.add(role2)
+            db.session.add(role3)
+            db.session.add(role4)
+            db.session.commit()
         else:
             role = 'reader'
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name=role).first())
