@@ -17,8 +17,8 @@ class User(db.Model, UserMixin):
     
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     
-    reservations = db.relationship('Reservation', backref='reserve')
-    borrow = db.relationship('Borrowing', backref='borrow')
+    reservations = db.relationship('Reservation', backref='u_reserve')
+    borrow = db.relationship('Borrowing', backref='u_borrow')
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
@@ -47,8 +47,8 @@ class Book(db.Model):
     
     number_of = db.Column(db.Integer, nullable=False)
     
-    reservations = db.relationship('Reservation', backref='reserve')
-    borrow = db.relationship('Borrowing', backref='borrow')
+    reservations = db.relationship('Reservation', backref='b_reserve')
+    borrow = db.relationship('Borrowing', backref='b_borrow')
     
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
 
