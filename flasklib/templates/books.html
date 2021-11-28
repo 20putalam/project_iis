@@ -3,6 +3,7 @@
 <table id="data" class="table table-striped">
   <thead>
       <tr>
+          <th>ID</th>
           <th>Name</th>
           <th>Author</th>
           <th>Publisher</th>
@@ -14,6 +15,7 @@
   <tbody>
       {% for Book in books %}
       <tr>
+          <td>{{ Book.id }}</td>
           <td>{{ Book.name }}</td>
           <td>{{ Book.autor }}</td>
           <td>{{ Book.publisher }}</td>
@@ -35,6 +37,7 @@
   $(document).ready(function () {
       $('#data').DataTable({
           columns: [
+              null,
               null,
               null,
               null,
