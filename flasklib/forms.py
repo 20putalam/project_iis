@@ -1,8 +1,9 @@
+from flask.app import Flask
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from flasklib.models import User
+from flasklib.models import Library, User
 
 
 class RegistrationForm(FlaskForm):
@@ -35,18 +36,12 @@ class AddBook(FlaskForm):
     submit = SubmitField('Přidat')
 
 
-
 class LoginForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
-
-class ManageUsersForm(FlaskForm):
-
-    id = IntegerField('ID',validators=[DataRequired()])
-    submit = SubmitField('Delete')
 
 class AddUsersForm(FlaskForm):
 
@@ -67,5 +62,30 @@ class AddUsersForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email is taken. Please choose a different one.')
+
+class AddLibrariesForm(FlaskForm):
+
+    city = StringField('City',validators=[DataRequired(), Length(min=1, max=40)])
+    street = StringField('Street',validators=[DataRequired(), Length(min=1, max=40)])
+    housenumber = IntegerField('Housenumber', validators=[DataRequired()])
+    submit_add = SubmitField('Add')
+
+class ChangeLibrariesForm(FlaskForm):
+
+    id = IntegerField('ID of Library to change',validators=[DataRequired()])
+    city = StringField('City',validators=[DataRequired(), Length(min=1, max=40)])
+    street = StringField('Street',validators=[DataRequired(), Length(min=1, max=40)])
+    housenumber = IntegerField('Housenumber', validators=[DataRequired()])
+    submit_change = SubmitField('Change')
+
+    def validate_library_2(self, city, street, housenumber):
+        par1 = Library.query.filter_by(city==city.data).first()
+        par2 = Library.query.filter_by(street==street.data).first()
+        par3 = Library.query.filter_by(housenumber==housenumber.data).first()
+        if par1 and par2 and par3:
+            raise ValidationError('That library already exists, please set valid information')
+    
+
+
             
 

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style2.css">
+    <link rel="icon" href="/static/img/icon.ico">
+    <title>Manage Users</title>
+</head>
+
+<nav class="navbar2">
+  <div class="nav_content">
+      <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
+      <ul class="nav_list">
+          <div class="left_links">
+              <li><a href="index">Home</a></li>
+              <li><a href="manageusers">Manage Users</a></li>
+              <li><a href="addusers">Add Users</a></li>
+              <li><a href="managelibraries">Manage Libraries</a></li>
+              <li><a href="index">Manage Books</a></li>
+              
+          </div>
+          <div class="right_links">
+              {% if current_user.is_authenticated %}
+                  <li id="login1"><a href="#">Účet</a></li>
+                  <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
+              {% else %}
+                  <li id="login1"><a href="login">Příhlášení</a></li>
+                  <li id="login2"><a href="register">Registrace</a></li>
+              {% endif %}
+          </div>
+      </ul>
+  </div>
+</nav>
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+<div class="table-responsive rounded my-table">
+    <table id="library_table" class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" >Library ID</th>
+          <th scope="col" >City</th>
+          <th scope="col" >Street</th>
+          <th scope="col" >House number</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for o in libraries %}
+            <tr>
+              <th scope="row">          
+                  {{ o.id }}
+              </th>
+              <td>             
+                  {{ o.city }}
+              </td>
+              <td>             
+                  {{ o.street }}
+              </td>
+              <td>
+                  {{ o.housenumber }}
+              </td>
+              <td>
+                <a href="{{ url_for('library_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+              </td>
+  
+            </tr>
+       {% endfor %}
+       </tbody>
+   </table>
+    <div class="content-section">
+    <form method="POST" action="">
+        {{ form1.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Add Library</legend>
+            <div class="form-group">
+                {{ form1.city.label(class="form-control-label") }}
+
+                {% if form1.city.errors %}
+                    {{ form1.city(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form1.city.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form1.city(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form1.street.label(class="form-control-label") }}
+                {% if form1.street.errors %}
+                    {{ form1.street(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form1.street.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form1.street(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form1.housenumber.label(class="form-control-label") }}
+                {% if form1.housenumber.errors %}
+                    {{ form1.housenumber(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form1.housenumber.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form1.housenumber(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form1.submit_add(class="btn btn-outline-info") }}
+        </div>
+    </form>
+    <br>
+    <form method="POST" action="">
+        {{ form2.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Change Library</legend>
+            <div class="form-group">
+                {{ form2.city.label(class="form-control-label") }}
+
+                {% if form2.city.errors %}
+                    {{ form2.city(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.city.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form2.city(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form2.street.label(class="form-control-label") }}
+                {% if form2.street.errors %}
+                    {{ form2.street(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.street.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form2.street(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form2.housenumber.label(class="form-control-label") }}
+                {% if form2.housenumber.errors %}
+                    {{ form2.housenumber(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.housenumber.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form2.housenumber(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form2.id.label(class="form-control-label") }}
+                {% if form2.id.errors %}
+                    {{ form2.id(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form2.id.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form2.id(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form2.submit_change(class="btn btn-outline-info") }}
+        </div>
+    </form>
+    </div>
+</div>
+</html>

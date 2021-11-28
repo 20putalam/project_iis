@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     <link rel="stylesheet" type="text/css" href="/static/style2.css">
     <link rel="icon" href="/static/img/icon.ico">
@@ -18,13 +21,11 @@
               <li><a href="index">Home</a></li>
               <li><a href="manageusers">Manage Users</a></li>
               <li><a href="addusers">Add Users</a></li>
-              <li><a href="index">Manage User Roles</a></li>
-              <li><a href="index">Manage Libraries</a></li>
+              <li><a href="managelibraries">Manage Libraries</a></li>
               <li><a href="index">Manage Books</a></li>
               
           </div>
           <div class="right_links">
-              <input type="text" placeholder="Search..">
               {% if current_user.is_authenticated %}
                   <li id="login1"><a href="#">Účet</a></li>
                   <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
@@ -36,16 +37,34 @@
       </ul>
   </div>
 </nav>
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
 
-
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+<div class="table_user_manage">
 <div class="table-responsive rounded my-table">
-  <table id="user_table" class="table table-striped" data-filter-data="" data-filter-control="true">
+  <table id="user_table" class="table table-striped">
     <thead class="thead-dark">
       <tr>
+<<<<<<< HEAD
         <th scope="col" data-field="pk" data-filter-control="input">#</th>
         <th scope="col" data-field="fields.first_name">Name</th>
         <th scope="col" data-field="fields.email">E-mail</th>
         <th scope="col" data-field="fields.role" data-filter-control="input">Role</th>
+=======
+        <th scope="col" >ID</th>
+        <th scope="col" >Name</th>
+        <th scope="col" >E-mail</th>
+        <th scope="col" >Role</th>
+>>>>>>> c4cc329d38a1bcb4f98b9c98d64abbae52b0dff8
       </tr>
     </thead>
     <tbody>
@@ -64,8 +83,26 @@
               </a>  
             </td>
             <td>
+<<<<<<< HEAD
                 {{ o.role_id }}
               </a>  
+=======
+                {{ o.ro_user.name }}
+            <td>
+              <div class="dropdown">
+                <button class="dropbtn">Choose role</button>
+                <div class="dropdown-content">
+                  <a href="{{ url_for('user_update', id=o.id,role=1)}}">Admin</a>
+                  <a href="{{ url_for('user_update', id=o.id,role=2)}}">Reader</a>
+                  <a href="{{ url_for('user_update', id=o.id,role=3)}}">Librarian</a>
+                  <a href="{{ url_for('user_update', id=o.id,role=4)}}">Teacher</a>
+                </div>
+              </div> 
+            </td>
+            </td>
+            <td>
+              <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+>>>>>>> c4cc329d38a1bcb4f98b9c98d64abbae52b0dff8
             </td>
 
           </tr>
@@ -73,19 +110,6 @@
      </tbody>
  </table>
 
- <form method="POST" action="">
-  {{ form.hidden_tag() }}
-  <fieldset class="form-group">
-      <legend class="border-bottom mb-4">Delete User by ID</legend>
-      <div class="form-group">
-          {{ form.id.label(class="form-control-label") }}
-          {{ form.id(class="form-control form-control-lg") }}
-      </div>
-  </fieldset>
-  <div class="form-group">
-      {{ form.submit(class="btn btn-outline-info", text="Delete") }}
-  </div>
-</form>
-
+</div>
 </div>
 </html>
