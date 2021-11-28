@@ -41,6 +41,7 @@
             </ul>
         </div>
     </nav>
+    {% for message in get_flashed_messages() %}
     <!--end of navbar-->
     <div>    
         {% block content %}{% endblock %}
