@@ -46,11 +46,10 @@ class Book(db.Model):
     tag = db.Column(db.String(40), nullable=False)
     
     number_of = db.Column(db.Integer, nullable=False)
+    library = db.Column(db.Integer, db.ForeignKey('library.id'))
     
     reservations = db.relationship('Reservation', backref='b_reserve')
     borrow = db.relationship('Borrowing', backref='b_borrow')
-    
-    library = db.Column(db.Integer, db.ForeignKey('library.id'))
 
 class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
