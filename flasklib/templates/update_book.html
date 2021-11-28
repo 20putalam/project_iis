@@ -1,11 +1,57 @@
-{% extends "layout.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style2.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
+    <link rel="icon" href="/static/img/icon.ico">
+    <title>Manage Books</title>
+</head>
+
+<nav class="navbar2">
+    <div class="nav_content">
+        <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
+        <ul class="nav_list">
+            <div class="left_links">
+                <li><a href="index">Home</a></li>
+                <li><a href="manageusers">Manage Users</a></li>
+                <li><a href="addusers">Add Users</a></li>
+                <li><a href="managelibraries">Manage Libraries</a></li>
+                <li><a href="managebooks">Manage Books</a></li>
+
+            </div>
+            <div class="right_links">
+                {% if current_user.is_authenticated %}
+                <li id="login1"><a href="account">Account</a></li>
+                <li id="login2"><a href="{{ url_for('logout') }}">Log out</a></li>
+                {% else %}
+                <li id="login1"><a href="login">Log in</a></li>
+                <li id="login2"><a href="register">Sign up</a></li>
+                {% endif %}
+            </div>
+        </ul>
+    </div>
+</nav>
+
+<div class="our_button">
+    {% for message in get_flashed_messages() %}
+    <div class="our_alert">
+        <li>{{ message }}<span class="close">x</span></li>
+    </div>
+    {% endfor %}
+</div>
 
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Aktualizovat knihu</legend>
+            <legend class="border-bottom mb-4">Update book</legend>
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
                 {% if form.name.errors %}
@@ -78,4 +124,4 @@
     </form>
 </div>
 
-{% endblock %}
+</html>

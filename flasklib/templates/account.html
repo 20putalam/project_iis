@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<table id="data" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>E-mail</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.ro_user.name}}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock content %}

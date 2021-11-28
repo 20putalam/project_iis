@@ -5,7 +5,6 @@ from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flasklib.models import Library, User
 
-
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
@@ -27,17 +26,22 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('That email is taken. Please choose a different one.')
 
 class AddBook(FlaskForm):
+    def fill_choices(Library):
+        choices = list()
+        for lib in Library.query.all():
+            choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
+        return choices
+    
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=40)])
     autor = StringField('Autor', validators=[DataRequired(), Length(min=2, max=40)])
     publisher = StringField('Publisher', validators=[DataRequired(), Length(min=2, max=40)])
     tag = StringField('Tag', validators=[DataRequired(), Length(min=2, max=40)])
-    choices = list()
+    library = SelectField('Library', validators=[DataRequired()], choices=fill_choices(Library))
+    number_of = IntegerField('Number', validators=[DataRequired()])
+    img = StringField('Image', validators=[DataRequired(), Length(min=2, max=40)])
 
-    for lib in Library.query.all():
-        choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
+    submit = SubmitField('Add')
     
-    library = SelectField('Library', validators=[DataRequired()], choices=choices)
-    submit = SubmitField('Přidat')
 
 
 class LoginForm(FlaskForm):
@@ -45,7 +49,7 @@ class LoginForm(FlaskForm):
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+    submit = SubmitField('Log in')
 
 class AddUsersForm(FlaskForm):
 

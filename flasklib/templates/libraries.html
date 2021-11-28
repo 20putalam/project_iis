@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<table id="library_table" class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" >City</th>
+        <th scope="col" >Street</th>
+        <th scope="col" >House number</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in libraries %}
+          <tr>
+            <th scope="row">          
+                {{ o.city }}
+            </th>
+            <td>             
+                {{ o.street }}
+            </td>
+            <td>             
+                {{ o.housenumber }}
+            </td>
+          </tr>
+     {% endfor %}
+     </tbody>
+ </table>
+{% endblock content %}

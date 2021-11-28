@@ -16,6 +16,9 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
+    
+    reservations = db.relationship('Reservation', backref='u_reserve')
+    borrow = db.relationship('Borrowing', backref='u_borrow')
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
@@ -41,10 +44,26 @@ class Book(db.Model):
     autor = db.Column(db.String(40), nullable=False)
     publisher = db.Column(db.String(40), nullable=False)
     tag = db.Column(db.String(40), nullable=False)
-    #number_of = db.Column(db.Integer, nullable=False)
     
-    #reservations = db.relationship('Reservation', backref='reservations')
+    number_of = db.Column(db.Integer, nullable=False)
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
+    img = db.Column(db.String(40), nullable=False)
+    
+    reservations = db.relationship('Reservation', backref='b_reserve')
+    borrow = db.relationship('Borrowing', backref='b_borrow')
+
+class Reservation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+    valid_until = db.Column(db.DateTime,  default=db.func.current_timestamp()+ '3 days')
+
+class Borrowing(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+    valid_until = db.Column(db.DateTime,  default=db.func.current_timestamp()+ '30 days')
+
 
 class MyModelView(ModelView):
     def is_accessible(self):

@@ -5,7 +5,7 @@
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Přihlásit se</legend>
+                <legend class="border-bottom mb-4">Log in</legend>
                 <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
@@ -41,13 +41,13 @@
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
             <small class="text-muted ml-2">
-                <a href="#">Zapomenuté heslo?</a>
+                <a href="#">Forgot password?</a>
             </small>
         </form>
     </div>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Ještě nemáš učet? <a class="ml-2" href="register">Registruj se zde</a>
+            Don't have an account? <a class="ml-2" href="register">Sign up here</a>
         </small>
     </div>
 

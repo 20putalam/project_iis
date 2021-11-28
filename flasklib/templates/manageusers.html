@@ -19,16 +19,16 @@
               <li><a href="manageusers">Manage Users</a></li>
               <li><a href="addusers">Add Users</a></li>
               <li><a href="managelibraries">Manage Libraries</a></li>
-              <li><a href="knihy">Manage Books</a></li>
+              <li><a href="managebooks">Manage Books</a></li>
               
           </div>
           <div class="right_links">
               {% if current_user.is_authenticated %}
-                  <li id="login1"><a href="#">Účet</a></li>
-                  <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
+                  <li id="login1"><a href="account">Account</a></li>
+                  <li id="login2"><a href="{{ url_for('logout') }}">Log out</a></li>
               {% else %}
-                  <li id="login1"><a href="login">Příhlášení</a></li>
-                  <li id="login2"><a href="register">Registrace</a></li>
+                  <li id="login1"><a href="login">Log in</a></li>
+                  <li id="login2"><a href="register">Sign up</a></li>
               {% endif %}
           </div>
       </ul>
@@ -78,13 +78,13 @@
                   <a href="{{ url_for('user_update', id=o.id,role=1)}}">Admin</a>
                   <a href="{{ url_for('user_update', id=o.id,role=2)}}">Reader</a>
                   <a href="{{ url_for('user_update', id=o.id,role=3)}}">Librarian</a>
-                  <a href="{{ url_for('user_update', id=o.id,role=4)}}">Teacher</a>
+                  <a href="{{ url_for('user_update', id=o.id,role=4)}}">Distributor</a>
                 </div>
               </div> 
             </td>
             </td>
             <td>
-              <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+              <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Delete</button> </a>
             </td>
 
           </tr>

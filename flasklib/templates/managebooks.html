@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
     <link rel="icon" href="/static/img/icon.ico">
-    <title>Manage Users</title>
+    <title>Manage Books</title>
 </head>
 
 <nav class="navbar2">
@@ -23,16 +23,16 @@
                 <li><a href="manageusers">Manage Users</a></li>
                 <li><a href="addusers">Add Users</a></li>
                 <li><a href="managelibraries">Manage Libraries</a></li>
-                <li><a href="knihy">Manage Books</a></li>
+                <li><a href="managebooks">Manage Books</a></li>
 
             </div>
             <div class="right_links">
                 {% if current_user.is_authenticated %}
-                <li id="login1"><a href="#">Účet</a></li>
-                <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
+                <li id="login1"><a href="account">Account</a></li>
+                <li id="login2"><a href="{{ url_for('logout') }}">Log out</a></li>
                 {% else %}
-                <li id="login1"><a href="login">Příhlášení</a></li>
-                <li id="login2"><a href="register">Registrace</a></li>
+                <li id="login1"><a href="login">Log in</a></li>
+                <li id="login2"><a href="register">Sign up</a></li>
                 {% endif %}
             </div>
         </ul>
@@ -51,7 +51,7 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Přidat knihu</legend>
+            <legend class="border-bottom mb-4">Add book</legend>
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
 
@@ -118,6 +118,32 @@
                 {{ form.library(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+            <div class="form-group">
+                {{ form.number_of.label(class="form-control-label") }}
+                {% if form.number_of.errors %}
+                {{ form.number_of(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.number_of.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.number_of(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.img.label(class="form-control-label") }}
+                {% if form.img.errors %}
+                {{ form.img(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.img.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.img(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
         </fieldset>
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
@@ -128,11 +154,12 @@
 <table id="data" class="table table-striped">
     <thead>
         <tr>
-            <th>Jméno</th>
-            <th>Autor</th>
-            <th>Vydavatel</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Publisher</th>
             <th>Tag</th>
-            <th>Knihovna</th>
+            <th>Library</th>
+            <th>Number_of</th>
             <th>Button</th>
         </tr>
     </thead>
@@ -143,12 +170,13 @@
             <td>{{ Book.autor }}</td>
             <td>{{ Book.publisher }}</td>
             <td>{{ Book.tag }}</td>
-            <td>{{ Book.library }}</td>
+            <td>{{ Book.all_books.city+', '+Book.all_books.street }}</td>
+            <td>{{ Book.number_of }}</td>
             <td>
-                <a href="{{ url_for('knihy_delete', id=Book.id)}}"> <button type="button"
-                        class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
-                <a href="{{ url_for('knihy_update', id=Book.id)}}"> <button type="button"
-                        class="btn btn-secondary">Upravit</button> </a>
+                <a href="{{ url_for('book_delete', id=Book.id)}}"> <button type="button"
+                        class="btn btn-sm btn-outline-danger">Delete</button> </a>
+                <a href="{{ url_for('book_update', id=Book.id)}}"> <button type="button"
+                        class="btn btn-secondary">Update</button> </a>
             </td>
         </tr>
         {% endfor %}
