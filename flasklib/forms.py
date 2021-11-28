@@ -29,13 +29,11 @@ class AddBook(FlaskForm):
 
     def fill_choices(Library):
         choices = list()
-        try:    
-            for lib in Library.query.all():
-                choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
-            return choices
-        except:
-            return choices
-            
+        for lib in Library.query.all():
+            choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
+        return choices
+      
+
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=40)])
     autor = StringField('Autor', validators=[DataRequired(), Length(min=2, max=40)])
     publisher = StringField('Publisher', validators=[DataRequired(), Length(min=2, max=40)])
