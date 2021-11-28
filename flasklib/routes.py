@@ -125,6 +125,14 @@ def managelibraries():
             form2 = ChangeLibrariesForm()
             if form1.validate_on_submit():
                 if form1.submit_add.data:
+                    
+                    par1 = Library.query.filter_by(city=form1.city.data).first()
+                    par2 = Library.query.filter_by(street=form1.street.data).first()
+                    par3 = Library.query.filter_by(housenumber=form1.housenumber.data).first()
+                    if par1 and par2 and par3:
+                        flash("Library already exists")
+                        return redirect(url_for('managelibraries'))
+
                     library = Library(city=form1.city.data, street=form1.street.data, housenumber=form1.housenumber.data)
                     db.session.add(library)
                     db.session.commit()

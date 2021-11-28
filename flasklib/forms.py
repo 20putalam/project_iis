@@ -70,14 +70,6 @@ class AddLibrariesForm(FlaskForm):
     housenumber = IntegerField('Housenumber', validators=[DataRequired()])
     submit_add = SubmitField('Add')
 
-    def validate_library(self, city):
-        par1 = Library.query.filter_by(city=city.data).first()
-        #par2 = Library.query.filter_by(street==street.data).first()
-        #par3 = Library.query.filter_by(housenumber==housenumber.data).first()
-        if par1:
-            raise ValidationError('That library already exists, please set valid information')
-   
-
 class ChangeLibrariesForm(FlaskForm):
 
     id = IntegerField('ID of Library to change',validators=[DataRequired()])
