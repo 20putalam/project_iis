@@ -123,8 +123,6 @@ def managelibraries():
             libraries = Library.query.order_by(Library.id)
             form1 = AddLibrariesForm()
             form2 = ChangeLibrariesForm()
-            form1.validate_library()
-            form2.validate_library()
             if form1.validate_on_submit():
                 if form1.submit_add.data:
                     library = Library(city=form1.city.data, street=form1.street.data, housenumber=form1.housenumber.data)

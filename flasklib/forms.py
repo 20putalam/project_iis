@@ -71,9 +71,9 @@ class AddLibrariesForm(FlaskForm):
     submit_add = SubmitField('Add')
 
     def validate_library(self, city, street, housenumber):
-        par1 = Library.query.filter_by(city=city.data).first()
-        par2 = Library.query.filter_by(street=street.data).first()
-        par3 = Library.query.filter_by(housenumber=housenumber.data).first()
+        par1 = Library.query.filter_by(city==city.data).first()
+        par2 = Library.query.filter_by(street==street.data).first()
+        par3 = Library.query.filter_by(housenumber==housenumber.data).first()
         if par1 and par2 and par3:
             raise ValidationError('That library already exists, please set valid information')
    
@@ -87,9 +87,9 @@ class ChangeLibrariesForm(FlaskForm):
     submit_change = SubmitField('Change')
 
     def validate_library(self, city, street, housenumber):
-        par1 = Library.query.filter_by(city=city.data).first()
-        par2 = Library.query.filter_by(street=street.data).first()
-        par3 = Library.query.filter_by(housenumber=housenumber.data).first()
+        par1 = Library.query.filter_by(city==city.data).first()
+        par2 = Library.query.filter_by(street==street.data).first()
+        par3 = Library.query.filter_by(housenumber==housenumber.data).first()
         if par1 and par2 and par3:
             raise ValidationError('That library already exists, please set valid information')
     
