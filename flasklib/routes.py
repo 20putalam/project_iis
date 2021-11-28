@@ -23,6 +23,22 @@ def books():
     books = Book.query.order_by(Book.id)
     return render_template('books.html',books=books)
 
+@app.route("/books_reserve/<int:id>")
+def book_reserve(id):
+    if current_user.is_authenticated:
+        book = Book.query.get_or_404(id)
+        try:
+            
+            #db.session.commit()
+            flash("Book reserved successfully!")
+            #return redirect(url_for('books'))
+        except:
+            flash("Error!")
+            return redirect(url_for('books'))
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route("/libraries")
 def libraries():
     libraries = Library.query.order_by(Library.id)
