@@ -54,6 +54,7 @@
             <legend class="border-bottom mb-4">Update book</legend>
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
+
                 {% if form.name.errors %}
                 {{ form.name(class="form-control form-control-lg is-invalid") }}
                 <div class="invalid-feedback">
@@ -62,7 +63,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.name(class="form-control form-control-lg", value=book_update.name) }}
+                {{ form.name(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -75,7 +76,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.autor(class="form-control form-control-lg", value=book_update.autor) }}
+                {{ form.autor(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -88,7 +89,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.publisher(class="form-control form-control-lg", value=book_update.publisher) }}
+                {{ form.publisher(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -101,7 +102,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.tag(class="form-control form-control-lg", value=book_update.tag) }}
+                {{ form.tag(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -114,7 +115,33 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.library(class="form-control form-control-lg", value=book_update.library) }}
+                {{ form.library(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.number_of.label(class="form-control-label") }}
+                {% if form.number_of.errors %}
+                {{ form.number_of(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.number_of.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.number_of(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.img.label(class="form-control-label") }}
+                {% if form.img.errors %}
+                {{ form.img(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.img.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.img(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
         </fieldset>
