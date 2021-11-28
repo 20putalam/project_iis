@@ -21,8 +21,8 @@ def home():
 @app.route("/account")
 def account():
     if current_user.is_authenticated:
-        user = current_user
-        return render_template('account.html',user=user)   
+        reservations = Reservation.query.filter_by(user_id=current_user)
+        return render_template('account.html',user=current_user,reservations=reservations)   
     else:
         return redirect(url_for('login'))
 
@@ -34,12 +34,11 @@ def books():
 @app.route("/books_reserve/<int:id>")
 def book_reserve(id):
     if current_user.is_authenticated:
-        book = Book.query.get_or_404(id)
         try:
-            
-            #db.session.commit()
+            reservation = Reservation(user_id=current_user.id, book_id=id)
+            db.session.commit(reservation)
             flash("Book reserved successfully!")
-            #return redirect(url_for('books'))
+            return redirect(url_for('books'))
         except:
             flash("Error!")
             return redirect(url_for('books'))
@@ -78,14 +77,11 @@ def book_delete(id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
             book_delete = Book.query.get_or_404(id)
-            name = None
-            form = AddBook()
-
+         
             try:
                 db.session.delete(book_delete)
                 db.session.commit()
                 flash("Book deleted successfully!")
-                Books = Book.query
                 return redirect(url_for('managebooks'))
             except:
                 flash("Error!")

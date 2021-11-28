@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<table id="data" class="table table-striped">
+<table id="user-data" class="table table-striped">
     <thead>
         <tr>
             <th>Username</th>
@@ -15,6 +15,25 @@
             <td>{{ user.email }}</td>
             <td>{{ user.ro_user.name}}</td>
         </tr>
+    </tbody>
+</table>
+<br>
+<table id="user-reservation-data" class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Book ID</th>
+            <th>Valid Until</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.book_id }}</td>
+            <td>{{ reservation.valid_until }}</td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
 
