@@ -10,7 +10,7 @@
     <title>Manage Users</title>
 </head>
 
-<nav class="navbar2">
+<nav class="navbar">
   <div class="nav_content">
       <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
       <ul class="nav_list">
@@ -46,10 +46,17 @@
   <table id="user_table" class="table table-striped">
     <thead class="thead-dark">
       <tr>
+<<<<<<< HEAD
+        <th scope="col" data-field="pk" data-filter-control="input">#</th>
+        <th scope="col" data-field="fields.first_name">Name</th>
+        <th scope="col" data-field="fields.email">E-mail</th>
+        <th scope="col" data-field="fields.role" data-filter-control="input">Role</th>
+=======
         <th scope="col" >ID</th>
         <th scope="col" >Name</th>
         <th scope="col" >E-mail</th>
         <th scope="col" >Role</th>
+>>>>>>> c4cc329d38a1bcb4f98b9c98d64abbae52b0dff8
       </tr>
     </thead>
     <tbody>
@@ -57,14 +64,21 @@
           <tr>
             <th scope="row">          
                 {{ o.id }}
+              </a> 
             </th>
             <td>             
                 {{ o.username }}
+              </a>  
             </td>
             <td>             
                 {{ o.email }}
+              </a>  
             </td>
             <td>
+<<<<<<< HEAD
+                {{ o.role_id }}
+              </a>  
+=======
                 {{ o.ro_user.name }}
             <td>
               <div class="dropdown">
@@ -80,6 +94,7 @@
             </td>
             <td>
               <a href="{{ url_for('user_delete', id=o.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+>>>>>>> c4cc329d38a1bcb4f98b9c98d64abbae52b0dff8
             </td>
 
           </tr>

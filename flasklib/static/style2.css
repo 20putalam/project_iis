@@ -3,10 +3,9 @@
     background: grey;
 }
 */
-.navbar2 {
+.navbar {
     position: relative;
     background: grey;
-    padding-bottom: 0.5vw;
 }
 
 .sticky {

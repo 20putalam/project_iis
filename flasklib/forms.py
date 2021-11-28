@@ -1,7 +1,6 @@
 from flask.app import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.fields.choices import SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flasklib.models import Library, User
@@ -32,7 +31,8 @@ class AddBook(FlaskForm):
     autor = StringField('Autor', validators=[DataRequired(), Length(min=2, max=40)])
     publisher = StringField('Publisher', validators=[DataRequired(), Length(min=2, max=40)])
     tag = StringField('Tag', validators=[DataRequired(), Length(min=2, max=40)])
-    library = StringField('Library', validators=[DataRequired(), Length(min=2, max=40)])
+    
+    library = SelectField('Library', validators=[DataRequired()], choices=[(1, 'Brno'), (2, 'Praha')])
     submit = SubmitField('Přidat')
 
 
@@ -41,7 +41,7 @@ class LoginForm(FlaskForm):
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
-    submit = SubmitField('Login') 
+    submit = SubmitField('Login')
 
 class AddUsersForm(FlaskForm):
 
