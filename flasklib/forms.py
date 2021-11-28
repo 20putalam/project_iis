@@ -34,7 +34,7 @@ class AddBook(FlaskForm):
     choices = list()
 
     for lib in Library.query.all():
-        choices.append((lib.id, lib.city))
+        choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
     
     library = SelectField('Library', validators=[DataRequired()], choices=choices)
     submit = SubmitField('Přidat')
