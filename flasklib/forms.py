@@ -5,10 +5,6 @@ from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flasklib.models import Library, User
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
