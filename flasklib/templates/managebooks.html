@@ -28,11 +28,11 @@
             </div>
             <div class="right_links">
                 {% if current_user.is_authenticated %}
-                <li id="login1"><a href="#">Účet</a></li>
-                <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
+                <li id="login1"><a href="#">Account</a></li>
+                <li id="login2"><a href="{{ url_for('logout') }}">Log out</a></li>
                 {% else %}
-                <li id="login1"><a href="login">Příhlášení</a></li>
-                <li id="login2"><a href="register">Registrace</a></li>
+                <li id="login1"><a href="login">Log in</a></li>
+                <li id="login2"><a href="register">Sign up</a></li>
                 {% endif %}
             </div>
         </ul>
@@ -51,7 +51,7 @@
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Přidat knihu</legend>
+            <legend class="border-bottom mb-4">Add book</legend>
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
 
@@ -128,11 +128,11 @@
 <table id="data" class="table table-striped">
     <thead>
         <tr>
-            <th>Jméno</th>
-            <th>Autor</th>
-            <th>Vydavatel</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Publisher</th>
             <th>Tag</th>
-            <th>Knihovna</th>
+            <th>Library</th>
             <th>Button</th>
         </tr>
     </thead>
@@ -145,10 +145,10 @@
             <td>{{ Book.tag }}</td>
             <td>{{ Book.library }}</td>
             <td>
-                <a href="{{ url_for('knihy_delete', id=Book.id)}}"> <button type="button"
-                        class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
-                <a href="{{ url_for('knihy_update', id=Book.id)}}"> <button type="button"
-                        class="btn btn-secondary">Upravit</button> </a>
+                <a href="{{ url_for('book_delete', id=Book.id)}}"> <button type="button"
+                        class="btn btn-sm btn-outline-danger">Delete</button> </a>
+                <a href="{{ url_for('book_update', id=Book.id)}}"> <button type="button"
+                        class="btn btn-secondary">Update</button> </a>
             </td>
         </tr>
         {% endfor %}

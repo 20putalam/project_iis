@@ -18,12 +18,12 @@ admin.add_view(MyModelView(Book, db.session))
 def home():
     return render_template('index.html')
 
-@app.route("/knihovny")
-def knihovny():
-    return render_template('knihovny.html')
+@app.route("/libraries")
+def libraries():
+    return render_template('libraries.html')
 
-@app.route("/knihy", methods=['GET', 'POST'])
-def knihy():
+@app.route("/managebooks", methods=['GET', 'POST'])
+def managebooks():
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
             Books = Book.query
@@ -35,15 +35,15 @@ def knihy():
                 new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data ,all_books=lib_city)
                 db.session.add(new_book)
                 db.session.commit()   
-                flash('Kniha byla přidána!', 'Úspěch')
+                flash('Book added successfully!', 'Success')
             return render_template('managebooks.html', title='Basic Table', Books=Books, form=form)
         else:
             return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
 
-@app.route('/knihy_delete/<int:id>')
-def knihy_delete(id):
+@app.route('/book_delete/<int:id>')
+def book_delete(id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
             book_delete = Book.query.get_or_404(id)
@@ -53,19 +53,19 @@ def knihy_delete(id):
             try:
                 db.session.delete(book_delete)
                 db.session.commit()
-                flash("Kniha byla úspěšné smazána !")
+                flash("Book deleted successfully!")
                 Books = Book.query
-                return redirect(url_for('knihy'))
+                return redirect(url_for('managebooks'))
             except:
-                flash("Při mazání nastala chyba !!")
-                return redirect(url_for('knihy'))
+                flash("Error!")
+                return redirect(url_for('managebooks'))
         else:
             return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
 
-@app.route('/knihy_update<int:id>', methods=['GET', 'POST'])
-def knihy_update(id):
+@app.route('/book_update<int:id>', methods=['GET', 'POST'])
+def book_update(id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
             form = AddBook()
@@ -80,8 +80,8 @@ def knihy_update(id):
                 book_update.all_books = lib_city
 
                 db.session.commit()
-                flash("Kniha auktualizována !!")
-                return redirect(url_for('knihy'))
+                flash("Book updated successfully!")
+                return redirect(url_for('managebooks'))
             else:   
                 return render_template("update_book.html", form=form, book_update = book_update)
         else:
@@ -110,25 +110,26 @@ def user_delete(id):
             try:
                 User.query.filter_by(id=id).delete()
                 db.session.commit()
-                flash("User byl úspěšné smazán !")
+                flash("User deleted successfully!")
                 return redirect(url_for('manageusers'))
             except:
-                flash("Při mazání nastala chyba !!")
+                flash("Error!")
                 return redirect(url_for('manageusers'))
         else:
             return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
+        
 @app.route('/user_update/<int:id>/<int:role>')
 def user_update(id,role):
 
     try:
         User.query.filter_by(id=id).update(dict(role_id=role))
         db.session.commit()
-        flash("User successfully updated !")
+        flash("User updated successfully!")
         return redirect(url_for('manageusers'))
     except:
-        flash("Při mazání nastala chyba !!")
+        flash("Error!")
         return redirect(url_for('manageusers'))
 
 @app.route("/addusers",methods=['GET', 'POST'])
@@ -145,7 +146,7 @@ def addusers():
                 user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first())
                 db.session.add(user)
                 db.session.commit()
-                flash('Učet byl vytvořen!', 'Úspěch')
+                flash('Account created successfully!', 'Success')
                 
             return render_template('addusers.html', title='Admin Tools',form=form)
 
@@ -171,13 +172,13 @@ def managelibraries():
                     par2 = Library.query.filter_by(street=form1.street.data).first()
                     par3 = Library.query.filter_by(housenumber=form1.housenumber.data).first()
                     if par1 and par2 and par3:
-                        flash("Library already exists")
+                        flash("Library already exists!")
                         return redirect(url_for('managelibraries'))
 
                     library = Library(city=form1.city.data, street=form1.street.data, housenumber=form1.housenumber.data)
                     db.session.add(library)
                     db.session.commit()
-                    flash('Knihovna byla vytvořena!', 'Úspěch')
+                    flash('Library created successfully!', 'Success')
 
             if form2.validate_on_submit():
                 if form2.submit_change.data:
@@ -186,7 +187,7 @@ def managelibraries():
                     par2 = Library.query.filter_by(street=form2.street.data).first()
                     par3 = Library.query.filter_by(housenumber=form2.housenumber.data).first()
                     if par1 and par2 and par3:
-                        flash("Library already exists")
+                        flash("Library already exists!")
                         return redirect(url_for('managelibraries'))
 
                     try:
@@ -195,7 +196,7 @@ def managelibraries():
                         Library.query.filter_by(id=form2.id.data).update(dict(housenumber=form2.housenumber.data))
                         db.session.commit()
                     except:
-                        flash("Library ID to update not found")
+                        flash("Library ID to update not found!")
 
 
             return render_template('managelibraries.html', title='Admin Tools',libraries = libraries,form1=form1,form2=form2)
@@ -211,10 +212,10 @@ def library_delete(id):
     try:
         Library.query.filter_by(id=id).delete()
         db.session.commit()
-        flash("Library byla úspěšné smazána !")
+        flash("Library deleted successfully!")
         return redirect(url_for('managelibraries'))
     except:
-        flash("Při mazání nastala chyba !!")
+        flash("Error!")
         return redirect(url_for('managelibraries'))
 
 ############################################################################################################################################
@@ -232,7 +233,7 @@ def login():
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
-            flash('Příhlašení neúspěsné! Zkontrolujte heslo a email', 'chyba')
+            flash('Login unsuccessfull! Check password and mail address', 'Error')
     return render_template('login.html', title='Login', form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -245,7 +246,7 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, ro_user=Role.query.filter_by(name='reader').first())
         db.session.add(user)
         db.session.commit()
-        flash('Váš učet byl vytvořen! Nyní se můžete  přihlásit', 'Úspěch')
+        flash('Account created successfully! You can log in now', 'Success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 

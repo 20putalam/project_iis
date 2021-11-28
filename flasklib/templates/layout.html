@@ -19,9 +19,9 @@
             <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
             <ul class="nav_list">
                 <div class="left_links">
-                    <li><a href="index">Domů</a></li>
-                    <li><a href="knihovny">Knihovny</a></li>
-                    <li><a href="#">Knihy</a></li>
+                    <li><a href="index">Home</a></li>
+                    <li><a href="libraries">Libraries</a></li>
+                    <li><a href="books">Books</a></li>
                     {% if current_user.is_authenticated %}
                         {% if current_user.ro_user.name == "admin" %}
                             <li><a href="manageusers">Admin</a></li>
@@ -31,11 +31,11 @@
                 <div class="right_links">
                     <input type="text" placeholder="Search..">
                     {% if current_user.is_authenticated %}
-                        <li id="login1"><a href="#">Účet</a></li>
-                        <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
+                        <li id="login1"><a href="#">Account</a></li>
+                        <li id="login2"><a href="{{ url_for('logout') }}">Log out</a></li>
                     {% else %}
-                        <li id="login1"><a href="login">Příhlášení</a></li>
-                        <li id="login2"><a href="register">Registrace</a></li>
+                        <li id="login1"><a href="login">Log in</a></li>
+                        <li id="login2"><a href="register">Sign up</a></li>
                     {% endif %}
                 </div>
             </ul>
