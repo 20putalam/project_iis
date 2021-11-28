@@ -47,6 +47,7 @@ class Book(db.Model):
     
     number_of = db.Column(db.Integer, nullable=False)
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
+    img = db.Column(db.String(40), nullable=False)
     
     reservations = db.relationship('Reservation', backref='b_reserve')
     borrow = db.relationship('Borrowing', backref='b_borrow')
