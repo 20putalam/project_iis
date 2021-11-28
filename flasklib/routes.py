@@ -27,14 +27,14 @@ def knihy():
     Books = Book.query
     form = AddBook()
     if form.validate_on_submit():
-        lib_city=form.library.data[0]
+        lib_city=form.library.data
         lib_city = Library.query.get_or_404(lib_city)
 
         new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data ,all_books=lib_city)
         db.session.add(new_book)
         db.session.commit()   
         flash('Kniha byla přidána!', 'Úspěch')
-    return render_template('knihy.html', title='Basic Table', Books=Books, form=form)
+    return render_template('managebooks.html', title='Basic Table', Books=Books, form=form)
 
 @app.route('/knihy_delete/<int:id>')
 def knihy_delete(id):
@@ -61,7 +61,7 @@ def knihy_update(id):
         book_update.autor = form.autor.data
         book_update.publisher = form.publisher.data
         book_update.tag = form.tag.data
-        lib_city=form.library.data[0]
+        lib_city=form.library.data
         lib_city = Library.query.get_or_404(lib_city)
         book_update.all_books = lib_city
 

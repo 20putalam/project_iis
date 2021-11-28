@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style2.css">
+    <link rel="icon" href="/static/img/icon.ico">
+    <title>Manage Users</title>
+</head>
+
+<nav class="navbar2">
+    <div class="nav_content">
+        <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
+        <ul class="nav_list">
+            <div class="left_links">
+                <li><a href="index">Home</a></li>
+                <li><a href="manageusers">Manage Users</a></li>
+                <li><a href="addusers">Add Users</a></li>
+                <li><a href="managelibraries">Manage Libraries</a></li>
+                <li><a href="knihy">Manage Books</a></li>
+
+            </div>
+            <div class="right_links">
+                {% if current_user.is_authenticated %}
+                <li id="login1"><a href="#">Účet</a></li>
+                <li id="login2"><a href="{{ url_for('logout') }}">Odhlášení</a></li>
+                {% else %}
+                <li id="login1"><a href="login">Příhlášení</a></li>
+                <li id="login2"><a href="register">Registrace</a></li>
+                {% endif %}
+            </div>
+        </ul>
+    </div>
+</nav>
+
+<div class="our_button">
+    {% for message in get_flashed_messages() %}
+    <div class="our_alert">
+        <li>{{ message }}<span class="close">x</span></li>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Přidat knihu</legend>
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+
+                {% if form.name.errors %}
+                {{ form.name(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.autor.label(class="form-control-label") }}
+                {% if form.autor.errors %}
+                {{ form.autor(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.autor.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.autor(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.publisher.label(class="form-control-label") }}
+                {% if form.publisher.errors %}
+                {{ form.publisher(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.publisher.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.publisher(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.tag.label(class="form-control-label") }}
+                {% if form.tag.errors %}
+                {{ form.tag(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.tag.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.tag(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.library.label(class="form-control-label") }}
+                {% if form.library.errors %}
+                {{ form.library(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.library.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.library(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+
+<table id="data" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Jméno</th>
+            <th>Autor</th>
+            <th>Vydavatel</th>
+            <th>Tag</th>
+            <th>Knihovna</th>
+            <th>Button</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for Book in Books %}
+        <tr>
+            <td>{{ Book.name }}</td>
+            <td>{{ Book.autor }}</td>
+            <td>{{ Book.publisher }}</td>
+            <td>{{ Book.tag }}</td>
+            <td>{{ Book.library }}</td>
+            <td>
+                <a href="{{ url_for('knihy_delete', id=Book.id)}}"> <button type="button"
+                        class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+                <a href="{{ url_for('knihy_update', id=Book.id)}}"> <button type="button"
+                        class="btn btn-secondary">Upravit</button> </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#data').DataTable({
+            columns: [
+                null,
+                null,
+                null,
+                null,
+                null,
+                { searchable: false, orderable: false }],
+        });
+    });
+
+    var closebtns = document.getElementsByClassName("close");
+    var i;
+
+    /* Loop through the elements, and hide the parent, when clicked on */
+    for (i = 0; i < closebtns.length; i++) {
+        closebtns[i].addEventListener("click", function () {
+            this.parentElement.style.display = 'none';
+        });
+    }
+</script>
+
+</html>

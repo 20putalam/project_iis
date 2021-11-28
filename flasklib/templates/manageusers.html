@@ -10,7 +10,7 @@
     <title>Manage Users</title>
 </head>
 
-<nav class="navbar">
+<nav class="navbar2">
   <div class="nav_content">
       <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
       <ul class="nav_list">
@@ -19,7 +19,7 @@
               <li><a href="manageusers">Manage Users</a></li>
               <li><a href="addusers">Add Users</a></li>
               <li><a href="managelibraries">Manage Libraries</a></li>
-              <li><a href="index">Manage Books</a></li>
+              <li><a href="knihy">Manage Books</a></li>
               
           </div>
           <div class="right_links">
@@ -94,4 +94,15 @@
 
 </div>
 </div>
+<script>
+  var closebtns = document.getElementsByClassName("close");
+var i;
+
+/* Loop through the elements, and hide the parent, when clicked on */
+for (i = 0; i < closebtns.length; i++) {
+  closebtns[i].addEventListener("click", function() {
+    this.parentElement.style.display = 'none';
+  });
+}
+</script>
 </html>

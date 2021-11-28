@@ -31,8 +31,12 @@ class AddBook(FlaskForm):
     autor = StringField('Autor', validators=[DataRequired(), Length(min=2, max=40)])
     publisher = StringField('Publisher', validators=[DataRequired(), Length(min=2, max=40)])
     tag = StringField('Tag', validators=[DataRequired(), Length(min=2, max=40)])
+    choices = list()
+
+    for lib in Library.query.all():
+        choices.append((lib.id, lib.city))
     
-    library = SelectField('Library', validators=[DataRequired()], choices=[(1, 'Brno'), (2, 'Praha')])
+    library = SelectField('Library', validators=[DataRequired()], choices=choices)
     submit = SubmitField('Přidat')
 
 

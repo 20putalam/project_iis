@@ -14,14 +14,14 @@
 </head>
 <body>
     <!--navbar-->
-    <nav class="navbar">
+    <nav class="navbar2">
         <div class="nav_content">
             <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
             <ul class="nav_list">
                 <div class="left_links">
                     <li><a href="index">Domů</a></li>
                     <li><a href="knihovny">Knihovny</a></li>
-                    <li><a href="knihy">Knihy</a></li>
+                    <li><a href="#">Knihy</a></li>
                     {% if current_user.is_authenticated %}
                         {% if current_user.ro_user.name == "admin" %}
                             <li><a href="manageusers">Admin</a></li>
@@ -41,7 +41,6 @@
             </ul>
         </div>
     </nav>
-    {% block content %}
     <div class="our_button">
         {% for message in get_flashed_messages() %}
         <div class="our_alert">
@@ -49,7 +48,6 @@
         </div>
         {% endfor %}
     </div>
-    {% endblock %}
     <!--end of navbar-->
     <div>    
         {% block content %}{% endblock %}
@@ -61,4 +59,15 @@
     {% block scripts %}{% endblock %}
  
 </body>
+<script>
+    var closebtns = document.getElementsByClassName("close");
+  var i;
+  
+  /* Loop through the elements, and hide the parent, when clicked on */
+  for (i = 0; i < closebtns.length; i++) {
+    closebtns[i].addEventListener("click", function() {
+      this.parentElement.style.display = 'none';
+    });
+  }
+  </script>
 </html>
