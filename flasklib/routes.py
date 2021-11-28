@@ -24,52 +24,70 @@ def knihovny():
 
 @app.route("/knihy", methods=['GET', 'POST'])
 def knihy():
-    Books = Book.query
-    form = AddBook()
-    if form.validate_on_submit():
-        lib_city=form.library.data
-        lib_city = Library.query.get_or_404(lib_city)
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
+            Books = Book.query
+            form = AddBook()
+            if form.validate_on_submit():
+                lib_city=form.library.data
+                lib_city = Library.query.get_or_404(lib_city)
 
-        new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data ,all_books=lib_city)
-        db.session.add(new_book)
-        db.session.commit()   
-        flash('Kniha byla přidána!', 'Úspěch')
-    return render_template('managebooks.html', title='Basic Table', Books=Books, form=form)
+                new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data ,all_books=lib_city)
+                db.session.add(new_book)
+                db.session.commit()   
+                flash('Kniha byla přidána!', 'Úspěch')
+            return render_template('managebooks.html', title='Basic Table', Books=Books, form=form)
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
 
 @app.route('/knihy_delete/<int:id>')
 def knihy_delete(id):
-    book_delete = Book.query.get_or_404(id)
-    name = None
-    form = AddBook()
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
+            book_delete = Book.query.get_or_404(id)
+            name = None
+            form = AddBook()
 
-    try:
-        db.session.delete(book_delete)
-        db.session.commit()
-        flash("Kniha byla úspěšné smazána !")
-        Books = Book.query
-        return redirect(url_for('knihy'))
-    except:
-        flash("Při mazání nastala chyba !!")
-        return redirect(url_for('knihy'))
+            try:
+                db.session.delete(book_delete)
+                db.session.commit()
+                flash("Kniha byla úspěšné smazána !")
+                Books = Book.query
+                return redirect(url_for('knihy'))
+            except:
+                flash("Při mazání nastala chyba !!")
+                return redirect(url_for('knihy'))
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
 
 @app.route('/knihy_update<int:id>', methods=['GET', 'POST'])
 def knihy_update(id):
-    form = AddBook()
-    book_update = Book.query.get_or_404(id)
-    if form.validate_on_submit():
-        book_update.name = form.name.data
-        book_update.autor = form.autor.data
-        book_update.publisher = form.publisher.data
-        book_update.tag = form.tag.data
-        lib_city=form.library.data
-        lib_city = Library.query.get_or_404(lib_city)
-        book_update.all_books = lib_city
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
+            form = AddBook()
+            book_update = Book.query.get_or_404(id)
+            if form.validate_on_submit():
+                book_update.name = form.name.data
+                book_update.autor = form.autor.data
+                book_update.publisher = form.publisher.data
+                book_update.tag = form.tag.data
+                lib_city=form.library.data
+                lib_city = Library.query.get_or_404(lib_city)
+                book_update.all_books = lib_city
 
-        db.session.commit()
-        flash("Kniha auktualizována !!")
-        return redirect(url_for('knihy'))
-    else:   
-        return render_template("update_book.html", form=form, book_update = book_update)
+                db.session.commit()
+                flash("Kniha auktualizována !!")
+                return redirect(url_for('knihy'))
+            else:   
+                return render_template("update_book.html", form=form, book_update = book_update)
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
     
 @app.route("/manageusers",methods=['GET', 'POST'])
 def manageusers():
@@ -96,7 +114,10 @@ def user_delete(id):
     except:
         flash("Při mazání nastala chyba !!")
         return redirect(url_for('manageusers'))
-
+else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
 @app.route('/user_update/<int:id>/<int:role>')
 def user_update(id,role):
 
