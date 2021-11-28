@@ -20,7 +20,7 @@ def home():
 
 @app.route("/books")
 def books():
-    books = Books.query.order_by(Book.id)
+    books = Book.query.order_by(Book.id)
     return render_template('libraries.html',books=books)
 
 @app.route("/libraries")
