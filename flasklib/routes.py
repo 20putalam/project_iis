@@ -18,9 +18,15 @@ admin.add_view(MyModelView(Book, db.session))
 def home():
     return render_template('index.html')
 
+@app.route("/books")
+def books():
+    books = Books.query.order_by(Book.id)
+    return render_template('libraries.html',books=books)
+
 @app.route("/libraries")
 def libraries():
-    return render_template('libraries.html')
+    libraries = Library.query.order_by(Library.id)
+    return render_template('libraries.html',libraries=libraries)
 
 @app.route("/managebooks", methods=['GET', 'POST'])
 def managebooks():
@@ -119,7 +125,7 @@ def user_delete(id):
             return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
-        
+
 @app.route('/user_update/<int:id>/<int:role>')
 def user_update(id,role):
 

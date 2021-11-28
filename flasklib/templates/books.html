@@ -1,4 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
-
+<table id="book_table" class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" >Name</th>
+        <th scope="col" >Author</th>
+        <th scope="col" >Publisher</th>
+        <th scope="col" >Tag</th>
+        <th scope="col" >Library</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for o in books %}
+          <tr>
+            <th scope="row">          
+                {{ o.name }}
+            </th>
+            <td>             
+                {{ o.autor }}
+            </td>
+            <td>             
+                {{ o.publisher }}
+            </td>
+            <td>             
+                {{ o.tag }}
+            </td>
+            <td>             
+                {{ o.library }}
+            </td>
+          </tr>
+     {% endfor %}
+     </tbody>
+ </table>
 {% endblock %}
