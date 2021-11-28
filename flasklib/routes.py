@@ -36,8 +36,9 @@ def books():
 def book_reserve(id):
     if current_user.is_authenticated:
         try:
-            reservation = Reservation(user_id=current_user, book_id=id)
-            db.session.commit(reservation)
+            reservation = Reservation(user_id=current_user.id, book_id=id)
+            db.session.add(reservation)
+            db.session.commit()
             flash("Book reserved successfully!")
             return redirect(url_for('books'))
         except:
