@@ -21,10 +21,11 @@
                     {% if current_user.is_authenticated %}
                         {% if current_user.ro_user.name == "admin" %}
                             <li><a href="manageusers">Admin</a></li>
+                            <li><a href="librarian">Librarian</a></li>
                         {% endif %}
                     {% endif %}
                     {% if current_user.is_authenticated %}
-                        {% if current_user.ro_user.name == "librarian" or "admin" %}
+                        {% if current_user.ro_user.name == "librarian" %}
                             <li><a href="librarian">Librarian</a></li>
                         {% endif %}
                     {% endif %}

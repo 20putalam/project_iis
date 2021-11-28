@@ -23,7 +23,8 @@ def home():
 def account():
     if current_user.is_authenticated:
         reservations = Reservation.query.filter_by(user_id=current_user.id)
-        return render_template('account.html',user=current_user,reservations=reservations)   
+        borrowing = Borrowing.query.filter_by(user_id=current_user.id)
+        return render_template('account.html',user=current_user,reservations=reservations,borrowing=borrowing)   
     else:
         return redirect(url_for('login'))
 
@@ -40,7 +41,7 @@ def librarian():
 @app.route("/confirm_borrowing/<int:id>")
 def confirm_borrowing(id):
     reservation = Reservation.query.filter_by(id=id)
-    borrowing = Borrowing(user_id=current_user.id, book_id=id)
+    borrowing = Borrowing(user_id=reservation.user_id, book_id=id)
     db.session.delete(reservation)
     db.session.add(borrowing)
     db.session.commit()

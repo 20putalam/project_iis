@@ -20,7 +20,7 @@
 </table>
 <br>
 <table id="user-reservation-data" class="table table-striped">
-    <legend>Your reservations and borrowings:</legend>
+    <legend>Your reservations:</legend>
     <thead>
         <tr>
             <th>Reservation ID</th>
@@ -32,6 +32,24 @@
         <tr>
             <td>{{ reservation.id }}</td>
             <td>{{ reservation.book_id }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<table id="user-reservation-data" class="table table-striped">
+    <legend>Your borrowings:</legend>
+    <thead>
+        <tr>
+            <th>Borrowing ID</th>
+            <th>Book Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for borrowing in borrowings %}
+        <tr>
+            <td>{{ borrowing.id }}</td>
+            <td>{{ borrowing.book_id }}</td>
         </tr>
         {% endfor %}
     </tbody>
