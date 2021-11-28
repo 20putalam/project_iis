@@ -105,16 +105,17 @@ def manageusers():
 
 @app.route('/user_delete/<int:id>')
 def user_delete(id):
-
-    try:
-        User.query.filter_by(id=id).delete()
-        db.session.commit()
-        flash("User byl úspěšné smazán !")
-        return redirect(url_for('manageusers'))
-    except:
-        flash("Při mazání nastala chyba !!")
-        return redirect(url_for('manageusers'))
-else:
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
+            try:
+                User.query.filter_by(id=id).delete()
+                db.session.commit()
+                flash("User byl úspěšné smazán !")
+                return redirect(url_for('manageusers'))
+            except:
+                flash("Při mazání nastala chyba !!")
+                return redirect(url_for('manageusers'))
+        else:
             return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
