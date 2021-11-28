@@ -23,8 +23,8 @@ def home():
 def account():
     if current_user.is_authenticated:
         reservations = Reservation.query.filter_by(user_id=current_user.id)
-        borrowing = Borrowing.query.filter_by(user_id=current_user.id)
-        return render_template('account.html',user=current_user,reservations=reservations,borrowing=borrowing)   
+        borrowings = Borrowing.query.filter_by(user_id=current_user.id)
+        return render_template('account.html',user=current_user,reservations=reservations,borrowings=borrowings)   
     else:
         return redirect(url_for('login'))
 
