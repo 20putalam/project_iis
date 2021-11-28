@@ -54,7 +54,6 @@
             <legend class="border-bottom mb-4">Update book</legend>
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
-
                 {% if form.name.errors %}
                 {{ form.name(class="form-control form-control-lg is-invalid") }}
                 <div class="invalid-feedback">
@@ -63,7 +62,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.name(class="form-control form-control-lg") }}
+                {{ form.name(class="form-control form-control-lg", value=book_update.name) }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -76,7 +75,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.autor(class="form-control form-control-lg") }}
+                {{ form.autor(class="form-control form-control-lg", value=book_update.autor) }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -89,7 +88,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.publisher(class="form-control form-control-lg") }}
+                {{ form.publisher(class="form-control form-control-lg", value=book_update.publisher) }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -102,7 +101,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.tag(class="form-control form-control-lg") }}
+                {{ form.tag(class="form-control form-control-lg", value=book_update.tag) }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -115,7 +114,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.library(class="form-control form-control-lg") }}
+                {{ form.library(class="form-control form-control-lg", value=book_update.library) }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -128,7 +127,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.number_of(class="form-control form-control-lg") }}
+                {{ form.number_of(class="form-control form-control-lg", value=number_of.library) }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -141,7 +140,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.img(class="form-control form-control-lg") }}
+                {{ form.img(class="form-control form-control-lg", value=img.library) }}
                 {% endif %}
             </div>
         </fieldset>
