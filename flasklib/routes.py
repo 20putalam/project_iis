@@ -26,9 +26,11 @@ def knihovny():
 def knihy():
     Books = Book.query
     form = AddBook()
-    city_lib = Library.query.filter_by(city=form.library.data).first()
     if form.validate_on_submit():
-        new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data ,all_books=city_lib)
+        lib_city=form.library.data[0]
+        lib_city = Library.query.get_or_404(lib_city)
+
+        new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data ,all_books=lib_city)
         db.session.add(new_book)
         db.session.commit()   
         flash('Kniha byla přidána!', 'Úspěch')
@@ -50,7 +52,25 @@ def knihy_delete(id):
         flash("Při mazání nastala chyba !!")
         return redirect(url_for('knihy'))
 
+@app.route('/knihy_update<int:id>', methods=['GET', 'POST'])
+def knihy_update(id):
+    form = AddBook()
+    book_update = Book.query.get_or_404(id)
+    if form.validate_on_submit():
+        book_update.name = form.name.data
+        book_update.autor = form.autor.data
+        book_update.publisher = form.publisher.data
+        book_update.tag = form.tag.data
+        lib_city=form.library.data[0]
+        lib_city = Library.query.get_or_404(lib_city)
+        book_update.all_books = lib_city
 
+        db.session.commit()
+        flash("Kniha auktualizována !!")
+        return redirect(url_for('knihy'))
+    else:   
+        return render_template("update_book.html", form=form, book_update = book_update)
+    
 @app.route("/manageusers",methods=['GET', 'POST'])
 def manageusers():
 
@@ -61,17 +81,11 @@ def manageusers():
             form = ManageUsersForm()
 
             if form.validate_on_submit():
-
                 try:
                     User.query.filter_by(id=form.id.data).delete()
                     db.session.commit()
                 except:
                     flash("Given ID not found in database")
-
-                user = User.query.filter_by(id=form.id.data)
-                user.role = form.role
-                db.session.commit()
-                
             return render_template('manageusers.html', title='Admin Tools',users=users,form=form)
 
         else:

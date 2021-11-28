@@ -1,123 +1,126 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Přidat knihu</legend>
-                <div class="form-group">
-                    {{ form.name.label(class="form-control-label") }}
-
-                    {% if form.name.errors %}
-                        {{ form.name(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.name.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.name(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.autor.label(class="form-control-label") }}
-                    {% if form.autor.errors %}
-                        {{ form.autor(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.autor.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.autor(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.publisher.label(class="form-control-label") }}
-                    {% if form.publisher.errors %}
-                        {{ form.publisher(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.publisher.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.publisher(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.tag.label(class="form-control-label") }}
-                    {% if form.tag.errors %}
-                        {{ form.tag(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.tag.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.tag(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.library.label(class="form-control-label") }}
-                    {% if form.library.errors %}
-                        {{ form.library(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.library.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.library(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-            </fieldset>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Přidat knihu</legend>
             <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+                {{ form.name.label(class="form-control-label") }}
+
+                {% if form.name.errors %}
+                {{ form.name(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.name(class="form-control form-control-lg") }}
+                {% endif %}
             </div>
-        </form>
-    </div>
+            <div class="form-group">
+                {{ form.autor.label(class="form-control-label") }}
+                {% if form.autor.errors %}
+                {{ form.autor(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.autor.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.autor(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.publisher.label(class="form-control-label") }}
+                {% if form.publisher.errors %}
+                {{ form.publisher(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.publisher.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.publisher(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.tag.label(class="form-control-label") }}
+                {% if form.tag.errors %}
+                {{ form.tag(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.tag.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.tag(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.library.label(class="form-control-label") }}
+                {% if form.library.errors %}
+                {{ form.library(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.library.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.library(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
 
 <table id="data" class="table table-striped">
     <thead>
-      <tr>
-        <th>Jméno</th>
-        <th>Autor</th>
-        <th>Vydavatel</th>
-        <th>Tag</th>
-        <th>Knihovna</th>
-        <th>Button</th>
-      </tr>
+        <tr>
+            <th>Jméno</th>
+            <th>Autor</th>
+            <th>Vydavatel</th>
+            <th>Tag</th>
+            <th>Knihovna</th>
+            <th>Button</th>
+        </tr>
     </thead>
     <tbody>
-      {% for Book in Books %}
+        {% for Book in Books %}
         <tr>
-          <td>{{ Book.name }}</td>
-          <td>{{ Book.autor }}</td>
-          <td>{{ Book.publisher }}</td>
-          <td>{{ Book.tag }}</td>
-          <td>{{ Book.library }}</td>
-          <td>  
-            <a href="{{ url_for('knihy_delete', id=Book.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+            <td>{{ Book.name }}</td>
+            <td>{{ Book.autor }}</td>
+            <td>{{ Book.publisher }}</td>
+            <td>{{ Book.tag }}</td>
+            <td>{{ Book.library }}</td>
+            <td>
+                <a href="{{ url_for('knihy_delete', id=Book.id)}}"> <button type="button"
+                        class="btn btn-sm btn-outline-danger">Odstranit</button> </a>
+                <a href="{{ url_for('knihy_update', id=Book.id)}}"> <button type="button"
+                        class="btn btn-secondary">Upravit</button> </a>
             </td>
         </tr>
-      {% endfor %}
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 {% endblock %}
 
 {% block scripts %}
-  <script>
+<script>
     $(document).ready(function () {
-      $('#data').DataTable({
-        columns: [
-          null,
-          null,
-          null,
-          null,
-          null,
-          {searchable: false, orderable: false}],
-      });
+        $('#data').DataTable({
+            columns: [
+                null,
+                null,
+                null,
+                null,
+                null,
+                { searchable: false, orderable: false }],
+        });
     });
-  </script>
+</script>
 {% endblock %}

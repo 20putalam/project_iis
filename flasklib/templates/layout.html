@@ -14,7 +14,7 @@
 </head>
 <body>
     <!--navbar-->
-    <nav class="navbar2">
+    <nav class="navbar">
         <div class="nav_content">
             <div class="logo"><a href="index"><img src="/static/img/icon_3.png" alt="icon"></a></div>
             <ul class="nav_list">
@@ -24,7 +24,7 @@
                     <li><a href="knihy">Knihy</a></li>
                     {% if current_user.is_authenticated %}
                         {% if current_user.ro_user.name == "admin" %}
-                            <li><a href="admin">Admin</a></li>
+                            <li><a href="manageusers">Admin</a></li>
                         {% endif %}
                     {% endif %}
                 </div>
