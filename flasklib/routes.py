@@ -123,9 +123,10 @@ def managelibraries():
             libraries = Library.query.order_by(Library.id)
             form1 = AddLibrariesForm()
             form2 = ChangeLibrariesForm()
+            form1.validate_library()
+            form2.validate_library()
             if form1.validate_on_submit():
                 if form1.submit_add.data:
-                    form1.validate_library()
                     library = Library(city=form1.city.data, street=form1.street.data, housenumber=form1.housenumber.data)
                     db.session.add(library)
                     db.session.commit()
@@ -133,7 +134,6 @@ def managelibraries():
 
             if form2.validate_on_submit():
                 if form2.submit_change.data:
-                    form2.validate_library()
                     try:
                         Library.query.filter_by(id=form2.id.data).update(dict(city=form2.city.data))
                         Library.query.filter_by(id=form2.id.data).update(dict(street=form2.street.data))
