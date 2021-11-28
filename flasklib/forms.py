@@ -26,7 +26,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('That email is taken. Please choose a different one.')
 
 class AddBook(FlaskForm):
-    def fill_choices(Library):
+    def fill_choices(self, Library):
         choices = list()
         for lib in Library.query.all():
             choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
