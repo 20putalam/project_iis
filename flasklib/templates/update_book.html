@@ -127,7 +127,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.number_of(class="form-control form-control-lg", value=number_of.library) }}
+                {{ form.number_of(class="form-control form-control-lg", value=book_update.number_of) }}
                 {% endif %}
             </div>
             <div class="form-group">
@@ -140,7 +140,7 @@
                     {% endfor %}
                 </div>
                 {% else %}
-                {{ form.img(class="form-control form-control-lg", value=img.library) }}
+                {{ form.img(class="form-control form-control-lg", value=book_update.img) }}
                 {% endif %}
             </div>
         </fieldset>
