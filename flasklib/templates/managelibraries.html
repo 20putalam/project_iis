@@ -34,13 +34,15 @@
       </ul>
   </div>
 </nav>
-<div class="our_button">
-    {% for message in get_flashed_messages() %}
-    <div class="our_alert">
-      <li>{{ message }}<span class="close">x</span></li>
+{% block content %}
+    <div class="our_button">
+        {% for message in get_flashed_messages() %}
+        <div class="our_alert">
+          <li>{{ message }}<span class="close">x</span></li>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+    {% endblock %}
 <div class="table-responsive rounded my-table">
     <table id="library_table" class="table table-striped">
       <thead class="thead-dark">
