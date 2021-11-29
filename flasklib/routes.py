@@ -248,6 +248,10 @@ def managebooks():
                 new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data, number_of=0,all_books=lib_city, img=form.img.data)
                 db.session.add(new_book)
                 db.session.commit()   
+                form.publisher.data = ""
+                form.name.data = ""
+                form.autor.data = ""
+                form.tag.data = ""
                 flash('Book added successfully!', 'Success')
             return render_template('managebooks.html', title='Basic Table', Books=Books, form=form)
         else:
@@ -338,6 +342,7 @@ def book_update(id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
             form = AddBook()
+            form.library.choices = form.fill_choices()
             book_update = Book.query.get_or_404(id)
             if form.validate_on_submit():
                 book_update.name = form.name.data
