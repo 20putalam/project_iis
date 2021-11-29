@@ -46,8 +46,8 @@
 {% endfor %}
 </div>
 --> 
-
-{% scripts block %}
+{% endblock %}
+{% block scripts  %}
 <script>
   $(document).ready(function () {
       $('#data').DataTable({
