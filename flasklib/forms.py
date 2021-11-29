@@ -92,7 +92,7 @@ class ChangeLibrariesForm(FlaskForm):
 class OrderBookForm(FlaskForm):
       
     id = IntegerField('ID of Book to Order',validators=[DataRequired()])
-    number_of = IntegerField('Number', validators=[DataRequired()])
+    number_of = IntegerField('Amount', validators=[DataRequired()])
     submit = SubmitField('Order')
     
 

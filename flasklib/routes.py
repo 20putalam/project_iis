@@ -192,7 +192,7 @@ def supplybooks():
     else:
         return redirect(url_for('home'))
 
-@app.route("/supply/<int:order_id>", methods=['GET', 'POST'])
+@app.route("/supply/<int:order_id>")
 def supply(order_id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin"  or current_user.ro_user.name == "distributor":
