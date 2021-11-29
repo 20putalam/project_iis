@@ -50,10 +50,9 @@ def confirm_borrowing(res_id,id_user,id_book):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
             try:
-                reservation = Reservation.query.filter_by(id=res_id)
+                Reservation.query.filter_by(id=res_id).delete()
                 borrowing = Borrowing(user_id=id_user, book_id=id_book)
                 db.session.add(borrowing)
-                db.session.delete(reservation)
                 db.session.commit()
                 flash("User borrowed book successfully!")
                 return redirect(url_for('librarian'))
@@ -84,8 +83,7 @@ def book_reserve(id):
 def delete_reservation(res_id):
     if current_user.is_authenticated:
         try:
-            reservation = Reservation.query.filter_by(id=res_id)
-            db.session.delete(reservation)
+            Reservation.query.filter_by(id=res_id).delete()
             db.session.commit()
             flash("Reservation deleted successfully!")
             if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
