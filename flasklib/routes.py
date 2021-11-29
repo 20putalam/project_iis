@@ -218,15 +218,13 @@ def book_delete(id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
             book_delete = Book.query.get_or_404(id)
-            try:
-                Reservation.query.filter_by(book_id=id).delete()
-                db.session.delete(book_delete)
-                db.session.commit()
-                flash("Book deleted successfully!")
-                return redirect(url_for('managebooks'))
-            except:
-                flash("Error!")
-                return redirect(url_for('managebooks'))
+            
+            Reservation.query.filter_by(book_id=id).delete()
+            db.session.delete(book_delete)
+            db.session.commit()
+            flash("Book deleted successfully!")
+            return redirect(url_for('managebooks'))
+            
         else:
             return redirect(url_for('home'))
     else:
