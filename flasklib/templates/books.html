@@ -31,6 +31,7 @@
 </table>
 --> 
 <div class="knihy_table">
+ <table id="data" class="table table-striped">
 {% for Book in books %}
 <div class="kniha">
   <div class="kniha_item">
@@ -42,6 +43,7 @@
   <a href="{{ url_for('book_reserve', id=Book.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Reserve</button> </a>
 </div>
 {% endfor %}
+   </table>
   </div>
 
 
