@@ -410,8 +410,7 @@
 }
 
 #kniha {
-    width: 8vw;
-    min-width: 80px;
+    width: 4vw;
     object-fit: contain;
     display:block;
     margin:auto;
