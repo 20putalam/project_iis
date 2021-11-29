@@ -170,10 +170,7 @@ def orderbooks():
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
             form = OrderBookForm()
             orders = Order.query
-            form.library.choices = form.fill_choices()
             if form.validate_on_submit():
-                lib_city=form.library.data
-                lib_city = Library.query.get_or_404(lib_city)
                 new_order = Order(book_id=form.id.data,number_of=form.number_of.data)
                 db.session.add(new_order)
                 db.session.commit()   
