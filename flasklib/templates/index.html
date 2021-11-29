@@ -29,6 +29,11 @@
                             <li><a href="librarian">Librarian</a></li>
                         {% endif %}
                     {% endif %}
+                    {% if current_user.is_authenticated %}
+                        {% if current_user.ro_user.name == "distributor" %}
+                            <li><a href="managebooks">Distributor</a></li>
+                        {% endif %}
+                    {% endif %}
                 </div>
                 <div class="right_links">
                     <input type="text" placeholder="Search..">

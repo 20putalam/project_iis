@@ -108,7 +108,7 @@ def libraries():
 @app.route("/managebooks", methods=['GET', 'POST'])
 def managebooks():
     if current_user.is_authenticated:
-        if current_user.ro_user.name == "admin":
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
             Books = Book.query
             form = AddBook()
             if form.validate_on_submit():
