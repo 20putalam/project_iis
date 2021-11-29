@@ -171,11 +171,15 @@ def orderbooks():
             form = OrderBookForm()
             orders = Order.query
             if form.validate_on_submit():
-                new_order = Order(book_id=form.id.data,number_of=form.number_of.data)
-                db.session.add(new_order)
-                db.session.commit()   
-                flash('Book ordered successfully!', 'Success')
-            return render_template('orderbooks.html', title='Basic Table', orders=orders, form=form)
+                try:
+                    new_order = Order(book_id=form.id.data,number_of=form.number_of.data)
+                    db.session.add(new_order)
+                    db.session.commit()   
+                    flash('Book ordered successfully!', 'Success')
+                    return render_template('orderbooks.html', title='Basic Table', orders=orders, form=form)
+                except:
+                    flash("Book ID does not exist!")
+                    return render_template('orderbooks.html', title='Basic Table', orders=orders, form=form)
         else:
             return redirect(url_for('home'))
     else:
@@ -197,12 +201,16 @@ def supply(order_id,book_id,amount):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin"  or current_user.ro_user.name == "distributor":
             
-            book = Book.query.get_or_404(book_id)
-            book.number_of += amount
-            Order.query.filter_by(id = order_id).delete()
-            db.session.commit()
-            flash("Books supplied successfully!")
-            return redirect(url_for('supplybooks'))
+            try:
+                book = Book.query.get_or_404(book_id)
+                book.number_of += amount
+                Order.query.filter_by(id = order_id).delete()
+                db.session.commit()
+                flash("Books supplied successfully!")
+                return redirect(url_for('supplybooks'))
+            except:
+                flash("Error!")
+                return redirect(url_for('supplybooks'))
         
         else:
             return redirect(url_for('home'))
