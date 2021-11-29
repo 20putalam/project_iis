@@ -64,7 +64,7 @@ class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    date = db.Column('timestamp', TIMESTAMP(timezone=False), nullable=False, default=datetime.now())
+    date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     waiting = db.Column(db.Boolean,default=False)
     
 
