@@ -69,8 +69,7 @@ def confirm_borrowing(res_id,id_user,id_book):
 def book_reserve(id):
     if current_user.is_authenticated:
         try:
-            reservation = Reservation.query.filter_by(id=id).first()
-            book = Book.query.filter_by(id=reservation.book_id).first()
+            book = Book.query.filter_by(id=id).first()
             book.number_of-=1
             reservation = Reservation(user_id=current_user.id, book_id=id)
             db.session.add(reservation)
