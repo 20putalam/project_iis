@@ -398,7 +398,6 @@
 
 
 .knihy_table {
-    border: 1px solid red;
     margin-left: 10vw;
     margin-right: 10vw;
     margin-top: 1vw;
@@ -420,14 +419,14 @@
     height: auto;
     min-height: 13.5vw;
     margin: auto;
-    border: 1px solid green;
+    border: 1px solid gray;
     display: flex;
     justify-content: center;
 }
 
 .kniha {
     display: inline-block;
-    border: 1px solid blue;
+    border: 1px solid black;
     margin: 2vw;
     padding: 0.5vw;
     width: max-content;
@@ -447,7 +446,6 @@
 }
 
 .knihovny_table {
-    border: 1px solid red;
     margin-left: 10vw;
     margin-right: 10vw;
     margin-top: 1vw;
@@ -460,13 +458,13 @@
 .knihovna_item {
     height: auto;
     margin: auto;
-    border: 1px solid green;
+    border: 1px solid gray;
     display: flex;
     justify-content: center;}
 
 .knihovna {
     display: inline-block;
-    border: 1px solid blue;
+    border: 1px solid black;
     margin: 2vw;
     padding: 0.5vw;
     width: max-content;
