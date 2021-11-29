@@ -38,7 +38,8 @@ def librarian():
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin":
             reservations = Reservation.query.all()
-            return render_template('librarian.html',reservations=reservations)
+            borrowings = Borrowing.query.all()
+            return render_template('librarian.html',reservations=reservations,borrowings=borrowings)
         else:
             return redirect(url_for('home'))
     else:
