@@ -85,7 +85,7 @@ def delete_reservation(res_id):
     if current_user.is_authenticated:
         try:
             reservation = Reservation.query.filter_by(id=res_id)
-            db.session.delte(reservation)
+            db.session.delete(reservation)
             db.session.commit()
             flash("Reservation deleted successfully!")
             if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
