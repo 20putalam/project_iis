@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<!--
 <table id="library_table" class="table table-striped">
     <thead class="thead-dark">
       <tr>
@@ -24,4 +25,19 @@
      {% endfor %}
      </tbody>
  </table>
+ -->
+<div class="knihovny_table">
+    {% for o in libraries %}
+    <div class="knihovna">
+        <div class="knihovna_item">
+            <img id="knihovna" src="/static/img/knihovna.jpg" alt="">
+        </div>
+        <p>Knihovna {{ o.city }}</p>
+        <p>{{ o.street }} {{ o.housenumber }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+
+
 {% endblock content %}
