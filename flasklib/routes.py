@@ -41,8 +41,8 @@ def librarian():
 @app.route("/confirm_borrowing/<int:res_id>")
 def confirm_borrowing(res_id):
     reservation = Reservation.query.filter_by(id=res_id)
-    borrowing = Borrowing(user_id=reservation.user_id, book_id=reservation.book_id)
-    db.session.add(borrowing)
+    #borrowing = Borrowing(user_id=reservation.user_id, book_id=reservation.book_id)
+    #db.session.add(borrowing)
     db.session.delete(reservation)
     db.session.commit()
     return render_template('librarian.html')
