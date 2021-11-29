@@ -164,6 +164,28 @@ def managebooks():
     else:
         return redirect(url_for('home'))
 
+@app.route("/stockbooks", methods=['GET', 'POST'])
+def stockbooks():
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin"  or current_user.ro_user.name == "distributor":
+            Books = Book.query
+            form = AddBook()
+            form.library.choices = form.fill_choices()
+            if form.validate_on_submit():
+                
+                lib_city=form.library.data
+                lib_city = Library.query.get_or_404(lib_city)
+
+                new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data, number_of=form.number_of.data,all_books=lib_city, img=form.img.data)
+                db.session.add(new_book)
+                db.session.commit()   
+                flash('Book added successfully!', 'Success')
+            return redirect(url_for('managebooks'))
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
+
 @app.route('/book_delete/<int:id>')
 def book_delete(id):
     if current_user.is_authenticated:
