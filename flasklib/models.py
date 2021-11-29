@@ -11,6 +11,11 @@ from flask_login import current_user
 def load_user(user_id):
     return User.query.get(user_id)
 
+vote_indentifier = db.Table('vote_indentifier',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('vote_id', db.Integer, db.ForeignKey('votes.id'))
+)
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -71,7 +76,17 @@ class Order(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     number_of = db.Column(db.Integer, nullable=False)
     
+class Votes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40), nullable=False)
+    autor = db.Column(db.String(40), nullable=False)
+    publisher = db.Column(db.String(40), nullable=False)
+    tag = db.Column(db.String(40), nullable=False)
 
+    num_votes = db.Column(db.Integer, nullable=False)
+
+    library = db.Column(db.Integer, db.ForeignKey('library.id'))
+    users = db.relationship('User', secondary=vote_indentifier)
 
 class MyModelView(ModelView):
     def is_accessible(self):
