@@ -115,9 +115,11 @@ def delete_borrowing(bor_id):
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
             try:
                 borrowing = Borrowing.query.filter_by(id=bor_id).first()
-                book = Book.query.filter_by(id=borrowing.book_id).first()
-                if book.name:
+                try:
+                    book = Book.query.filter_by(id=borrowing.book_id).first()
                     book.number_of+=1
+                except:
+                    flash("Book is no longer offered!")
                 Borrowing.query.filter_by(id=bor_id).delete()
                 db.session.commit()
                 flash("Book returned successfully!")
