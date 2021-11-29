@@ -44,6 +44,7 @@ class Library(db.Model):
     housenumber = db.Column(db.Integer, nullable=False)
 
     books = db.relationship('Book', backref='all_books')
+    votes = db.relationship('Votes', backref='all_votes')
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
