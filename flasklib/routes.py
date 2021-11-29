@@ -175,7 +175,7 @@ def orderbooks():
                 db.session.add(new_order)
                 db.session.commit()   
                 flash('Book ordered successfully!', 'Success')
-                return render_template('orderbooks.html', title='Basic Table', orders=orders, form=form)
+            return render_template('orderbooks.html', title='Basic Table', orders=orders, form=form)
         else:
             return redirect(url_for('home'))
     else:
