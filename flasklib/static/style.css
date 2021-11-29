@@ -27,7 +27,8 @@
 .nav_content {
     display: inline-flex;
     margin-top: 1vw;
-    margin-left: 10vw;
+    /*margin-left: 10vw;*/
+    margin-left: 4vw;
     align-items: center;
 }
 
@@ -55,7 +56,8 @@
 
 .nav_list .right_links {
     float: right;
-    margin-right: 8vw;
+    /*margin-right: 8vw;*/
+    margin-right: 4vw;
 }
 
 
