@@ -116,7 +116,8 @@ def delete_borrowing(bor_id):
             try:
                 borrowing = Borrowing.query.filter_by(id=bor_id).first()
                 book = Book.query.filter_by(id=borrowing.book_id).first()
-                book.number_of+=1
+                if book.name:
+                    book.number_of+=1
                 Borrowing.query.filter_by(id=bor_id).delete()
                 db.session.commit()
                 flash("Book returned successfully!")
