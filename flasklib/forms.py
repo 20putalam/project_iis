@@ -44,7 +44,21 @@ class AddBook(FlaskForm):
 
     submit = SubmitField('Add')
     
+class ManageVotes(FlaskForm):
+    def fill_choices_votes(self):
+        choices = list()
+        tables = Library.query.all()
+        for lib in tables:
+            choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
+        return choices
+    
+    name = StringField('Name', validators=[DataRequired(), Length(min=2, max=40)])
+    autor = StringField('Autor', validators=[DataRequired(), Length(min=2, max=40)])
+    publisher = StringField('Publisher', validators=[DataRequired(), Length(min=2, max=40)])
+    tag = StringField('Tag', validators=[DataRequired(), Length(min=2, max=40)])
+    library = SelectField('Library', validators=[DataRequired()], choices=[])
 
+    submit = SubmitField('Add')
 
 class LoginForm(FlaskForm):
     email = StringField('Email',
