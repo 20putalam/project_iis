@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
     
     reservations = db.relationship('Reservation', backref='u_reserve')
     borrow = db.relationship('Borrowing', backref='u_borrow')
+    votes = db.relationship('Votes', secondary=vote_indentifier,backref='b_users')
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
@@ -87,7 +88,8 @@ class Votes(db.Model):
     num_votes = db.Column(db.Integer, nullable=False)
 
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
-    users = db.relationship('User', secondary=vote_indentifier)
+    users = db.relationship('User', secondary=vote_indentifier,backref='b_votes')
+
 
 class MyModelView(ModelView):
     def is_accessible(self):
