@@ -439,6 +439,8 @@
 }
 
 #knihovna {
+    width: 8vw;
+    min-width: 80px;
     object-fit: contain;
     display:block;
     margin:auto;
