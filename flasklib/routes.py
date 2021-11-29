@@ -52,9 +52,9 @@ def confirm_borrowing(res_id):
             try:
                 reservation = Reservation.query.filter_by(id=res_id)
                 borrowing = Borrowing(user_id=reservation.user_id, book_id=reservation.book_id)
-                db.session.add(borrowing)
-                db.session.delete(reservation)
-                db.session.commit()
+                #db.session.add(borrowing)
+                #db.session.delete(reservation)
+                #db.session.commit()
                 flash("User borrowed book successfully!")
                 return redirect(url_for('librarian'))
             except:
