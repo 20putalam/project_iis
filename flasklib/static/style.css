@@ -435,6 +435,7 @@
     font-size: max(1.2vw, 15px);
     width: 10vw;
     min-width: 100px;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 
