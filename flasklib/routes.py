@@ -129,7 +129,7 @@ def managebooks():
 @app.route('/book_delete/<int:id>')
 def book_delete(id):
     if current_user.is_authenticated:
-        if current_user.ro_user.name == "admin":
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
             book_delete = Book.query.get_or_404(id)
          
             try:
@@ -148,7 +148,7 @@ def book_delete(id):
 @app.route('/book_update<int:id>', methods=['GET', 'POST'])
 def book_update(id):
     if current_user.is_authenticated:
-        if current_user.ro_user.name == "admin":
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
             form = AddBook()
             book_update = Book.query.get_or_404(id)
             if form.validate_on_submit():
@@ -203,15 +203,21 @@ def user_delete(id):
 
 @app.route('/user_update/<int:id>/<int:role>')
 def user_update(id,role):
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin":
 
-    try:
-        User.query.filter_by(id=id).update(dict(role_id=role))
-        db.session.commit()
-        flash("User updated successfully!")
-        return redirect(url_for('manageusers'))
-    except:
-        flash("Error!")
-        return redirect(url_for('manageusers'))
+            try:
+                User.query.filter_by(id=id).update(dict(role_id=role))
+                db.session.commit()
+                flash("User updated successfully!")
+                return redirect(url_for('manageusers'))
+            except:
+                flash("Error!")
+                return redirect(url_for('manageusers'))
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
 
 @app.route("/addusers",methods=['GET', 'POST'])
 def addusers():
@@ -242,7 +248,7 @@ def addusers():
 def managelibraries():
 
     if current_user.is_authenticated:
-        if current_user.ro_user.name == "admin":
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
             libraries = Library.query.order_by(Library.id)
             form1 = AddLibrariesForm()
             form2 = ChangeLibrariesForm()
@@ -289,16 +295,20 @@ def managelibraries():
 
 @app.route('/library_delete/<int:id>')
 def library_delete(id):
-
-    try:
-        Library.query.filter_by(id=id).delete()
-        db.session.commit()
-        flash("Library deleted successfully!")
-        return redirect(url_for('managelibraries'))
-    except:
-        flash("Error!")
-        return redirect(url_for('managelibraries'))
-
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
+            try:
+                Library.query.filter_by(id=id).delete()
+                db.session.commit()
+                flash("Library deleted successfully!")
+                return redirect(url_for('managelibraries'))
+            except:
+                flash("Error!")
+                return redirect(url_for('managelibraries'))
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
 ############################################################################################################################################
 
 

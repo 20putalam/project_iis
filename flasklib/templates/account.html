@@ -31,7 +31,7 @@
         {% for reservation in reservations %}
         <tr>
             <td>{{ reservation.id }}</td>
-            <td>{{ reservation.book_id }}</td>
+            <td>{{ reservation.b_reserve.name }}</td>
             <td>
                 <a href="{{ url_for('delete_reservation', res_id=reservation.id)}}"><button type="button"
                         class="btn btn-sm btn-outline-danger">Delete reservation</button> </a>
@@ -53,7 +53,7 @@
         {% for borrowing in borrowings %}
         <tr>
             <td>{{ borrowing.id }}</td>
-            <td>{{ borrowing.book_id }}</td>
+            <td>{{ borrowing.b_borrow.name }}</td>
         </tr>
         {% endfor %}
     </tbody>
