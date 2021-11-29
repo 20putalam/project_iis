@@ -65,6 +65,7 @@ class Reservation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     date = db.Column('timestamp', TIMESTAMP(timezone=False), nullable=False, default=datetime.now())
+    waiting = db.Column(db.Boolean,default=False)
     
 
 class Borrowing(db.Model):
