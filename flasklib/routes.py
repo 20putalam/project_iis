@@ -55,8 +55,8 @@ def confirm_borrowing(res_id,id_user,id_book):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
             try:
-                reservation = Reservation.query.filter_by(id=res_id)
-                if reservation.waiting:
+                reservation = Reservation.query.get_or_404(res_id)
+                if reservation.waiting == False:
                     Reservation.query.filter_by(id=res_id).delete()
                     borrowing = Borrowing(user_id=id_user, book_id=id_book)
                     db.session.add(borrowing)
@@ -67,7 +67,7 @@ def confirm_borrowing(res_id,id_user,id_book):
                     flash("There is no supply for this book!")
                     return redirect(url_for('librarian'))
             except:
-                flash("There is no supply for this book!")
+                flash("Error!")
                 return redirect(url_for('librarian'))
         else:
             return redirect(url_for('home'))
