@@ -55,12 +55,17 @@ def confirm_borrowing(res_id,id_user,id_book):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
             try:
-                Reservation.query.filter_by(id=res_id).delete()
-                borrowing = Borrowing(user_id=id_user, book_id=id_book)
-                db.session.add(borrowing)
-                db.session.commit()
-                flash("User borrowed book successfully!")
-                return redirect(url_for('librarian'))
+                reservation = Reservation.query.filter_by(id=res_id)
+                if not reservation.waiting:
+                    Reservation.query.filter_by(id=res_id).delete()
+                    borrowing = Borrowing(user_id=id_user, book_id=id_book)
+                    db.session.add(borrowing)
+                    db.session.commit()
+                    flash("User borrowed book successfully!")
+                    return redirect(url_for('librarian'))
+                else:
+                    flash("There is no supply for this book!")
+                    return redirect(url_for('librarian'))
             except:
                 flash("Error!")
                 return redirect(url_for('librarian'))
@@ -249,6 +254,15 @@ def supply(order_id,book_id,amount):
                 Order.query.filter_by(id = order_id).delete()
                 db.session.commit()
                 flash("Books supplied successfully!")
+
+                reservations = Reservation.query.filter_by(book_id=book_id,waiting=True).order_by(Reservation.id)
+                i = 0
+                while amount > 0:
+                    reservations[i].waiting = False
+                    i+=1
+                    amount-=1
+
+
                 return redirect(url_for('supplybooks'))
             except:
                 flash("Error!")
