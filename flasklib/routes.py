@@ -196,17 +196,15 @@ def supplybooks():
 def supply(order_id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin"  or current_user.ro_user.name == "distributor":
-            try:
-                order = Order.query.filter_by(id = order_id)
-                book = Book.query.filter_by(id=order.b_order.id)
-                book.number_of += order.number_of
-                Order.query.filter_by(id = order_id).delete()
-                db.session.commit()
-                flash("Books supplied successfully!")
-                return redirect(url_for('supplybooks'))
-            except:
-                flash("Error!")
-                return redirect(url_for('supplybooks'))
+            
+            order = Order.query.filter_by(id = order_id)
+            book = Book.query.filter_by(id=order.b_order.id)
+            book.number_of += order.number_of
+            Order.query.filter_by(id = order_id).delete()
+            db.session.commit()
+            flash("Books supplied successfully!")
+            return redirect(url_for('supplybooks'))
+        
         else:
             return redirect(url_for('home'))
     else:
@@ -218,13 +216,15 @@ def book_delete(id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
             book_delete = Book.query.get_or_404(id)
-            
-            Reservation.query.filter_by(book_id=id).delete()
-            db.session.delete(book_delete)
-            db.session.commit()
-            flash("Book deleted successfully!")
-            return redirect(url_for('managebooks'))
-            
+            try:
+                Reservation.query.filter_by(book_id=id).delete()
+                db.session.delete(book_delete)
+                db.session.commit()
+                flash("Book deleted successfully!")
+                return redirect(url_for('managebooks'))
+            except:
+                flash("Error!")
+                return redirect(url_for('managebooks'))
         else:
             return redirect(url_for('home'))
     else:
