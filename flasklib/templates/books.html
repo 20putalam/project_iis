@@ -13,16 +13,16 @@
       </tr>
   </thead>
   <tbody>
-      {% for Book in books %}
+      {% for book in books %}
       <tr>
-          <td>{{ Book.id }}</td>
-          <td>{{ Book.name }}</td>
-          <td>{{ Book.autor }}</td>
-          <td>{{ Book.publisher }}</td>
-          <td>{{ Book.tag }}</td>
-          <td>{{ Book.library }}</td>
+          <td>{{ book.id }}</td>
+          <td>{{ book.name }}</td>
+          <td>{{ book.autor }}</td>
+          <td>{{ book.publisher }}</td>
+          <td>{{ book.tag }}</td>
+          <td>{{ book.library }}</td>
           <td>
-            <a href="{{ url_for('book_reserve', id=Book.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Reserve</button> </a>
+            <a href="{{ url_for('book_reserve', id=book.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Reserve</button> </a>
         </td>
       </tr>
       {% endfor %}
