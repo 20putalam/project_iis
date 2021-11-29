@@ -252,17 +252,17 @@ def supply(order_id,book_id,amount):
                 book = Book.query.get_or_404(book_id)
                 book.number_of += amount
                 Order.query.filter_by(id = order_id).delete()
+                reservations = Reservation.query.filter_by(book_id=book_id,waiting=True).order_by(Reservation.id)
+              
+                for res in reservations:
+                    res.waiting = False
+                    book.number_of-=1
+                    amount-=1
+                    if amount == 0:
+                        break
+
                 db.session.commit()
                 flash("Books supplied successfully!")
-
-                reservations = Reservation.query.filter_by(book_id=book_id,waiting=True).order_by(Reservation.id)
-                i = 0
-                while amount > 0:
-                    reservations[i].waiting = False
-                    i+=1
-                    amount-=1
-
-
                 return redirect(url_for('supplybooks'))
             except:
                 flash("Error!")
