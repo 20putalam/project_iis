@@ -99,6 +99,23 @@ def delete_reservation(res_id):
     else:
         return redirect(url_for('login'))
 
+@app.route("/delete_borrowing/<int:bor_id>")
+def delete_borrowing(bor_id):
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
+            try:
+                Borrowing.query.filter_by(id=bor_id).delete()
+                db.session.commit()
+                flash("Book returned successfully!")
+                return redirect(url_for('librarian'))
+            except:
+                flash("Error!")
+                return redirect(url_for('librarian'))
+        else:
+            return redirect(url_for('index'))
+    else:
+        return redirect(url_for('login'))
+
 
 @app.route("/libraries")
 def libraries():
