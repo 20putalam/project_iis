@@ -85,7 +85,7 @@
             <td>{{ order.b_order.name }}</td>
             <td>{{ order.number_of}}</td>
             <td>
-                <a href="{{ url_for('supply', order_id=order.id, book_id=order.b_order.id)}}"><button type="button"
+                <a href="{{ url_for('supply', order_id=order.id, book_id=order.b_order.id, amount=order.number_of)}}"><button type="button"
                         class="btn btn-sm btn-outline-danger">Supply now!</button> </a>
             </td>
         </tr>

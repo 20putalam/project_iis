@@ -192,14 +192,13 @@ def supplybooks():
     else:
         return redirect(url_for('home'))
 
-@app.route("/supply/<int:order_id>/<int:book_id>")
-def supply(order_id,book_id):
+@app.route("/supply/<int:order_id>/<int:book_id>/<int:amount>")
+def supply(order_id,book_id,amount):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin"  or current_user.ro_user.name == "distributor":
             
-            order = Order.query.filter_by(id = order_id)
             book = Book.query.filter_by(id = book_id)
-            book.number_of += order.number_of
+            book.number_of += amount
             Order.query.filter_by(id = order_id).delete()
             db.session.commit()
             flash("Books supplied successfully!")
