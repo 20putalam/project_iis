@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from sqlalchemy.orm import backref
 from flasklib import db, login_manager
 from flask_login import UserMixin
 from flask_admin.contrib.sqla import ModelView
@@ -49,6 +51,7 @@ class Book(db.Model):
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
     img = db.Column(db.String(40), nullable=False)
     
+    orders = db.relationship('Order',backref='b_order')
     reservations = db.relationship('Reservation', backref='b_reserve')
     borrow = db.relationship('Borrowing', backref='b_borrow')
 
@@ -62,6 +65,11 @@ class Borrowing(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+    number_of = db.Column(db.Integer, nullable=False)
     
 
 
