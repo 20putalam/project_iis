@@ -45,7 +45,7 @@ def librarian():
         return redirect(url_for('home'))
     
 
-@app.route("/confirm_borrowing/<int:res_id>/<int:id_user>/<int:id_book")
+@app.route("/confirm_borrowing/<int:res_id>/<int:id_user>/<int:id_book>")
 def confirm_borrowing(res_id,id_user,id_book):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
