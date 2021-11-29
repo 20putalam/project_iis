@@ -56,7 +56,7 @@ def confirm_borrowing(res_id,id_user,id_book):
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
             try:
                 reservation = Reservation.query.filter_by(id=res_id)
-                if not reservation.waiting:
+                if reservation.waiting:
                     Reservation.query.filter_by(id=res_id).delete()
                     borrowing = Borrowing(user_id=id_user, book_id=id_book)
                     db.session.add(borrowing)
