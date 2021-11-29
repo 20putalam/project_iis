@@ -23,7 +23,7 @@
           <td>{{ book.autor }}</td>
           <td>{{ book.publisher }}</td>
           <td>{{ book.tag }}</td>
-          <td>{{ book.library }}</td>
+          <td>{{ book.all_books.city+', '+book.all_books.street  }}</td>
           
           <td>
             <a href="{{ url_for('book_reserve', id=book.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Reserve</button> </a>
