@@ -70,12 +70,16 @@ def book_reserve(id):
     if current_user.is_authenticated:
         try:
             book = Book.query.filter_by(id=id).first()
-            book.number_of-=1
-            reservation = Reservation(user_id=current_user.id, book_id=id)
-            db.session.add(reservation)
-            db.session.commit()
-            flash("Book reserved successfully!")
-            return redirect(url_for('books'))
+            if book.number_of == 0:
+                flash("No more copies left!")
+                return redirect(url_for('books'))
+            else:
+                book.number_of-=1
+                reservation = Reservation(user_id=current_user.id, book_id=id)
+                db.session.add(reservation)
+                db.session.commit()
+                flash("Book reserved successfully!")
+                return redirect(url_for('books'))
         except:
             flash("Error!")
             return redirect(url_for('books'))
