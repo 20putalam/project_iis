@@ -29,7 +29,8 @@ class AddBook(FlaskForm):
 
     def fill_choices(self):
         choices = list()
-        for lib in Library.query.all():
+        tables = Library.query.all()
+        for lib in tables:
             choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
         return choices
       
