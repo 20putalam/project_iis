@@ -143,6 +143,49 @@ def libraries():
     libraries = Library.query.order_by(Library.id)
     return render_template('libraries.html',libraries=libraries)
 
+@app.route("/votes", methods=['GET', 'POST'])
+def votes():
+    if current_user.is_authenticated:
+        votes = Votes.query
+        vote_array = []
+        for page_vote in votes:
+            for user_vote in current_user.votes:
+                if page_vote == user_vote:
+                    vote_array.append(page_vote.id)
+        return render_template('votes.html', title='Votes', votes=votes, vote_array=vote_array)
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/vote/<int:vote_id>')
+def vote(vote_id):
+    if current_user.is_authenticated:
+        vote_update = Votes.query.get_or_404(vote_id)
+
+        vote_update.num_votes = vote_update.num_votes + 1
+
+        vote_update.users.append(current_user)
+
+        db.session.commit()
+        
+        return redirect(url_for('votes'))
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/unvote/<int:vote_id>')
+def unvote(vote_id):
+    if current_user.is_authenticated:
+        vote_update = Votes.query.get_or_404(vote_id)
+
+        vote_update.num_votes = vote_update.num_votes - 1
+
+        vote_update.users.remove(current_user)
+
+        db.session.commit()
+
+        return redirect(url_for('votes'))
+    else:
+        return redirect(url_for('home'))
+
 @app.route("/managebooks", methods=['GET', 'POST'])
 def managebooks():
     if current_user.is_authenticated:
