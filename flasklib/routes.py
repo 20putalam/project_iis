@@ -252,6 +252,7 @@ def managebooks():
                 form.name.data = ""
                 form.autor.data = ""
                 form.tag.data = ""
+                form.img.data = ""
                 flash('Book added successfully!', 'Success')
             return render_template('managebooks.html', title='Basic Table', Books=Books, form=form)
         else:
