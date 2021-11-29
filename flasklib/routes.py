@@ -171,13 +171,11 @@ def orderbooks():
             form = OrderBookForm()
             orders = Order.query
             if form.validate_on_submit():
-             
                 new_order = Order(book_id=form.id.data,number_of=form.number_of.data)
                 db.session.add(new_order)
                 db.session.commit()   
                 flash('Book ordered successfully!', 'Success')
                 return render_template('orderbooks.html', title='Basic Table', orders=orders, form=form)
-               
         else:
             return redirect(url_for('home'))
     else:
