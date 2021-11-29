@@ -142,19 +142,6 @@
                 {% endif %}
             </div>
             <div class="form-group">
-                {{ form.number_of.label(class="form-control-label") }}
-                {% if form.number_of.errors %}
-                {{ form.number_of(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.number_of.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.number_of(class="form-control form-control-lg", value=book_update.number_of) }}
-                {% endif %}
-            </div>
-            <div class="form-group">
                 {{ form.img.label(class="form-control-label") }}
                 {% if form.img.errors %}
                 {{ form.img(class="form-control form-control-lg is-invalid") }}

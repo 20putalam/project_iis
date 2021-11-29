@@ -344,7 +344,6 @@ def book_update(id):
                 book_update.autor = form.autor.data
                 book_update.publisher = form.publisher.data
                 book_update.tag = form.tag.data
-                book_update.number_of = form.number_of.data
                 book_update.img = form.img.data
                 
                 lib_city=form.library.data
