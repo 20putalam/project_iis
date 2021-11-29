@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<!--
 <table id="data" class="table table-striped">
   <thead>
       <tr>
@@ -28,6 +29,22 @@
       {% endfor %}
   </tbody>
 </table>
+--> 
+<div class="knihy_table">
+{% for Book in books %}
+<div class="kniha">
+  <div class="kniha_item">
+    <img id="kniha" src="{{Book.img}}" alt="">
+  </div>
+  <p>{{Book.name}}</p>
+  <p>Autor: {{Book.autor}}</p>
+  <p>Tag: {{Book.tag}}</p>
+  <a href="{{ url_for('book_reserve', id=Book.id)}}"> <button type="button" class="btn btn-sm btn-outline-danger">Reserve</button> </a>
+</div>
+{% endfor %}
+  </div>
+
+
 
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>

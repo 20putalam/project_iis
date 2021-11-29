@@ -397,6 +397,87 @@
 .our_button .close:hover {background: #bbb;}
 
 
+.knihy_table {
+    border: 1px solid red;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-top: 1vw;
+    width: auto;
+    height: auto;
+
+    text-align:center
+}
+
+#kniha {
+    width: 8vw;
+    min-width: 80px;
+    object-fit: contain;
+    display:block;
+    margin:auto;
+}
+
+.kniha_item {
+    height: auto;
+    min-height: 13.5vw;
+    margin: auto;
+    border: 1px solid green;
+    display: flex;
+    justify-content: center;
+}
+
+.kniha {
+    display: inline-block;
+    border: 1px solid blue;
+    margin: 2vw;
+    padding: 0.5vw;
+    width: max-content;
+    text-align: center;
+    font-size: max(1.2vw, 15px);
+    width: 10vw;
+    min-width: 100px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+#knihovna {
+    width: 8vw;
+    min-width: 80px;
+    object-fit: contain;
+    display:block;
+    margin:auto;
+}
+
+.knihovny_table {
+    border: 1px solid red;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-top: 1vw;
+    width: auto;
+    height: auto;
+
+    text-align:center
+}
+
+.knihovna_item {
+    height: auto;
+    margin: auto;
+    border: 1px solid green;
+    display: flex;
+    justify-content: center;}
+
+.knihovna {
+    display: inline-block;
+    border: 1px solid blue;
+    margin: 2vw;
+    padding: 0.5vw;
+    width: max-content;
+    text-align: center;
+    font-size: max(1.2vw, 15px);
+    width: 10vw;
+    min-width: 100px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+
 
 /*For mobile*/
 @media screen and (max-width: 955px) {
