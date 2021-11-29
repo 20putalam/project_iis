@@ -198,7 +198,7 @@ def managebooks():
                 lib_city=form.library.data
                 lib_city = Library.query.get_or_404(lib_city)
 
-                new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data, number_of=form.number_of.data,all_books=lib_city, img=form.img.data)
+                new_book = Book(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data, number_of=0,all_books=lib_city, img=form.img.data)
                 db.session.add(new_book)
                 db.session.commit()   
                 flash('Book added successfully!', 'Success')
