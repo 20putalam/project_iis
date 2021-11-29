@@ -67,7 +67,7 @@ def confirm_borrowing(res_id,id_user,id_book):
                     flash("There is no supply for this book!")
                     return redirect(url_for('librarian'))
             except:
-                flash("Error!")
+                flash("There is no supply for this book!")
                 return redirect(url_for('librarian'))
         else:
             return redirect(url_for('home'))
