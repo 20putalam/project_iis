@@ -94,6 +94,10 @@ class OrderBookForm(FlaskForm):
     id = IntegerField('ID of Book to Order',validators=[DataRequired()])
     number_of = IntegerField('Amount', validators=[DataRequired()])
     submit = SubmitField('Order')
+    def validate_id(self, id):
+        book = Book.query.filter_by(id=id.data).first()
+        if book:
+            raise ValidationError('Book with given ID does not exist. Please set valid Book ID.')
     
 
 
