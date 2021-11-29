@@ -36,7 +36,7 @@ def books():
 @app.route("/librarian")
 def librarian():
     if current_user.is_authenticated:
-        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
+        if (current_user.ro_user.name == "admin") or (current_user.ro_user.name == "librarian"):
             reservations = Reservation.query.all()
             return render_template('librarian.html',reservations=reservations)
         else:
