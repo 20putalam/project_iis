@@ -192,6 +192,46 @@ def unvote(vote_id):
         return redirect(url_for('votes'))
     else:
         return redirect(url_for('home'))
+    
+@app.route('/managevotes', methods=['GET', 'POST'])
+def managevotes():
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
+            All_Votes = Votes.query
+            form = ManageVotes()
+            form.library.choices = form.fill_choices_votes()
+            if form.validate_on_submit():
+                
+                lib_city=form.library.data
+                lib_city = Library.query.get_or_404(lib_city)
+
+                new_votes = Votes(name=form.name.data ,autor=form.autor.data ,publisher=form.publisher.data ,tag=form.tag.data, num_votes=0,all_votes=lib_city)
+                db.session.add(new_votes)
+                db.session.commit()   
+                flash('Vote added successfully!', 'Success')
+            return render_template('managevotes.html', title='Basic Table', votes=All_Votes, form=form)
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/vote_delete/<int:id>')
+def vote_delete(id):
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
+            vote_delete = Votes.query.get_or_404(id)
+            try:
+                db.session.delete(vote_delete)
+                db.session.commit()
+                flash("Vote deleted successfully!")
+                return redirect(url_for('managevotes'))
+            except:
+                flash("Error!")
+                return redirect(url_for('managevotes'))
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
 
 @app.route("/managebooks", methods=['GET', 'POST'])
 def managebooks():
