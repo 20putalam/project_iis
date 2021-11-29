@@ -32,6 +32,10 @@
         <tr>
             <td>{{ reservation.id }}</td>
             <td>{{ reservation.book_id }}</td>
+            <td>
+                <a href="{{ url_for('delete_reservation', res_id=reservation.id)}}"><button type="button"
+                        class="btn btn-sm btn-outline-danger">Delete reservation</button> </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

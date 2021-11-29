@@ -36,7 +36,7 @@ def books():
 @app.route("/librarian")
 def librarian():
     if current_user.is_authenticated:
-        if (current_user.ro_user.name == "admin") or (current_user.ro_user.name == "librarian"):
+        if current_user.ro_user.name == "admin":
             reservations = Reservation.query.all()
             return render_template('librarian.html',reservations=reservations)
         else:
@@ -77,6 +77,27 @@ def book_reserve(id):
         except:
             flash("Error!")
             return redirect(url_for('books'))
+    else:
+        return redirect(url_for('login'))
+
+@app.route("/delete_reservation/<int:res_id>")
+def delete_reservation(res_id):
+    if current_user.is_authenticated:
+        try:
+            reservation = Reservation.query.filter_by(id=res_id)
+            db.session.delte(reservation)
+            db.session.commit()
+            flash("Reservation deleted successfully!")
+            if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
+                return redirect(url_for('librarian'))
+            else:
+                return redirect(url_for('account'))
+        except:
+            flash("Error!")
+            if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
+                return redirect(url_for('librarian'))
+            else:
+                return redirect(url_for('account'))
     else:
         return redirect(url_for('login'))
 
