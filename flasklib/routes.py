@@ -197,7 +197,7 @@ def supply(order_id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin"  or current_user.ro_user.name == "distributor":
             order = Order.query.filter_by(id = order_id)
-            book = Book.query.filter_by(id=order.book_id)
+            book = Book.query.filter_by(id=order.b_order.id)
             book.number_of += order.number_of
             Order.query.filter_by(id = order_id).delete()
             db.session.commit()
