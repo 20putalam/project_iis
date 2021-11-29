@@ -2,9 +2,11 @@ from datetime import datetime
 from sqlalchemy.orm import backref
 from flasklib import db, login_manager
 from flask_login import UserMixin
+from flask_login import current_user
+'''
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import AdminIndexView
-from flask_login import current_user
+'''
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -91,7 +93,7 @@ class Votes(db.Model):
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
     users = db.relationship('User', secondary=vote_indentifier,back_populates='votes')
 
-
+'''
 class MyModelView(ModelView):
     def is_accessible(self):
         if current_user.is_authenticated:
@@ -114,3 +116,4 @@ class MyAdminIndexView(AdminIndexView):
                 return False
         else:
             return False
+'''

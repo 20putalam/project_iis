@@ -2,9 +2,9 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request
 from flasklib import app, db, bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
-from flasklib.models import Order, User, Role, MyModelView, MyAdminIndexView, Library, Book, Reservation, Borrowing, Votes
-from flasklib.forms import AddLibrariesForm, ChangeLibrariesForm, OrderBookForm, RegistrationForm, LoginForm, AddUsersForm, AddBook
-from flask_admin import Admin
+from flasklib.models import Order, User, Role, Library, Book, Reservation, Borrowing, Votes
+from flasklib.forms import AddLibrariesForm, ChangeLibrariesForm, OrderBookForm, RegistrationForm, LoginForm, AddUsersForm, AddBook, ManageVotes
+'''from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 
@@ -17,7 +17,7 @@ admin.add_view(MyModelView(Votes, db.session))
 admin.add_view(MyModelView(Order, db.session))
 admin.add_view(MyModelView(Borrowing, db.session))
 admin.add_view(MyModelView(Reservation, db.session))
-
+'''
 @app.route("/")
 @app.route("/index")
 def home():
