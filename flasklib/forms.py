@@ -89,6 +89,19 @@ class ChangeLibrariesForm(FlaskForm):
     housenumber = IntegerField('Housenumber', validators=[DataRequired()])
     submit_change = SubmitField('Change')
 
+class OrderBookForm(FlaskForm):
+
+    def fill_choices(self):
+        choices = list()
+        tables = Library.query.all()
+        for lib in tables:
+            choices.append((lib.id, lib.city+" "+lib.street+" "+str(lib.housenumber)))
+        return choices
+      
+    id = IntegerField('ID of Book to Order',validators=[DataRequired()])
+    #library = SelectField('Library', validators=[DataRequired()], choices=[])
+    number_of = IntegerField('Number', validators=[DataRequired()])
+    submit = SubmitField('Order')
     
 
 
