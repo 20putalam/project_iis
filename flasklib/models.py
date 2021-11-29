@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from sqlalchemy.orm import backref
 from flasklib import db, login_manager
 from flask_login import UserMixin
@@ -64,7 +63,7 @@ class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
     waiting = db.Column(db.Boolean,default=False)
     
 
