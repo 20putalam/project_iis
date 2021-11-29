@@ -75,11 +75,12 @@ def book_reserve(id):
         try:
             book = Book.query.filter_by(id=id).first()
             if book.number_of == 0:
-                flash("No more copies left!")
+                flash("No more copies left, your request is added to queue!")
+                reservation = Reservation(user_id=current_user.id, book_id=id,waiting=true) #waiting is true
                 return redirect(url_for('books'))
             else:
                 book.number_of-=1
-                reservation = Reservation(user_id=current_user.id, book_id=id)
+                reservation = Reservation(user_id=current_user.id, book_id=id) #waiting is false
                 db.session.add(reservation)
                 db.session.commit()
                 flash("Book reserved successfully!")

@@ -73,6 +73,8 @@
             <th>Reservation ID</th>
             <th>User ID</th>
             <th>Book Name</th>
+            <th>In queue</th>
+            <th>Timestamp</th>
         </tr>
     </thead>
     <tbody>
@@ -81,6 +83,8 @@
             <td>{{ res.id }}</td>
             <td>{{ res.user_id }}</td>
             <td>{{ res.b_reserve.name }}</td>
+            <td>{{ res.date }}</td>
+            <td>{{ res.waiting }}</td>
             <td>
                 <a href="{{ url_for('confirm_borrowing', res_id=res.id, id_user=res.user_id, id_book=res.book_id)}}"><button type="button"
                         class="btn btn-sm btn-outline-danger">Confirm borrowing</button> </a>
