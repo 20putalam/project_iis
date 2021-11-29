@@ -20,10 +20,31 @@
         <ul class="nav_list">
             <div class="left_links">
                 <li><a href="index">Home</a></li>
-                <li><a href="manageusers">Manage Users</a></li>
-                <li><a href="addusers">Add Users</a></li>
-                <li><a href="managelibraries">Manage Libraries</a></li>
-                <li><a href="managebooks">Manage Books</a></li>
+                {% if current_user.is_authenticated %}
+                        {% if current_user.ro_user.name == "admin"%}
+                            <li><a href="manageusers">Manage Users</a></li>
+                            <li><a href="addusers">Add Users</a></li>
+                            <li><a href="managelibraries">Manage Libraries</a></li>
+                            <li><a href="managebooks">Manage Books</a></li>
+                            <li><a href="orderbooks">Order Books</a></li>
+                            <li><a href="supplybooks">Supply Books</a></li>
+                            <li><a href="librarian">Reservations</a></li>
+                        {% endif %}
+                    {% endif %}
+                {% if current_user.is_authenticated %}
+                    {% if current_user.ro_user.name == "librarian"%}
+                        <li><a href="managelibraries">Manage Libraries</a></li>
+                        <li><a href="managebooks">Manage Books</a></li>
+                        <li><a href="orderbooks">Order Books</a></li>
+                        <li><a href="librarian">Reservations</a></li>
+                    {% endif %}
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                    {% if current_user.ro_user.name == "distributor"%}
+                        <li><a href="managebooks">Manage Books</a></li>
+                        <li><a href="supplybooks">Supply Books</a></li>
+                    {% endif %}
+                {% endif %}
 
             </div>
             <div class="right_links">
