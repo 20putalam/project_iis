@@ -144,6 +144,7 @@ def managebooks():
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian" or current_user.ro_user.name == "distributor":
             Books = Book.query
             form = AddBook()
+            form.library.choices = form.fill_choices()
             if form.validate_on_submit():
                 
                 lib_city=form.library.data
