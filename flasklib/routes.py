@@ -231,7 +231,7 @@ def orderbooks():
 def supplybooks():
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin"  or current_user.ro_user.name == "distributor":
-            orders = Order.query.order_by(Order.id.desc())
+            orders = Order.query
             return render_template('supplybooks.html',orders=orders)
         else:
             return redirect(url_for('home'))
