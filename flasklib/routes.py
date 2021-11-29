@@ -196,13 +196,17 @@ def supplybooks():
 def supply(order_id):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin"  or current_user.ro_user.name == "distributor":
-            order = Order.query.filter_by(id = order_id)
-            book = Book.query.filter_by(id=order.b_order.id)
-            book.number_of += order.number_of
-            Order.query.filter_by(id = order_id).delete()
-            db.session.commit()
-            flash("Books supplied successfully!")
-            return redirect(url_for('supplybooks'))
+            try:
+                order = Order.query.filter_by(id = order_id)
+                book = Book.query.filter_by(id=order.b_order.id)
+                book.number_of += order.number_of
+                Order.query.filter_by(id = order_id).delete()
+                db.session.commit()
+                flash("Books supplied successfully!")
+                return redirect(url_for('supplybooks'))
+            except:
+                flash("Error!")
+                return redirect(url_for('supplybooks'))
         else:
             return redirect(url_for('home'))
     else:
