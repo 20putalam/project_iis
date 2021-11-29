@@ -439,7 +439,7 @@
 }
 
 #knihovna {
-    width: 8vw;
+    width: 14vw;
     min-width: 80px;
     object-fit: contain;
     display:block;
@@ -472,7 +472,7 @@
     width: max-content;
     text-align: center;
     font-size: max(1.2vw, 15px);
-    width: 10vw;
+    width: 15vw;
     min-width: 100px;
     box-shadow: 10px 10px 5px #aaaaaa;
 }
