@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <!--end of navbar-->
+    <div class="special_margin">
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -50,7 +51,7 @@
             Don't have an account? <a class="ml-2" href="register">Sign up here</a>
         </small>
     </div>
-
+</div>
 <script>
          // When the user scrolls the page, execute myFunction
          window.onscroll = function() {myFunction()};

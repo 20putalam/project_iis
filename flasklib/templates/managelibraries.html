@@ -30,6 +30,7 @@
                             <li><a href="orderbooks">Order Books</a></li>
                             <li><a href="supplybooks">Supply Books</a></li>
                             <li><a href="librarian">Reservations</a></li>
+                            <li><a href="managevotes">Manage votes</a></li>
                         {% endif %}
                     {% endif %}
                 {% if current_user.is_authenticated %}
@@ -38,12 +39,14 @@
                         <li><a href="managebooks">Manage Books</a></li>
                         <li><a href="orderbooks">Order Books</a></li>
                         <li><a href="librarian">Reservations</a></li>
+                        <li><a href="managevotes">Manage votes</a></li>
                     {% endif %}
                 {% endif %}
                 {% if current_user.is_authenticated %}
                     {% if current_user.ro_user.name == "distributor"%}
                         <li><a href="managebooks">Manage Books</a></li>
                         <li><a href="supplybooks">Supply Books</a></li>
+                        <li><a href="managevotes">Manage votes</a></li>
                     {% endif %}
                 {% endif %}
               
@@ -69,6 +72,7 @@
         {% endfor %}
     </div>
 {% endblock %}
+<div class="special_margin">
 <div class="table-responsive rounded my-table">
     <table id="library_table" class="table table-striped">
       <thead class="thead-dark">
@@ -216,6 +220,7 @@
         </div>
     </form>
     </div>
+</div>
 </div>
 <script>
     var closebtns = document.getElementsByClassName("close");
