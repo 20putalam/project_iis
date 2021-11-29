@@ -45,16 +45,16 @@ def librarian():
         return redirect(url_for('home'))
     
 
-@app.route("/confirm_borrowing/<int:res_id>")
-def confirm_borrowing(res_id):
+@app.route("/confirm_borrowing/<int:res_id>/<int:id_user>/<int:id_book")
+def confirm_borrowing(res_id,id_user,id_book):
     if current_user.is_authenticated:
         if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
             try:
                 reservation = Reservation.query.filter_by(id=res_id)
-                #borrowing = Borrowing(user_id=reservation.user_id, book_id=reservation.book_id)
-                #db.session.add(borrowing)
-                #db.session.delete(reservation)
-                #db.session.commit()
+                borrowing = Borrowing(user_id=id_user, book_id=id_book)
+                db.session.add(borrowing)
+                db.session.delete(reservation)
+                db.session.commit()
                 flash("User borrowed book successfully!")
                 return redirect(url_for('librarian'))
             except:

@@ -60,7 +60,7 @@
             <td>{{ res.user_id }}</td>
             <td>{{ res.book_id }}</td>
             <td>
-                <a href="{{ url_for('confirm_borrowing', res_id=res.id)}}"> <button type="button"
+                <a href="{{ url_for('confirm_borrowing', res_id=res.id, id_user=res.user_id, id_book=res.book_id)}}"> <button type="button"
                         class="btn btn-sm btn-outline-danger">Confirm borrowing</button> </a>
             </td>
         </tr>
