@@ -11,8 +11,8 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 vote_indentifier = db.Table('vote_indentifier',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('vote_id', db.Integer, db.ForeignKey('votes.id'))
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('vote_id', db.Integer, db.ForeignKey('votes.id'), primary_key=True)
 )
 
 class User(db.Model, UserMixin):
@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     
     reservations = db.relationship('Reservation', backref='u_reserve')
     borrow = db.relationship('Borrowing', backref='u_borrow')
-    votes = db.relationship('Votes', secondary=vote_indentifier,backref='b_users')
+    votes = db.relationship('Votes', secondary=vote_indentifier,back_populates='users')
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
@@ -88,7 +88,7 @@ class Votes(db.Model):
     num_votes = db.Column(db.Integer, nullable=False)
 
     library = db.Column(db.Integer, db.ForeignKey('library.id'))
-    users = db.relationship('User', secondary=vote_indentifier,backref='b_votes')
+    users = db.relationship('User', secondary=vote_indentifier,back_populates='votes')
 
 
 class MyModelView(ModelView):
