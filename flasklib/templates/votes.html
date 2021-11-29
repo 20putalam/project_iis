@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<table id="data" class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Tag</th>
+            <th>Library</th>
+            <th>Votes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vote in votes %}
+        <tr>
+            <td>{{ vote.id }}</td>
+            <td>{{ vote.name }}</td>
+            <td>{{ vote.autor }}</td>
+            <td>{{ vote.publisher }}</td>
+            <td>{{ vote.tag }}</td>
+            <td>{{ vote.library }}</td>
+            <td>{{ vote.num_votes }}</td>
+            <td>
+                {% if vote.id in vote_array %}
+                <a href="{{ url_for('unvote', vote_id=vote.id)}}"> <button type="button"
+                    class="btn btn-secondary">Unvote</button> </a>
+                {% else %}
+                <a href="{{ url_for('vote', vote_id=vote.id)}}"> <button type="button"
+                    class="btn btn-secondary">Vote</button> </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+for page_vote in votes:
+            for user_votee in user_vote:
+                if page_vote == user_votee:
+                    print(page_vote)
+                    print(user_votee)
+                    votebool = 1
