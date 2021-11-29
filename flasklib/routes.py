@@ -35,17 +35,35 @@ def books():
 
 @app.route("/librarian")
 def librarian():
-    reservations = Reservation.query.all()
-    return render_template('librarian.html',reservations=reservations)
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
+            reservations = Reservation.query.all()
+            return render_template('librarian.html',reservations=reservations)
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
+    
 
 @app.route("/confirm_borrowing/<int:res_id>")
 def confirm_borrowing(res_id):
-    reservation = Reservation.query.filter_by(id=res_id)
-    #borrowing = Borrowing(user_id=reservation.user_id, book_id=reservation.book_id)
-    #db.session.add(borrowing)
-    db.session.delete(reservation)
-    db.session.commit()
-    return render_template('librarian.html')
+    if current_user.is_authenticated:
+        if current_user.ro_user.name == "admin" or current_user.ro_user.name == "librarian":
+            try:
+                reservation = Reservation.query.filter_by(id=res_id)
+                borrowing = Borrowing(user_id=reservation.user_id, book_id=reservation.book_id)
+                db.session.add(borrowing)
+                db.session.delete(reservation)
+                db.session.commit()
+                flash("User borrowed book successfully!")
+                return redirect(url_for('librarian'))
+            except:
+                flash("Error!")
+                return redirect(url_for('librarian'))
+        else:
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
 
 @app.route("/books_reserve/<int:id>")
 def book_reserve(id):
